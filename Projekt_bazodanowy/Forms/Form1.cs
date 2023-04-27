@@ -38,7 +38,6 @@ namespace Projekt_bazodanowy
                     d.Dialect<MsSql2012Dialect>();
                     d.Driver<SqlClientDriver>();
                 });
-       
                 config.AddAssembly(Assembly.GetExecutingAssembly());
 
                 var session= config.BuildSessionFactory();
