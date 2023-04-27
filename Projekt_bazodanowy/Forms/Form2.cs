@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -32,10 +33,20 @@ namespace Projekt_bazodanowy
         {
             using (var session = sessionFactor.OpenSession())
             {
-                var product = new Product { Name = "Tea23", Units = 15, Price = 86.5 };
-                session.Save(product);
+                //var product = new Product { Name = "Tea23", Units = 15, Price = 86.5 };
+                try
+                {
+                    var klient = new Klienci();
+                    klient.ImieNazwisko = "Karol";
+                    klient.Email = "karol@mail";
 
-                session.Clear();
+                    session.Save(klient);
+
+                    session.Clear();
+                } catch(Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
             }
         }
 
@@ -49,12 +60,18 @@ namespace Projekt_bazodanowy
         {
             ISession session = sessionFactor.OpenSession();
 
-            using (session)
+            switch (comboBox1.Text.ToString())
             {
-                IQuery query = session.CreateQuery("FROM Product");
-                IList<Models.Product> prodInfo = query.List<Models.Product>();
-                dataGridView1.DataSource = prodInfo; 
+                case "Klienci":
+                    using (session)
+                    {
+                        IQuery query = session.CreateQuery("FROM Klienci");
+                        IList<Models.Klienci> prodInfo = query.List<Models.Klienci>();
+                        dataGridView1.DataSource = prodInfo;
+                        break;
+                    }
             }
+
         }
     }
 }
