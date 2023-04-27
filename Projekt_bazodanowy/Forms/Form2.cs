@@ -44,5 +44,17 @@ namespace Projekt_bazodanowy
             Form1 form1 = new Form1();
             form1.Show();
         }
+
+        private void loadButton_Click(object sender, EventArgs e)
+        {
+            ISession session = sessionFactor.OpenSession();
+
+            using (session)
+            {
+                IQuery query = session.CreateQuery("FROM Product");
+                IList<Models.Product> prodInfo = query.List<Models.Product>();
+                dataGridView1.DataSource = prodInfo; 
+            }
+        }
     }
 }
