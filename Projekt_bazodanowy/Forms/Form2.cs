@@ -70,6 +70,11 @@ namespace Projekt_bazodanowy
                         dataGridView1.DataSource = prodInfo;
                         break;
                     }
+                case "Produkty":
+                        IQuery query1 = session.CreateQuery("FROM Produkty");
+                        IList<Models.Produkty> prodInfo1 = query1.List<Models.Produkty>();
+                        dataGridView1.DataSource = prodInfo1;
+                        break;
             }
 
         }
