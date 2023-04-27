@@ -80,6 +80,7 @@
     <Compile Include="Models\Paragony.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Produkty.cs" />
+    <Compile Include="Models\Zakupy.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Form1.resx">

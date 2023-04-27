@@ -1,6 +1,7 @@
 ﻿using NHibernate;
 using NHibernate.Cfg;
 using Projekt_bazodanowy.Models;
+using Remotion.Linq.Parsing.ExpressionVisitors.Transformation.PredefinedTransformations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,11 +37,21 @@ namespace Projekt_bazodanowy
                 //var product = new Product { Name = "Tea23", Units = 15, Price = 86.5 };
                 try
                 {
+                    /*
                     var klient = new Klienci();
                     klient.ImieNazwisko = "Karol";
                     klient.Email = "karol@mail";
+                    */
 
-                    session.Save(klient);
+                    //var paragon = new Paragony {IDDokumentu="fw/asdf", DataZakupu = DateTime.Now ,IDKlienta = 1, KwotaCalkowita = 80.5};
+                    var paragon = new Paragony();
+                    paragon.IDDokumentu = "fw/asddfd";
+                    paragon.DataZakupu = DateTime.Now;
+                    paragon.IDKlienta = 1;
+                    paragon.KwotaCalkowita = 80.5;
+
+                    session.Save(paragon);
+                    session.Flush();
 
                     session.Clear();
                 } catch(Exception ex)
@@ -71,15 +82,29 @@ namespace Projekt_bazodanowy
                         break;
                     }
                 case "Produkty":
+                    using (session)
+                    {
                         IQuery query1 = session.CreateQuery("FROM Produkty");
                         IList<Models.Produkty> prodInfo1 = query1.List<Models.Produkty>();
                         dataGridView1.DataSource = prodInfo1;
                         break;
+                    }
                 case "Paragony":
+                    using (session)
+                    {
                         IQuery query2 = session.CreateQuery("FROM Paragony");
                         IList<Models.Paragony> prodInfo2 = query2.List<Models.Paragony>();
                         dataGridView1.DataSource = prodInfo2;
                         break;
+                    }
+                case "Zakupy":
+                    using (session)
+                    {
+                        IQuery query3 = session.CreateQuery("FROM Zakupy");
+                        IList<Models.Zakupy> prodInfo3 = query3.List<Models.Zakupy>();
+                        dataGridView1.DataSource = prodInfo3;
+                        break;
+                    }
             }
 
         }
