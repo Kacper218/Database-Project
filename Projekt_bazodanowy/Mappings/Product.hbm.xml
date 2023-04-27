@@ -19,5 +19,14 @@
 		<property name="Email"/>
 	</class>
 
+	<class name="Produkty">
+		<id name="IDProduktu">
+			<generator class="native"/>
+		</id>
+		<property name="Nazwa"/>
+		<property name="CenaAktualna"/>
+		<property name="Dostepnosc"/>
+	</class>
+
 
 </hibernate-mapping>
