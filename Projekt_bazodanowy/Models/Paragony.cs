@@ -10,7 +10,7 @@ namespace Projekt_bazodanowy.Models
     {
         public virtual string IDDokumentu { get; set; }
         public virtual DateTime  DataZakupu { get; set; }
-        public virtual int IDKlienta { get; set; }
+        public virtual Klienci IDKlienta { get; set; }
         public virtual double KwotaCalkowita { get; set; }
     }
 }
