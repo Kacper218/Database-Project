@@ -28,5 +28,14 @@
 		<property name="Dostepnosc"/>
 	</class>
 
+	<class name="Paragony">
+		<id name="IDDokumentu">
+			<generator class="native"/>
+		</id>
+		<property name="DataZakupu"/>
+		<property name="IDKlienta"/>
+		<property name="KwotaCalkowita"/>
+	</class>
+
 
 </hibernate-mapping>
