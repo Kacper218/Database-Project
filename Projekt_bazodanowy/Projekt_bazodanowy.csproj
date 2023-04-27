@@ -78,7 +78,6 @@
     </Compile>
     <Compile Include="Models\Klienci.cs" />
     <Compile Include="Models\Paragony.cs" />
-    <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Produkty.cs" />
     <Compile Include="Models\Zakupy.cs" />
     <Compile Include="Program.cs" />
