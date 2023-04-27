@@ -27,7 +27,7 @@ namespace Projekt_bazodanowy
             instance = this;
         }
 
-        public void connectToDataSource(string connStr)
+        public bool connectToDataSource(string connStr)
         {
             try
             {
@@ -46,7 +46,9 @@ namespace Projekt_bazodanowy
             }
             catch (Exception ex) {
                 MessageBox.Show("Wystapil bład podczas próby połączenia się z baza.","Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
+            return true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -58,12 +60,14 @@ namespace Projekt_bazodanowy
 
                 string connStr = "Data Source=DESKTOP-9QOBELF\\SQLEXPRESS; Initial Catalog=master; User Id=" + user + "; Password=" + password;
                 
-                connectToDataSource(connStr);
+                if(connectToDataSource(connStr))
+                {
+                    Form2 form2 = new Form2(sessionFactor);
+                    this.Hide();
+                    form2.Show();
+                    form2.BringToFront();
+                }
 
-                Form2 form2 = new Form2(sessionFactor);
-                this.Hide();
-                form2.Show();
-                form2.BringToFront();
             } else
             {
                 MessageBox.Show("Nie podano loginu i hasla!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
