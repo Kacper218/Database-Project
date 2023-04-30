@@ -11,6 +11,6 @@ namespace Projekt_bazodanowy.Models
         public virtual int IDProduktu { get; set; }
         public virtual string Nazwa { get; set; }   
         public virtual string CenaAktualna { get; set; }
-        public virtual int Dostepnosc { get; set; } 
+        public virtual string Dostepnosc { get; set; } 
     }
 }

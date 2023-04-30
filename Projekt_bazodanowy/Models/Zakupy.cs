@@ -10,8 +10,8 @@ namespace Projekt_bazodanowy.Models
     {
         public virtual int IDZakupu { get; set; }
         public virtual string IDDokumentu { get; set; }
-        public virtual int IDProduktu { get; set; }
-        public virtual int Ilosc { get; set; }
-        public virtual double CenaZakupu { get; set; }
+        public virtual string IDProduktu { get; set; }
+        public virtual string Ilosc { get; set; }
+        public virtual string CenaZakupu { get; set; }
     }
 }

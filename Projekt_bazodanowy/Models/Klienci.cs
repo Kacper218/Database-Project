@@ -8,7 +8,7 @@ namespace Projekt_bazodanowy.Models
 {
     public class Klienci
     {
-        public virtual int IDKlienta { get; set; }
+        public virtual string IDKlienta { get; set; }
         public virtual string ImieNazwisko { get; set; }
         public virtual string NazwaFirmy { get; set; }
         public virtual string Email { get; set; }
