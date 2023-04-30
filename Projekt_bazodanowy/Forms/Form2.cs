@@ -30,37 +30,6 @@ namespace Projekt_bazodanowy
             this.sessionFactor = sessionFactor;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            using (var session = sessionFactor.OpenSession())
-            {
-                //var product = new Product { Name = "Tea23", Units = 15, Price = 86.5 };
-                try
-                {
-                    /*
-                    var klient = new Klienci();
-                    klient.ImieNazwisko = "Karol";
-                    klient.Email = "karol@mail";
-                    */
-
-                    //var paragon = new Paragony {IDDokumentu="fw/asdf", DataZakupu = DateTime.Now ,IDKlienta = 1, KwotaCalkowita = 80.5};
-                    var paragon = new Paragony();
-                    paragon.IDDokumentu = "fw/asddfd";
-                    paragon.DataZakupu = DateTime.Now;
-                    paragon.IDKlienta = 1;
-                    paragon.KwotaCalkowita = 80.5;
-
-                    session.Save(paragon);
-                    session.Flush();
-
-                    session.Clear();
-                } catch(Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
-            }
-        }
-
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
             Form1 form1 = new Form1();
@@ -105,6 +74,107 @@ namespace Projekt_bazodanowy
                         dataGridView1.DataSource = prodInfo3;
                         break;
                     }
+            }
+
+        }
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            using (var session = sessionFactor.OpenSession())
+            {
+                try
+                {
+                    switch (comboBox1.Text.ToString())
+                    {
+                        case "Klienci":
+                            using (session)
+                            {
+                                var klient = new Klienci();
+                                if(textBox3.Text.ToString() == "")
+                                {
+                                    klient.ImieNazwisko = textBox2.Text.ToString();
+                                    klient.NazwaFirmy = "";
+                                }
+                                if(textBox2.Text.ToString() == "")
+                                {
+
+                                    klient.ImieNazwisko = "";
+                                    klient.NazwaFirmy = textBox3.Text.ToString();
+                                }
+                                klient.Email = textBox4.Text.ToString();
+                                session.Save(klient);
+                                session.Flush();
+                                session.Clear();
+                                break;
+                            }
+                        case "Produkty":
+                            using (session)
+                            {
+                                var produkt = new Produkty();
+                                produkt.Nazwa = textBox2.Text.ToString();
+                                produkt.CenaAktualna = textBox3.Text.ToString();
+                                produkt.Dostepnosc = textBox4.Text.ToString();
+                                session.Save(produkt);
+                                session.Flush();
+                                session.Clear();
+                                break;
+                            }
+                        case "Paragony":
+                            using (session)
+                            {
+                                var paragon = new Paragony();
+                                paragon.IDDokumentu = textBox1.Text.ToString();
+                                paragon.DataZakupu = DateTime.Parse(textBox2.Text.ToString());
+                                paragon.IDKlienta = textBox3.Text.ToString();
+                                paragon.KwotaCalkowita = textBox4.Text.ToString();
+                                session.Save(paragon);
+                                session.Flush();
+                                session.Clear();
+                                break;
+                            }
+                        case "Zakupy":
+                            using (session)
+                            {
+                                var zakup = new Zakupy();
+                                zakup.IDDokumentu = textBox2.Text.ToString();
+                                zakup.IDProduktu = textBox3.Text.ToString();
+                                zakup.Ilosc = textBox4.Text.ToString();
+                                zakup.CenaZakupu = textBox5.Text.ToString();
+                                session.Save(zakup);
+                                session.Flush();
+                                session.Clear();
+                                break;
+                            }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+
+        }
+
+        private void comboBox1_TextUpdate(object sender, EventArgs e)
+        {
+            switch (comboBox1.Text.ToString())
+            {
+                case "Klienci":
+                    textBox1.Enabled = false;
+                    textBox5.Enabled = false;
+                    break;
+                case "Produkty":
+                    textBox1.Enabled = false;
+                    textBox5.Enabled = false;
+                    break;
+                case "Paragony":
+                    textBox1.Enabled = true;
+                    textBox5.Enabled = false;
+                    break;
+                case "Zakupy":
+                    textBox1.Enabled = false;
+                    textBox5.Enabled = true;
+                    break;
             }
 
         }
