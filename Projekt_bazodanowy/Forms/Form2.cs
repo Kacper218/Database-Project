@@ -154,6 +154,15 @@ namespace Projekt_bazodanowy
             }
 
         }
+        
+        private void resetTextBoxes(object sender)
+        {
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            textBox5.Clear();
+        }
 
         private void comboBox1_TextUpdate(object sender, EventArgs e)
         {
@@ -162,18 +171,22 @@ namespace Projekt_bazodanowy
                 case "Klienci":
                     textBox1.Enabled = false;
                     textBox5.Enabled = false;
+                    resetTextBoxes(sender);
                     break;
                 case "Produkty":
                     textBox1.Enabled = false;
                     textBox5.Enabled = false;
+                    resetTextBoxes(sender);
                     break;
                 case "Paragony":
                     textBox1.Enabled = true;
                     textBox5.Enabled = false;
+                    resetTextBoxes(sender);
                     break;
                 case "Zakupy":
                     textBox1.Enabled = false;
                     textBox5.Enabled = true;
+                    resetTextBoxes(sender);
                     break;
             }
 
