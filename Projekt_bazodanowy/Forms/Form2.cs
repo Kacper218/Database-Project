@@ -191,5 +191,41 @@ namespace Projekt_bazodanowy
             }
 
         }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch(comboBox2.Text.ToString())
+            {
+                case "Klienci":
+                    comboBox3.Items.Clear();
+                    comboBox3.Items.Add("ID Klienta");
+                    comboBox3.Items.Add("Imie i Nazwisko");
+                    comboBox3.Items.Add("Nazwa firmy");
+                    comboBox3.Items.Add("Email");
+                    break;
+                case "Produkty":
+                    comboBox3.Items.Clear();
+                    comboBox3.Items.Add("ID produktu");
+                    comboBox3.Items.Add("Nazwa produktu");
+                    comboBox3.Items.Add("Aktualna cena produktu");
+                    comboBox3.Items.Add("Dostępna ilość");
+                    break;
+                case "Paragony":
+                    comboBox3.Items.Clear();
+                    comboBox3.Items.Add("Nr paragonu/faktury");
+                    comboBox3.Items.Add("Data zakupu");
+                    comboBox3.Items.Add("ID Klienta");
+                    comboBox3.Items.Add("Kwota całkowita");
+                    break;
+                case "Zakupy":
+                    comboBox3.Items.Clear();
+                    comboBox3.Items.Add("ID Zakupu");
+                    comboBox3.Items.Add("Nr paragonu/faktury");
+                    comboBox3.Items.Add("ID Produktu");
+                    comboBox3.Items.Add("Zakupiona ilość");
+                    comboBox3.Items.Add("Cena zakupu");
+                    break;
+            }
+        }
     }
 }
