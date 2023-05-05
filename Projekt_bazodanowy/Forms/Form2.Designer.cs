@@ -36,6 +36,9 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
@@ -61,6 +64,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -155,6 +159,10 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button1);
+            this.tabPage2.Controls.Add(this.textBox11);
+            this.tabPage2.Controls.Add(this.checkBox2);
+            this.tabPage2.Controls.Add(this.checkBox1);
             this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.label9);
             this.tabPage2.Controls.Add(this.comboBox4);
@@ -175,11 +183,42 @@
             this.tabPage2.Text = "Wyszukiwanie";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(58, 173);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(131, 22);
+            this.textBox11.TabIndex = 13;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.checkBox2.Location = new System.Drawing.Point(264, 131);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(241, 22);
+            this.checkBox2.TabIndex = 12;
+            this.checkBox2.Text = "Wyszukaj wszystko w kolumnie";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.Click += new System.EventHandler(this.checkBox2_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.checkBox1.Location = new System.Drawing.Point(23, 131);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(224, 22);
+            this.checkBox1.TabIndex = 11;
+            this.checkBox1.Text = "Wyszukaj konkrętną pozycję ";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Click += new System.EventHandler(this.checkBox1_Click);
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label10.Location = new System.Drawing.Point(73, 140);
+            this.label10.Location = new System.Drawing.Point(755, 198);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(62, 20);
             this.label10.TabIndex = 10;
@@ -198,7 +237,7 @@
             // comboBox4
             // 
             this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(203, 140);
+            this.comboBox4.Location = new System.Drawing.Point(885, 198);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(154, 24);
             this.comboBox4.TabIndex = 8;
@@ -237,35 +276,35 @@
             // 
             // textBox10
             // 
-            this.textBox10.Location = new System.Drawing.Point(504, 185);
+            this.textBox10.Location = new System.Drawing.Point(903, 137);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(126, 22);
             this.textBox10.TabIndex = 4;
             // 
             // textBox9
             // 
-            this.textBox9.Location = new System.Drawing.Point(504, 157);
+            this.textBox9.Location = new System.Drawing.Point(903, 109);
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(126, 22);
             this.textBox9.TabIndex = 3;
             // 
             // textBox8
             // 
-            this.textBox8.Location = new System.Drawing.Point(504, 129);
+            this.textBox8.Location = new System.Drawing.Point(903, 81);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(126, 22);
             this.textBox8.TabIndex = 2;
             // 
             // textBox7
             // 
-            this.textBox7.Location = new System.Drawing.Point(504, 101);
+            this.textBox7.Location = new System.Drawing.Point(903, 53);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(126, 22);
             this.textBox7.TabIndex = 1;
             // 
             // textBox6
             // 
-            this.textBox6.Location = new System.Drawing.Point(504, 73);
+            this.textBox6.Location = new System.Drawing.Point(903, 25);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(126, 22);
             this.textBox6.TabIndex = 0;
@@ -404,6 +443,16 @@
             this.textBox2.Size = new System.Drawing.Size(132, 22);
             this.textBox2.TabIndex = 5;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(203, 222);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(97, 31);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Szukaj";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -462,5 +511,9 @@
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button button1;
     }
 }

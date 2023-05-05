@@ -9,6 +9,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -225,6 +226,80 @@ namespace Projekt_bazodanowy
                     comboBox3.Items.Add("Zakupiona ilość");
                     comboBox3.Items.Add("Cena zakupu");
                     break;
+            }
+        }
+        private void checkBox1_Click(object sender, EventArgs e)
+        {
+            checkBox2.Checked = false;
+        }
+
+        private void checkBox2_Click(object sender, EventArgs e)
+        {
+            checkBox1.Checked = false;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if(checkBox2.Checked)
+            {
+                ISession session = sessionFactor.OpenSession();
+                switch(comboBox2.Text.ToString())
+                {
+                    case "Klienci":
+                        switch(comboBox3.SelectedIndex)
+                        {
+                            case 0:
+                                using (session)
+                                {
+                                    IList<string >prodInfo = session.QueryOver<Klienci>()
+                                        .Select(c => c.IDKlienta)
+                                        .List<string>();
+
+                                    dataGridView1.DataSource = prodInfo.Select(c => new {Value = c}).ToList();
+                                }
+                                break;
+                            case 1:
+                                using (session)
+                                {
+                                    IList<string >prodInfo = session.QueryOver<Klienci>()
+                                        .Select(c => c.ImieNazwisko)
+                                        .Where(c => c.ImieNazwisko != "")
+                                        .List<string>();
+
+                                    dataGridView1.DataSource = prodInfo.Select(c => new {Value = c}).ToList();
+                                }
+                                break;
+                            case 2:
+                                using (session)
+                                {
+                                    IList<string >prodInfo = session.QueryOver<Klienci>()
+                                        .Select(c => c.NazwaFirmy)
+                                        .Where(c => c.NazwaFirmy != "")
+                                        .List<string>();
+
+                                    dataGridView1.DataSource = prodInfo.Select(c => new {Value = c}).ToList();
+                                }
+                                break;
+                            case 3:
+                                using (session)
+                                {
+                                    IList<string >prodInfo = session.QueryOver<Klienci>()
+                                        .Select(c => c.Email)
+                                        .Where(c => c.Email != "")
+                                        .List<string>();
+
+                                    dataGridView1.DataSource = prodInfo.Select(c => new {Value = c}).ToList();
+                                }
+                                break;
+                        }
+                        break;
+                    case "Produkty":
+                        break; 
+                    case "Paragony":
+                        break;
+                    case "Zakupy":
+                        break;
+            }
             }
         }
     }
