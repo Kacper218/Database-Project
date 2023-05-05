@@ -649,7 +649,7 @@ namespace Projekt_bazodanowy
                                         .Where(c => c.CenaZakupu == searchParameter)
                                         .List<string>();
 
-                                    dataGridView1.DataSource = prodInfo.Select(c => new {Value = c}).ToList();
+                                    dataGridView1.DataSource = prodInfo.Select(c => new {CenaZakupu = c}).ToList();
                                 }
                                 break;
                         }
