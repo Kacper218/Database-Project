@@ -294,12 +294,151 @@ namespace Projekt_bazodanowy
                         }
                         break;
                     case "Produkty":
+                        switch(comboBox3.SelectedIndex)
+                        {
+                            case 0:
+                                using (session)
+                                {
+                                    IList<int>prodInfo = session.QueryOver<Produkty>()
+                                        .Select(c => c.IDProduktu)
+                                        .List<int>();
+
+                                    dataGridView1.DataSource = prodInfo.Select(c => new {Value = c}).ToList();
+                                }
+                                break;
+                            case 1:
+                                using (session)
+                                {
+                                    IList<string >prodInfo = session.QueryOver<Produkty>()
+                                        .Select(c => c.Nazwa)
+                                        .List<string>();
+
+                                    dataGridView1.DataSource = prodInfo.Select(c => new {Value = c}).ToList();
+                                }
+                                break;
+                            case 2:
+                                using (session)
+                                {
+                                    IList<string >prodInfo = session.QueryOver<Produkty>()
+                                        .Select(c => c.CenaAktualna)
+                                        .List<string>();
+
+                                    dataGridView1.DataSource = prodInfo.Select(c => new {Value = c}).ToList();
+                                }
+                                break;
+                            case 3:
+                                using (session)
+                                {
+                                    IList<string >prodInfo = session.QueryOver<Produkty>()
+                                        .Select(c => c.Dostepnosc)
+                                        .List<string>();
+
+                                    dataGridView1.DataSource = prodInfo.Select(c => new {Value = c}).ToList();
+                                }
+                                break;
+                        }
                         break; 
                     case "Paragony":
+                        switch(comboBox3.SelectedIndex)
+                        {
+                            case 0:
+                                using (session)
+                                {
+                                    IList<string >prodInfo = session.QueryOver<Paragony>()
+                                        .Select(c => c.IDDokumentu)
+                                        .List<string>();
+
+                                    dataGridView1.DataSource = prodInfo.Select(c => new {Value = c}).ToList();
+                                }
+                                break;
+                            case 1:
+                                using (session)
+                                {
+                                    IList<DateTime>prodInfo = session.QueryOver<Paragony>()
+                                        .Select(c => c.DataZakupu)
+                                        .List<DateTime>();
+
+                                    dataGridView1.DataSource = prodInfo.Select(c => new {Value = c}).ToList();
+                                }
+                                break;
+                            case 2:
+                                using (session)
+                                {
+                                    IList<string >prodInfo = session.QueryOver<Paragony>()
+                                        .Select(c => c.IDKlienta)
+                                        .List<string>();
+
+                                    dataGridView1.DataSource = prodInfo.Select(c => new {Value = c}).ToList();
+                                }
+                                break;
+                            case 3:
+                                using (session)
+                                {
+                                    IList<string >prodInfo = session.QueryOver<Paragony>()
+                                        .Select(c => c.KwotaCalkowita)
+                                        .List<string>();
+
+                                    dataGridView1.DataSource = prodInfo.Select(c => new {Value = c}).ToList();
+                                }
+                                break;
+                        }
                         break;
                     case "Zakupy":
+                        switch(comboBox3.SelectedIndex)
+                        {
+                            case 0:
+                                using (session)
+                                {
+                                    IList<string >prodInfo = session.QueryOver<Zakupy>()
+                                        .Select(c => c.IDZakupu)
+                                        .List<string>();
+
+                                    dataGridView1.DataSource = prodInfo.Select(c => new {Value = c}).ToList();
+                                }
+                                break;
+                            case 1:
+                                using (session)
+                                {
+                                    IList<string >prodInfo = session.QueryOver<Zakupy>()
+                                        .Select(c => c.IDDokumentu)
+                                        .List<string>();
+
+                                    dataGridView1.DataSource = prodInfo.Select(c => new {Value = c}).ToList();
+                                }
+                                break;
+                            case 2:
+                                using (session)
+                                {
+                                    IList<string >prodInfo = session.QueryOver<Zakupy>()
+                                        .Select(c => c.IDProduktu)
+                                        .List<string>();
+
+                                    dataGridView1.DataSource = prodInfo.Select(c => new {Value = c}).ToList();
+                                }
+                                break;
+                            case 3:
+                                using (session)
+                                {
+                                    IList<string >prodInfo = session.QueryOver<Zakupy>()
+                                        .Select(c => c.Ilosc)
+                                        .List<string>();
+
+                                    dataGridView1.DataSource = prodInfo.Select(c => new {Value = c}).ToList();
+                                }
+                                break;
+                            case 4:
+                                using (session)
+                                {
+                                    IList<string >prodInfo = session.QueryOver<Zakupy>()
+                                        .Select(c => c.CenaZakupu)
+                                        .List<string>();
+
+                                    dataGridView1.DataSource = prodInfo.Select(c => new {Value = c}).ToList();
+                                }
+                                break;
+                        }
                         break;
-            }
+                }
             }
         }
     }
