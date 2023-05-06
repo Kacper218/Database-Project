@@ -162,218 +162,217 @@ namespace Projekt_bazodanowy
             searchComboBoxOptions(segment5_search.Text.ToString(), segment5_column);
         }
 
-
-        private void button1_Click(object sender, EventArgs e)
+        private void segmentInfoGet(ComboBox search, ComboBox column,TextBox textBox, CheckBox position, CheckBox all)
         {
-            if(segment1_all.Checked)
-            {
-                ISession session = sessionFactor.OpenSession();
-                switch(segment1_search.Text.ToString())
+            if (all.Checked)
                 {
-                    case "Klienci":
-                        switch(segment1_column.SelectedIndex)
-                        {
-                            case 0:
-                                using (session)
-                                {
-                                    IList<string >prodInfo = session.QueryOver<Klienci>()
-                                        .Select(c => c.IDKlienta)
-                                        .List<string>();
+                    ISession session = sessionFactor.OpenSession();
+                    switch (search.Text.ToString())
+                    {
+                        case "Klienci":
+                            switch (column.SelectedIndex)
+                            {
+                                case 0:
+                                    using (session)
+                                    {
+                                        IList<string> prodInfo = session.QueryOver<Klienci>()
+                                            .Select(c => c.IDKlienta)
+                                            .List<string>();
 
-                                    dataGridView1.DataSource = prodInfo.Select(c => new {IDKlienta = c}).ToList();
-                                }
-                                break;
-                            case 1:
-                                using (session)
-                                {
-                                    IList<string >prodInfo = session.QueryOver<Klienci>()
-                                        .Select(c => c.ImieNazwisko)
-                                        .Where(c => c.ImieNazwisko != "")
-                                        .List<string>();
+                                        dataGridView1.DataSource = prodInfo.Select(c => new { IDKlienta = c }).ToList();
+                                    }
+                                    break;
+                                case 1:
+                                    using (session)
+                                    {
+                                        IList<string> prodInfo = session.QueryOver<Klienci>()
+                                            .Select(c => c.ImieNazwisko)
+                                            .Where(c => c.ImieNazwisko != "")
+                                            .List<string>();
 
-                                    dataGridView1.DataSource = prodInfo.Select(c => new {ImieNazwisko = c}).ToList();
-                                }
-                                break;
-                            case 2:
-                                using (session)
-                                {
-                                    IList<string >prodInfo = session.QueryOver<Klienci>()
-                                        .Select(c => c.NazwaFirmy)
-                                        .Where(c => c.NazwaFirmy != "")
-                                        .List<string>();
+                                        dataGridView1.DataSource = prodInfo.Select(c => new { ImieNazwisko = c }).ToList();
+                                    }
+                                    break;
+                                case 2:
+                                    using (session)
+                                    {
+                                        IList<string> prodInfo = session.QueryOver<Klienci>()
+                                            .Select(c => c.NazwaFirmy)
+                                            .Where(c => c.NazwaFirmy != "")
+                                            .List<string>();
 
-                                    dataGridView1.DataSource = prodInfo.Select(c => new {NazwaFirmy = c}).ToList();
-                                }
-                                break;
-                            case 3:
-                                using (session)
-                                {
-                                    IList<string >prodInfo = session.QueryOver<Klienci>()
-                                        .Select(c => c.Email)
-                                        .Where(c => c.Email != "")
-                                        .List<string>();
+                                        dataGridView1.DataSource = prodInfo.Select(c => new { NazwaFirmy = c }).ToList();
+                                    }
+                                    break;
+                                case 3:
+                                    using (session)
+                                    {
+                                        IList<string> prodInfo = session.QueryOver<Klienci>()
+                                            .Select(c => c.Email)
+                                            .Where(c => c.Email != "")
+                                            .List<string>();
 
-                                    dataGridView1.DataSource = prodInfo.Select(c => new {Email = c}).ToList();
-                                }
-                                break;
-                        }
-                        break;
-                    case "Produkty":
-                        switch(segment1_column.SelectedIndex)
-                        {
-                            case 0:
-                                using (session)
-                                {
-                                    IList<int>prodInfo = session.QueryOver<Produkty>()
-                                        .Select(c => c.IDProduktu)
-                                        .List<int>();
+                                        dataGridView1.DataSource = prodInfo.Select(c => new { Email = c }).ToList();
+                                    }
+                                    break;
+                            }
+                            break;
+                        case "Produkty":
+                            switch (column.SelectedIndex)
+                            {
+                                case 0:
+                                    using (session)
+                                    {
+                                        IList<int> prodInfo = session.QueryOver<Produkty>()
+                                            .Select(c => c.IDProduktu)
+                                            .List<int>();
 
-                                    dataGridView1.DataSource = prodInfo.Select(c => new {IDProduktu = c}).ToList();
-                                }
-                                break;
-                            case 1:
-                                using (session)
-                                {
-                                    IList<string >prodInfo = session.QueryOver<Produkty>()
-                                        .Select(c => c.Nazwa)
-                                        .List<string>();
+                                        dataGridView1.DataSource = prodInfo.Select(c => new { IDProduktu = c }).ToList();
+                                    }
+                                    break;
+                                case 1:
+                                    using (session)
+                                    {
+                                        IList<string> prodInfo = session.QueryOver<Produkty>()
+                                            .Select(c => c.Nazwa)
+                                            .List<string>();
 
-                                    dataGridView1.DataSource = prodInfo.Select(c => new {Nazwa = c}).ToList();
-                                }
-                                break;
-                            case 2:
-                                using (session)
-                                {
-                                    IList<string >prodInfo = session.QueryOver<Produkty>()
-                                        .Select(c => c.CenaAktualna)
-                                        .List<string>();
+                                        dataGridView1.DataSource = prodInfo.Select(c => new { Nazwa = c }).ToList();
+                                    }
+                                    break;
+                                case 2:
+                                    using (session)
+                                    {
+                                        IList<string> prodInfo = session.QueryOver<Produkty>()
+                                            .Select(c => c.CenaAktualna)
+                                            .List<string>();
 
-                                    dataGridView1.DataSource = prodInfo.Select(c => new {CenaAktualna = c}).ToList();
-                                }
-                                break;
-                            case 3:
-                                using (session)
-                                {
-                                    IList<string >prodInfo = session.QueryOver<Produkty>()
-                                        .Select(c => c.Dostepnosc)
-                                        .List<string>();
+                                        dataGridView1.DataSource = prodInfo.Select(c => new { CenaAktualna = c }).ToList();
+                                    }
+                                    break;
+                                case 3:
+                                    using (session)
+                                    {
+                                        IList<string> prodInfo = session.QueryOver<Produkty>()
+                                            .Select(c => c.Dostepnosc)
+                                            .List<string>();
 
-                                    dataGridView1.DataSource = prodInfo.Select(c => new {Dostepnosc = c}).ToList();
-                                }
-                                break;
-                        }
-                        break; 
-                    case "Paragony":
-                        switch(segment1_column.SelectedIndex)
-                        {
-                            case 0:
-                                using (session)
-                                {
-                                    IList<string >prodInfo = session.QueryOver<Paragony>()
-                                        .Select(c => c.IDDokumentu)
-                                        .List<string>();
+                                        dataGridView1.DataSource = prodInfo.Select(c => new { Dostepnosc = c }).ToList();
+                                    }
+                                    break;
+                            }
+                            break;
+                        case "Paragony":
+                            switch (column.SelectedIndex)
+                            {
+                                case 0:
+                                    using (session)
+                                    {
+                                        IList<string> prodInfo = session.QueryOver<Paragony>()
+                                            .Select(c => c.IDDokumentu)
+                                            .List<string>();
 
-                                    dataGridView1.DataSource = prodInfo.Select(c => new {IDDokumentu = c}).ToList();
-                                }
-                                break;
-                            case 1:
-                                using (session)
-                                {
-                                    IList<DateTime>prodInfo = session.QueryOver<Paragony>()
-                                        .Select(c => c.DataZakupu)
-                                        .List<DateTime>();
+                                        dataGridView1.DataSource = prodInfo.Select(c => new { IDDokumentu = c }).ToList();
+                                    }
+                                    break;
+                                case 1:
+                                    using (session)
+                                    {
+                                        IList<DateTime> prodInfo = session.QueryOver<Paragony>()
+                                            .Select(c => c.DataZakupu)
+                                            .List<DateTime>();
 
-                                    dataGridView1.DataSource = prodInfo.Select(c => new {DataZakupu = c}).ToList();
-                                }
-                                break;
-                            case 2:
-                                using (session)
-                                {
-                                    IList<string >prodInfo = session.QueryOver<Paragony>()
-                                        .Select(c => c.IDKlienta)
-                                        .List<string>();
+                                        dataGridView1.DataSource = prodInfo.Select(c => new { DataZakupu = c }).ToList();
+                                    }
+                                    break;
+                                case 2:
+                                    using (session)
+                                    {
+                                        IList<string> prodInfo = session.QueryOver<Paragony>()
+                                            .Select(c => c.IDKlienta)
+                                            .List<string>();
 
-                                    dataGridView1.DataSource = prodInfo.Select(c => new {IDKlienta = c}).ToList();
-                                }
-                                break;
-                            case 3:
-                                using (session)
-                                {
-                                    IList<string >prodInfo = session.QueryOver<Paragony>()
-                                        .Select(c => c.KwotaCalkowita)
-                                        .List<string>();
+                                        dataGridView1.DataSource = prodInfo.Select(c => new { IDKlienta = c }).ToList();
+                                    }
+                                    break;
+                                case 3:
+                                    using (session)
+                                    {
+                                        IList<string> prodInfo = session.QueryOver<Paragony>()
+                                            .Select(c => c.KwotaCalkowita)
+                                            .List<string>();
 
-                                    dataGridView1.DataSource = prodInfo.Select(c => new {KwotaCalkowita = c}).ToList();
-                                }
-                                break;
-                        }
-                        break;
-                    case "Zakupy":
-                        switch(segment1_column.SelectedIndex)
-                        {
-                            case 0:
-                                using (session)
-                                {
-                                    IList<string >prodInfo = session.QueryOver<Zakupy>()
-                                        .Select(c => c.IDZakupu)
-                                        .List<string>();
+                                        dataGridView1.DataSource = prodInfo.Select(c => new { KwotaCalkowita = c }).ToList();
+                                    }
+                                    break;
+                            }
+                            break;
+                        case "Zakupy":
+                            switch (column.SelectedIndex)
+                            {
+                                case 0:
+                                    using (session)
+                                    {
+                                        IList<string> prodInfo = session.QueryOver<Zakupy>()
+                                            .Select(c => c.IDZakupu)
+                                            .List<string>();
 
-                                    dataGridView1.DataSource = prodInfo.Select(c => new {IDZakupu = c}).ToList();
-                                }
-                                break;
-                            case 1:
-                                using (session)
-                                {
-                                    IList<string >prodInfo = session.QueryOver<Zakupy>()
-                                        .Select(c => c.IDDokumentu)
-                                        .List<string>();
+                                        dataGridView1.DataSource = prodInfo.Select(c => new { IDZakupu = c }).ToList();
+                                    }
+                                    break;
+                                case 1:
+                                    using (session)
+                                    {
+                                        IList<string> prodInfo = session.QueryOver<Zakupy>()
+                                            .Select(c => c.IDDokumentu)
+                                            .List<string>();
 
-                                    dataGridView1.DataSource = prodInfo.Select(c => new {IDDokumentu = c}).ToList();
-                                }
-                                break;
-                            case 2:
-                                using (session)
-                                {
-                                    IList<string >prodInfo = session.QueryOver<Zakupy>()
-                                        .Select(c => c.IDProduktu)
-                                        .List<string>();
+                                        dataGridView1.DataSource = prodInfo.Select(c => new { IDDokumentu = c }).ToList();
+                                    }
+                                    break;
+                                case 2:
+                                    using (session)
+                                    {
+                                        IList<string> prodInfo = session.QueryOver<Zakupy>()
+                                            .Select(c => c.IDProduktu)
+                                            .List<string>();
 
-                                    dataGridView1.DataSource = prodInfo.Select(c => new {IDProduktu = c}).ToList();
-                                }
-                                break;
-                            case 3:
-                                using (session)
-                                {
-                                    IList<string >prodInfo = session.QueryOver<Zakupy>()
-                                        .Select(c => c.Ilosc)
-                                        .List<string>();
+                                        dataGridView1.DataSource = prodInfo.Select(c => new { IDProduktu = c }).ToList();
+                                    }
+                                    break;
+                                case 3:
+                                    using (session)
+                                    {
+                                        IList<string> prodInfo = session.QueryOver<Zakupy>()
+                                            .Select(c => c.Ilosc)
+                                            .List<string>();
 
-                                    dataGridView1.DataSource = prodInfo.Select(c => new {Ilosc = c}).ToList();
-                                }
-                                break;
-                            case 4:
-                                using (session)
-                                {
-                                    IList<string >prodInfo = session.QueryOver<Zakupy>()
-                                        .Select(c => c.CenaZakupu)
-                                        .List<string>();
+                                        dataGridView1.DataSource = prodInfo.Select(c => new { Ilosc = c }).ToList();
+                                    }
+                                    break;
+                                case 4:
+                                    using (session)
+                                    {
+                                        IList<string> prodInfo = session.QueryOver<Zakupy>()
+                                            .Select(c => c.CenaZakupu)
+                                            .List<string>();
 
-                                    dataGridView1.DataSource = prodInfo.Select(c => new {CenaZakupu = c}).ToList();
-                                }
-                                break;
-                        }
-                        break;
+                                        dataGridView1.DataSource = prodInfo.Select(c => new { CenaZakupu = c }).ToList();
+                                    }
+                                    break;
+                            }
+                            break;
+                    }
                 }
-            }
-            else if(segment1_position.Checked)
-            {
-                string searchParameter = segment1_textBox.Text.ToString();
-
-                ISession session = sessionFactor.OpenSession();
-                switch(segment1_search.Text.ToString())
+            else if (position.Checked)
                 {
-                    case "Klienci":
-                        switch(segment1_column.SelectedIndex)
+                    string searchParameter = textBox.Text.ToString();
+
+                    ISession session = sessionFactor.OpenSession();
+                    switch(search.Text.ToString())
+                {
+                        case "Klienci":
+                            switch(column.SelectedIndex)
                         {
                             case 0:
                                 using (session)
@@ -420,9 +419,9 @@ namespace Projekt_bazodanowy
                                 }
                                 break;
                         }
-                        break;
-                    case "Produkty":
-                        switch(segment1_column.SelectedIndex)
+                            break;
+                        case "Produkty":
+                            switch(column.SelectedIndex)
                         {
                             case 0:
                                 using (session)
@@ -469,9 +468,9 @@ namespace Projekt_bazodanowy
                                 }
                                 break;
                         }
-                        break; 
-                    case "Paragony":
-                        switch(segment1_column.SelectedIndex)
+                            break; 
+                        case "Paragony":
+                            switch(column.SelectedIndex)
                         {
                             case 0:
                                 using (session)
@@ -518,9 +517,9 @@ namespace Projekt_bazodanowy
                                 }
                                 break;
                         }
-                        break;
-                    case "Zakupy":
-                        switch(segment1_column.SelectedIndex)
+                            break;
+                        case "Zakupy":
+                            switch(column.SelectedIndex)
                         {
                             case 0:
                                 using (session)
@@ -578,9 +577,21 @@ namespace Projekt_bazodanowy
                                 }
                                 break;
                         }
-                        break;
+                            break;
+                    }
                 }
-            }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            bool unlockedSeg2 = false, unlockedSeg3 = false, unlockedSeg4 = false, unlockedSeg5 = false;
+                
+            if (segment2_nextButton.Enabled) unlockedSeg2 = true;
+            if (segment3_nextButton.Enabled) unlockedSeg3 = true;
+            if (segment4_nextButton.Enabled) unlockedSeg4 = true;
+            if (segment5_nextButton.Enabled) unlockedSeg5 = true;
+
+            segmentInfoGet(segment1_search, segment1_column, segment1_textBox, segment1_position, segment1_all);
         }
     }
 }
