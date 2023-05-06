@@ -29,6 +29,45 @@ namespace Projekt_bazodanowy
         {
             segment1_position.Checked = false;
         }
+        private void segment2_position_Click(object sender, EventArgs e)
+        {
+            segment2_all.Checked = false;
+        }
+
+        private void segment2_all_Click(object sender, EventArgs e)
+        {
+            segment2_position.Checked = false;
+        }
+
+        private void segment3_position_Click(object sender, EventArgs e)
+        {
+            segment3_all.Checked = false;
+        }
+
+        private void segment3_all_Click(object sender, EventArgs e)
+        {
+            segment4_position.Checked = false;
+        }
+
+        private void segment4_position_Click(object sender, EventArgs e)
+        {
+            segment4_all.Checked = false;
+        }
+
+        private void segment4_all_Click(object sender, EventArgs e)
+        {
+            segment4_position.Checked = false;
+        }
+
+        private void segment5_position_Click(object sender, EventArgs e)
+        {
+            segment5_all.Checked = false;
+        }
+
+        private void segment5_all_Click(object sender, EventArgs e)
+        {
+            segment5_position.Checked = false;
+        }
 
         private void segmentUnlock(ComboBox search, ComboBox column, Button button, TextBox textBox, CheckBox position, CheckBox all)
         {

@@ -293,6 +293,7 @@
             this.segment5_position.TabIndex = 47;
             this.segment5_position.Text = "Wyszukaj konkrętną pozycję ";
             this.segment5_position.UseVisualStyleBackColor = true;
+            this.segment5_position.Click += new System.EventHandler(this.segment5_position_Click);
             // 
             // segment4_search
             // 
@@ -349,6 +350,7 @@
             this.segment5_all.TabIndex = 48;
             this.segment5_all.Text = "Wyszukaj wszystko w kolumnie";
             this.segment5_all.UseVisualStyleBackColor = true;
+            this.segment5_all.Click += new System.EventHandler(this.segment5_all_Click);
             // 
             // segment3_search
             // 
@@ -384,6 +386,7 @@
             this.segment4_all.TabIndex = 39;
             this.segment4_all.Text = "Wyszukaj wszystko w kolumnie";
             this.segment4_all.UseVisualStyleBackColor = true;
+            this.segment4_all.Click += new System.EventHandler(this.segment4_all_Click);
             // 
             // label17
             // 
@@ -424,6 +427,7 @@
             this.segment3_all.TabIndex = 30;
             this.segment3_all.Text = "Wyszukaj wszystko w kolumnie";
             this.segment3_all.UseVisualStyleBackColor = true;
+            this.segment3_all.Click += new System.EventHandler(this.segment3_all_Click);
             // 
             // segment4_textBox
             // 
@@ -444,6 +448,7 @@
             this.segment2_all.TabIndex = 21;
             this.segment2_all.Text = "Wyszukaj wszystko w kolumnie";
             this.segment2_all.UseVisualStyleBackColor = true;
+            this.segment2_all.Click += new System.EventHandler(this.segment2_all_Click);
             // 
             // segment4_column
             // 
@@ -475,6 +480,7 @@
             this.segment4_position.TabIndex = 38;
             this.segment4_position.Text = "Wyszukaj konkrętną pozycję ";
             this.segment4_position.UseVisualStyleBackColor = true;
+            this.segment4_position.Click += new System.EventHandler(this.segment4_position_Click);
             // 
             // segment2_position
             // 
@@ -487,6 +493,7 @@
             this.segment2_position.TabIndex = 20;
             this.segment2_position.Text = "Wyszukaj konkrętną pozycję ";
             this.segment2_position.UseVisualStyleBackColor = true;
+            this.segment2_position.Click += new System.EventHandler(this.segment2_position_Click);
             // 
             // segment3_position
             // 
@@ -499,6 +506,7 @@
             this.segment3_position.TabIndex = 29;
             this.segment3_position.Text = "Wyszukaj konkrętną pozycję ";
             this.segment3_position.UseVisualStyleBackColor = true;
+            this.segment3_position.Click += new System.EventHandler(this.segment3_position_Click);
             // 
             // label10
             // 
