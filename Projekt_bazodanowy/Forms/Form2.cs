@@ -58,6 +58,7 @@ namespace Projekt_bazodanowy
             segment2_nextButton.Enabled = false;
             segment3_nextButton.Enabled = false;
             segment4_nextButton.Enabled = false;
+            segment5_nextButton.Enabled = false;
             segment5_nextButton.Hide();
         }
 
