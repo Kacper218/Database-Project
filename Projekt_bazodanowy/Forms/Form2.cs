@@ -54,6 +54,10 @@ namespace Projekt_bazodanowy
             segment3_all.Enabled = false;
             segment4_all.Enabled = false;
             segment5_all.Enabled = false;
+
+            segment2_nextButton.Enabled = false;
+            segment3_nextButton.Enabled = false;
+            segment4_nextButton.Enabled = false;
         }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
