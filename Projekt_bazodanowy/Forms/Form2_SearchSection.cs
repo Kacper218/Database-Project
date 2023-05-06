@@ -20,60 +20,61 @@ namespace Projekt_bazodanowy
 {
     public partial class Form2 : Form
     { 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch(comboBox2.Text.ToString())
-            {
-                case "Klienci":
-                    comboBox3.Items.Clear();
-                    comboBox3.Items.Add("ID Klienta");
-                    comboBox3.Items.Add("Imie i Nazwisko");
-                    comboBox3.Items.Add("Nazwa firmy");
-                    comboBox3.Items.Add("Email");
-                    break;
-                case "Produkty":
-                    comboBox3.Items.Clear();
-                    comboBox3.Items.Add("ID produktu");
-                    comboBox3.Items.Add("Nazwa produktu");
-                    comboBox3.Items.Add("Aktualna cena produktu");
-                    comboBox3.Items.Add("Dostępna ilość");
-                    break;
-                case "Paragony":
-                    comboBox3.Items.Clear();
-                    comboBox3.Items.Add("Nr paragonu/faktury");
-                    comboBox3.Items.Add("Data zakupu");
-                    comboBox3.Items.Add("ID Klienta");
-                    comboBox3.Items.Add("Kwota całkowita");
-                    break;
-                case "Zakupy":
-                    comboBox3.Items.Clear();
-                    comboBox3.Items.Add("ID Zakupu");
-                    comboBox3.Items.Add("Nr paragonu/faktury");
-                    comboBox3.Items.Add("ID Produktu");
-                    comboBox3.Items.Add("Zakupiona ilość");
-                    comboBox3.Items.Add("Cena zakupu");
-                    break;
-            }
-        }
         private void checkBox1_Click(object sender, EventArgs e)
         {
-            checkBox2.Checked = false;
+            segment1_all.Checked = false;
         }
 
         private void checkBox2_Click(object sender, EventArgs e)
         {
-            checkBox1.Checked = false;
+            segment1_position.Checked = false;
+        }
+
+        private void segment1_search_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch(segment1_search.Text.ToString())
+            {
+                case "Klienci":
+                    segment1_column.Items.Clear();
+                    segment1_column.Items.Add("ID Klienta");
+                    segment1_column.Items.Add("Imie i Nazwisko");
+                    segment1_column.Items.Add("Nazwa firmy");
+                    segment1_column.Items.Add("Email");
+                    break;
+                case "Produkty":
+                    segment1_column.Items.Clear();
+                    segment1_column.Items.Add("ID produktu");
+                    segment1_column.Items.Add("Nazwa produktu");
+                    segment1_column.Items.Add("Aktualna cena produktu");
+                    segment1_column.Items.Add("Dostępna ilość");
+                    break;
+                case "Paragony":
+                    segment1_column.Items.Clear();
+                    segment1_column.Items.Add("Nr paragonu/faktury");
+                    segment1_column.Items.Add("Data zakupu");
+                    segment1_column.Items.Add("ID Klienta");
+                    segment1_column.Items.Add("Kwota całkowita");
+                    break;
+                case "Zakupy":
+                    segment1_column.Items.Clear();
+                    segment1_column.Items.Add("ID Zakupu");
+                    segment1_column.Items.Add("Nr paragonu/faktury");
+                    segment1_column.Items.Add("ID Produktu");
+                    segment1_column.Items.Add("Zakupiona ilość");
+                    segment1_column.Items.Add("Cena zakupu");
+                    break;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(checkBox2.Checked)
+            if(segment1_all.Checked)
             {
                 ISession session = sessionFactor.OpenSession();
-                switch(comboBox2.Text.ToString())
+                switch(segment1_search.Text.ToString())
                 {
                     case "Klienci":
-                        switch(comboBox3.SelectedIndex)
+                        switch(segment1_column.SelectedIndex)
                         {
                             case 0:
                                 using (session)
@@ -121,7 +122,7 @@ namespace Projekt_bazodanowy
                         }
                         break;
                     case "Produkty":
-                        switch(comboBox3.SelectedIndex)
+                        switch(segment1_column.SelectedIndex)
                         {
                             case 0:
                                 using (session)
@@ -166,7 +167,7 @@ namespace Projekt_bazodanowy
                         }
                         break; 
                     case "Paragony":
-                        switch(comboBox3.SelectedIndex)
+                        switch(segment1_column.SelectedIndex)
                         {
                             case 0:
                                 using (session)
@@ -211,7 +212,7 @@ namespace Projekt_bazodanowy
                         }
                         break;
                     case "Zakupy":
-                        switch(comboBox3.SelectedIndex)
+                        switch(segment1_column.SelectedIndex)
                         {
                             case 0:
                                 using (session)
@@ -267,15 +268,15 @@ namespace Projekt_bazodanowy
                         break;
                 }
             }
-            else if(checkBox1.Checked)
+            else if(segment1_position.Checked)
             {
-                string searchParameter = textBox11.Text.ToString();
+                string searchParameter = segment1_textBox.Text.ToString();
 
                 ISession session = sessionFactor.OpenSession();
-                switch(comboBox2.Text.ToString())
+                switch(segment1_search.Text.ToString())
                 {
                     case "Klienci":
-                        switch(comboBox3.SelectedIndex)
+                        switch(segment1_column.SelectedIndex)
                         {
                             case 0:
                                 using (session)
@@ -324,7 +325,7 @@ namespace Projekt_bazodanowy
                         }
                         break;
                     case "Produkty":
-                        switch(comboBox3.SelectedIndex)
+                        switch(segment1_column.SelectedIndex)
                         {
                             case 0:
                                 using (session)
@@ -373,7 +374,7 @@ namespace Projekt_bazodanowy
                         }
                         break; 
                     case "Paragony":
-                        switch(comboBox3.SelectedIndex)
+                        switch(segment1_column.SelectedIndex)
                         {
                             case 0:
                                 using (session)
@@ -422,7 +423,7 @@ namespace Projekt_bazodanowy
                         }
                         break;
                     case "Zakupy":
-                        switch(comboBox3.SelectedIndex)
+                        switch(segment1_column.SelectedIndex)
                         {
                             case 0:
                                 using (session)
