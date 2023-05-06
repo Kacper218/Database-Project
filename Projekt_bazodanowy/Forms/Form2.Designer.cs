@@ -33,6 +33,7 @@
             this.loadButton = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.segment5_nextButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -50,7 +51,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.segment2_textBox = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.segment3_column = new System.Windows.Forms.CheckBox();
+            this.segment3_all = new System.Windows.Forms.CheckBox();
             this.segment4_textBox = new System.Windows.Forms.TextBox();
             this.segment2_all = new System.Windows.Forms.CheckBox();
             this.segment4_column = new System.Windows.Forms.ComboBox();
@@ -63,9 +64,10 @@
             this.segment2_column = new System.Windows.Forms.ComboBox();
             this.segment3_textBox = new System.Windows.Forms.TextBox();
             this.segment2_search = new System.Windows.Forms.ComboBox();
-            this.segment3_all = new System.Windows.Forms.ComboBox();
+            this.segment3_column = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.segment2_nextButton = new System.Windows.Forms.Button();
             this.segment1_textBox = new System.Windows.Forms.TextBox();
             this.segment1_all = new System.Windows.Forms.CheckBox();
             this.segment1_position = new System.Windows.Forms.CheckBox();
@@ -74,8 +76,11 @@
             this.segment1_search = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.segment1_nextButton = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.segment3_nextButton = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.segment4_nextButton = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
@@ -91,10 +96,6 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.segment1_nextButton = new System.Windows.Forms.Button();
-            this.segment2_nextButton = new System.Windows.Forms.Button();
-            this.segment3_nextButton = new System.Windows.Forms.Button();
-            this.segment4_nextButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -104,6 +105,7 @@
             this.groupBox3.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -168,6 +170,16 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Wyświetlanie danych";
             // 
+            // segment5_nextButton
+            // 
+            this.segment5_nextButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.segment5_nextButton.Location = new System.Drawing.Point(424, 223);
+            this.segment5_nextButton.Name = "segment5_nextButton";
+            this.segment5_nextButton.Size = new System.Drawing.Size(115, 29);
+            this.segment5_nextButton.TabIndex = 55;
+            this.segment5_nextButton.Text = "Następny segment";
+            this.segment5_nextButton.UseVisualStyleBackColor = true;
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.button1);
@@ -219,7 +231,7 @@
             this.tabPage2.Controls.Add(this.label17);
             this.tabPage2.Controls.Add(this.segment2_textBox);
             this.tabPage2.Controls.Add(this.label14);
-            this.tabPage2.Controls.Add(this.segment3_column);
+            this.tabPage2.Controls.Add(this.segment3_all);
             this.tabPage2.Controls.Add(this.segment4_textBox);
             this.tabPage2.Controls.Add(this.segment2_all);
             this.tabPage2.Controls.Add(this.segment4_column);
@@ -232,7 +244,7 @@
             this.tabPage2.Controls.Add(this.segment2_column);
             this.tabPage2.Controls.Add(this.segment3_textBox);
             this.tabPage2.Controls.Add(this.segment2_search);
-            this.tabPage2.Controls.Add(this.segment3_all);
+            this.tabPage2.Controls.Add(this.segment3_column);
             this.tabPage2.Controls.Add(this.label11);
             this.tabPage2.Controls.Add(this.groupBox4);
             this.tabPage2.Controls.Add(this.segment1_textBox);
@@ -268,6 +280,7 @@
             this.segment5_search.Name = "segment5_search";
             this.segment5_search.Size = new System.Drawing.Size(173, 28);
             this.segment5_search.TabIndex = 44;
+            this.segment5_search.SelectedIndexChanged += new System.EventHandler(this.segment5_search_SelectedIndexChanged);
             // 
             // segment5_position
             // 
@@ -294,6 +307,7 @@
             this.segment4_search.Name = "segment4_search";
             this.segment4_search.Size = new System.Drawing.Size(173, 28);
             this.segment4_search.TabIndex = 35;
+            this.segment4_search.SelectedIndexChanged += new System.EventHandler(this.segment4_search_SelectedIndexChanged);
             // 
             // label16
             // 
@@ -349,6 +363,7 @@
             this.segment3_search.Name = "segment3_search";
             this.segment3_search.Size = new System.Drawing.Size(173, 28);
             this.segment3_search.TabIndex = 26;
+            this.segment3_search.SelectedIndexChanged += new System.EventHandler(this.segment3_search_SelectedIndexChanged);
             // 
             // segment5_textBox
             // 
@@ -398,17 +413,17 @@
             this.label14.TabIndex = 37;
             this.label14.Text = "Wybierz kolumne:";
             // 
-            // segment3_column
+            // segment3_all
             // 
-            this.segment3_column.AutoSize = true;
-            this.segment3_column.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.segment3_column.Location = new System.Drawing.Point(1193, 215);
-            this.segment3_column.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.segment3_column.Name = "segment3_column";
-            this.segment3_column.Size = new System.Drawing.Size(241, 22);
-            this.segment3_column.TabIndex = 30;
-            this.segment3_column.Text = "Wyszukaj wszystko w kolumnie";
-            this.segment3_column.UseVisualStyleBackColor = true;
+            this.segment3_all.AutoSize = true;
+            this.segment3_all.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.segment3_all.Location = new System.Drawing.Point(1193, 215);
+            this.segment3_all.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.segment3_all.Name = "segment3_all";
+            this.segment3_all.Size = new System.Drawing.Size(241, 22);
+            this.segment3_all.TabIndex = 30;
+            this.segment3_all.Text = "Wyszukaj wszystko w kolumnie";
+            this.segment3_all.UseVisualStyleBackColor = true;
             // 
             // segment4_textBox
             // 
@@ -535,15 +550,16 @@
             this.segment2_search.Name = "segment2_search";
             this.segment2_search.Size = new System.Drawing.Size(173, 28);
             this.segment2_search.TabIndex = 17;
+            this.segment2_search.SelectedIndexChanged += new System.EventHandler(this.segment2_search_SelectedIndexChanged);
             // 
-            // segment3_all
+            // segment3_column
             // 
-            this.segment3_all.FormattingEnabled = true;
-            this.segment3_all.Location = new System.Drawing.Point(1426, 102);
-            this.segment3_all.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.segment3_all.Name = "segment3_all";
-            this.segment3_all.Size = new System.Drawing.Size(173, 28);
-            this.segment3_all.TabIndex = 27;
+            this.segment3_column.FormattingEnabled = true;
+            this.segment3_column.Location = new System.Drawing.Point(1426, 102);
+            this.segment3_column.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.segment3_column.Name = "segment3_column";
+            this.segment3_column.Size = new System.Drawing.Size(173, 28);
+            this.segment3_column.TabIndex = 27;
             // 
             // label11
             // 
@@ -564,6 +580,17 @@
             this.groupBox4.TabIndex = 24;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Segment 2";
+            // 
+            // segment2_nextButton
+            // 
+            this.segment2_nextButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.segment2_nextButton.Location = new System.Drawing.Point(403, 219);
+            this.segment2_nextButton.Name = "segment2_nextButton";
+            this.segment2_nextButton.Size = new System.Drawing.Size(144, 36);
+            this.segment2_nextButton.TabIndex = 52;
+            this.segment2_nextButton.Text = "Następny segment";
+            this.segment2_nextButton.UseVisualStyleBackColor = true;
+            this.segment2_nextButton.Click += new System.EventHandler(this.segment2_nextButton_Click);
             // 
             // segment1_textBox
             // 
@@ -653,6 +680,17 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Segment 1";
             // 
+            // segment1_nextButton
+            // 
+            this.segment1_nextButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.segment1_nextButton.Location = new System.Drawing.Point(403, 219);
+            this.segment1_nextButton.Name = "segment1_nextButton";
+            this.segment1_nextButton.Size = new System.Drawing.Size(144, 36);
+            this.segment1_nextButton.TabIndex = 0;
+            this.segment1_nextButton.Text = "Następny segment";
+            this.segment1_nextButton.UseVisualStyleBackColor = true;
+            this.segment1_nextButton.Click += new System.EventHandler(this.segment1_nextButton_Click);
+            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.segment3_nextButton);
@@ -662,6 +700,17 @@
             this.groupBox5.TabIndex = 33;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Segment 3";
+            // 
+            // segment3_nextButton
+            // 
+            this.segment3_nextButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.segment3_nextButton.Location = new System.Drawing.Point(403, 219);
+            this.segment3_nextButton.Name = "segment3_nextButton";
+            this.segment3_nextButton.Size = new System.Drawing.Size(144, 36);
+            this.segment3_nextButton.TabIndex = 53;
+            this.segment3_nextButton.Text = "Następny segment";
+            this.segment3_nextButton.UseVisualStyleBackColor = true;
+            this.segment3_nextButton.Click += new System.EventHandler(this.segment3_nextButton_Click);
             // 
             // groupBox6
             // 
@@ -673,8 +722,20 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Segment 4";
             // 
+            // segment4_nextButton
+            // 
+            this.segment4_nextButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.segment4_nextButton.Location = new System.Drawing.Point(403, 219);
+            this.segment4_nextButton.Name = "segment4_nextButton";
+            this.segment4_nextButton.Size = new System.Drawing.Size(144, 36);
+            this.segment4_nextButton.TabIndex = 54;
+            this.segment4_nextButton.Text = "Następny segment";
+            this.segment4_nextButton.UseVisualStyleBackColor = true;
+            this.segment4_nextButton.Click += new System.EventHandler(this.segment4_nextButton_Click);
+            // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.segment5_nextButton);
             this.groupBox7.Location = new System.Drawing.Point(2344, 8);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(546, 261);
@@ -816,47 +877,6 @@
             this.textBox2.Size = new System.Drawing.Size(148, 26);
             this.textBox2.TabIndex = 5;
             // 
-            // segment1_nextButton
-            // 
-            this.segment1_nextButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.segment1_nextButton.Location = new System.Drawing.Point(403, 219);
-            this.segment1_nextButton.Name = "segment1_nextButton";
-            this.segment1_nextButton.Size = new System.Drawing.Size(144, 36);
-            this.segment1_nextButton.TabIndex = 0;
-            this.segment1_nextButton.Text = "Następny segment";
-            this.segment1_nextButton.UseVisualStyleBackColor = true;
-            this.segment1_nextButton.Click += new System.EventHandler(this.segment1_nextButton_Click);
-            // 
-            // segment2_nextButton
-            // 
-            this.segment2_nextButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.segment2_nextButton.Location = new System.Drawing.Point(403, 219);
-            this.segment2_nextButton.Name = "segment2_nextButton";
-            this.segment2_nextButton.Size = new System.Drawing.Size(144, 36);
-            this.segment2_nextButton.TabIndex = 52;
-            this.segment2_nextButton.Text = "Następny segment";
-            this.segment2_nextButton.UseVisualStyleBackColor = true;
-            // 
-            // segment3_nextButton
-            // 
-            this.segment3_nextButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.segment3_nextButton.Location = new System.Drawing.Point(403, 219);
-            this.segment3_nextButton.Name = "segment3_nextButton";
-            this.segment3_nextButton.Size = new System.Drawing.Size(144, 36);
-            this.segment3_nextButton.TabIndex = 53;
-            this.segment3_nextButton.Text = "Następny segment";
-            this.segment3_nextButton.UseVisualStyleBackColor = true;
-            // 
-            // segment4_nextButton
-            // 
-            this.segment4_nextButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.segment4_nextButton.Location = new System.Drawing.Point(403, 219);
-            this.segment4_nextButton.Name = "segment4_nextButton";
-            this.segment4_nextButton.Size = new System.Drawing.Size(144, 36);
-            this.segment4_nextButton.TabIndex = 54;
-            this.segment4_nextButton.Text = "Następny segment";
-            this.segment4_nextButton.UseVisualStyleBackColor = true;
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -878,6 +898,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
@@ -937,7 +958,7 @@
         private System.Windows.Forms.CheckBox segment4_all;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.CheckBox segment3_column;
+        private System.Windows.Forms.CheckBox segment3_all;
         private System.Windows.Forms.TextBox segment4_textBox;
         private System.Windows.Forms.ComboBox segment4_column;
         private System.Windows.Forms.Label label12;
@@ -945,7 +966,7 @@
         private System.Windows.Forms.CheckBox segment3_position;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox segment3_textBox;
-        private System.Windows.Forms.ComboBox segment3_all;
+        private System.Windows.Forms.ComboBox segment3_column;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.GroupBox groupBox7;
@@ -953,5 +974,6 @@
         private System.Windows.Forms.Button segment2_nextButton;
         private System.Windows.Forms.Button segment3_nextButton;
         private System.Windows.Forms.Button segment4_nextButton;
+        private System.Windows.Forms.Button segment5_nextButton;
     }
 }

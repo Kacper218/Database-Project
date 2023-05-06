@@ -20,51 +20,109 @@ namespace Projekt_bazodanowy
 {
     public partial class Form2 : Form
     { 
-        private void checkBox1_Click(object sender, EventArgs e)
+        private void segment1_position_Click(object sender, EventArgs e)
         {
             segment1_all.Checked = false;
         }
 
-        private void checkBox2_Click(object sender, EventArgs e)
+        private void segment1_all_Click(object sender, EventArgs e)
         {
             segment1_position.Checked = false;
         }
 
-        private void segment1_search_SelectedIndexChanged(object sender, EventArgs e)
+        private void segmentUnlock(ComboBox search, ComboBox column, Button button, TextBox textBox, CheckBox position, CheckBox all)
         {
-            switch(segment1_search.Text.ToString())
+            search.Enabled = true;
+            column.Enabled = true;
+            textBox.Enabled = true;
+            button.Enabled = true;
+            position.Enabled = true;
+            all.Enabled = true;
+        }
+
+        private void searchComboBoxOptions(string segment, ComboBox column)
+        {
+            switch(segment)
             {
                 case "Klienci":
-                    segment1_column.Items.Clear();
-                    segment1_column.Items.Add("ID Klienta");
-                    segment1_column.Items.Add("Imie i Nazwisko");
-                    segment1_column.Items.Add("Nazwa firmy");
-                    segment1_column.Items.Add("Email");
+                    column.Items.Clear();
+                    column.Items.Add("ID Klienta");
+                    column.Items.Add("Imie i Nazwisko");
+                    column.Items.Add("Nazwa firmy");
+                    column.Items.Add("Email");
                     break;
                 case "Produkty":
-                    segment1_column.Items.Clear();
-                    segment1_column.Items.Add("ID produktu");
-                    segment1_column.Items.Add("Nazwa produktu");
-                    segment1_column.Items.Add("Aktualna cena produktu");
-                    segment1_column.Items.Add("Dostępna ilość");
+                    column.Items.Clear();
+                    column.Items.Add("ID produktu");
+                    column.Items.Add("Nazwa produktu");
+                    column.Items.Add("Aktualna cena produktu");
+                    column.Items.Add("Dostępna ilość");
                     break;
                 case "Paragony":
-                    segment1_column.Items.Clear();
-                    segment1_column.Items.Add("Nr paragonu/faktury");
-                    segment1_column.Items.Add("Data zakupu");
-                    segment1_column.Items.Add("ID Klienta");
-                    segment1_column.Items.Add("Kwota całkowita");
+                    column.Items.Clear();
+                    column.Items.Add("Nr paragonu/faktury");
+                    column.Items.Add("Data zakupu");
+                    column.Items.Add("ID Klienta");
+                    column.Items.Add("Kwota całkowita");
                     break;
                 case "Zakupy":
-                    segment1_column.Items.Clear();
-                    segment1_column.Items.Add("ID Zakupu");
-                    segment1_column.Items.Add("Nr paragonu/faktury");
-                    segment1_column.Items.Add("ID Produktu");
-                    segment1_column.Items.Add("Zakupiona ilość");
-                    segment1_column.Items.Add("Cena zakupu");
+                    column.Items.Clear();
+                    column.Items.Add("ID Zakupu");
+                    column.Items.Add("Nr paragonu/faktury");
+                    column.Items.Add("ID Produktu");
+                    column.Items.Add("Zakupiona ilość");
+                    column.Items.Add("Cena zakupu");
                     break;
             }
+        
         }
+
+        private void segment1_nextButton_Click(object sender, EventArgs e)
+        {
+            segmentUnlock(segment2_search, segment2_column, segment2_nextButton, segment2_textBox, segment2_position, segment2_all);
+        }
+        private void segment2_nextButton_Click(object sender, EventArgs e)
+        {
+            segmentUnlock(segment3_search, segment3_column, segment3_nextButton, segment3_textBox, segment3_position, segment3_all);
+        }
+        private void segment3_nextButton_Click(object sender, EventArgs e)
+        {
+            segmentUnlock(segment4_search, segment4_column, segment4_nextButton, segment4_textBox, segment4_position, segment4_all);
+        }
+
+        private void segment4_nextButton_Click(object sender, EventArgs e)
+        {
+            segmentUnlock(segment5_search, segment5_column, segment5_nextButton, segment5_textBox, segment5_position, segment5_all);
+        }
+
+        private void segment1_search_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            segment1_column.SelectedIndex = -1;
+            searchComboBoxOptions(segment1_search.Text.ToString(), segment1_column);
+        }
+        private void segment2_search_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            segment2_column.SelectedIndex = -1;
+            searchComboBoxOptions(segment2_search.Text.ToString(), segment2_column);
+        }
+        private void segment3_search_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            segment3_column.SelectedIndex = -1;
+            searchComboBoxOptions(segment3_search.Text.ToString(), segment3_column);
+        }
+
+        private void segment4_search_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            segment4_column.SelectedIndex = -1;
+            searchComboBoxOptions(segment4_search.Text.ToString(), segment4_column);
+        }
+
+        private void segment5_search_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            segment5_column.SelectedIndex = -1;
+            searchComboBoxOptions(segment5_search.Text.ToString(), segment5_column);
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {

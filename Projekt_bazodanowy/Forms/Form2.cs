@@ -36,7 +36,7 @@ namespace Projekt_bazodanowy
             segment5_search.Enabled = false;
 
             segment2_column.Enabled = false;
-            segment3_column.Enabled = false;
+            segment3_all.Enabled = false;
             segment4_column.Enabled = false;
             segment5_column.Enabled = false;
 
@@ -51,13 +51,14 @@ namespace Projekt_bazodanowy
             segment5_position.Enabled = false;
 
             segment2_all.Enabled = false;
-            segment3_all.Enabled = false;
+            segment3_column.Enabled = false;
             segment4_all.Enabled = false;
             segment5_all.Enabled = false;
 
             segment2_nextButton.Enabled = false;
             segment3_nextButton.Enabled = false;
             segment4_nextButton.Enabled = false;
+            segment5_nextButton.Hide();
         }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
