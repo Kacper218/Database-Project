@@ -328,7 +328,44 @@ namespace Projekt_bazodanowy
                         }
                     break;
                     }
-                    case "Paragony":
+                case "Paragony":
+                    if (!(string.IsNullOrEmpty(idDokumentu_textBox.Text)) ||
+                        !(string.IsNullOrEmpty(dataZakupu_textBox.Text)) ||
+                        !(string.IsNullOrEmpty(idKlienta_textBox.Text)) ||
+                        !(string.IsNullOrEmpty(kwotaCalkowita_textBox.Text)))
+                    {
+                        using (session)
+                        {
+                            var query = session.QueryOver<Paragony>();
+                            if (!string.IsNullOrEmpty(idDokumentu_textBox.Text))
+                            {
+                                query = query.Where(c => c.IDDokumentu == idDokumentu_textBox.Text);
+                            }
+                            if (!string.IsNullOrEmpty(dataZakupu_textBox.Text))
+                            {
+                                DateTime dataZakupu;
+                                if (DateTime.TryParse(dataZakupu_textBox.Text, out dataZakupu))
+                                {
+                                    query = query.Where(c => c.DataZakupu == dataZakupu);
+                                }
+                            }
+                            if (!string.IsNullOrEmpty(idKlienta_textBox.Text))
+                            {
+                                query = query.Where(c => c.IDKlienta == idKlienta_textBox.Text);
+                            }
+                            if (!string.IsNullOrEmpty(kwotaCalkowita_textBox.Text))
+                            {
+                                query = query.Where(c => c.KwotaCalkowita == kwotaCalkowita_textBox.Text);
+                            }
+
+                            dataGridView1.DataSource = query
+                                .Select(c => c.IDDokumentu, c => c.DataZakupu, c => c.IDKlienta, c => c.KwotaCalkowita)
+                                .List<object[]>()
+                                .Select(c => new { IDDokumentu = (string)c[0], DataZakupu = (DateTime)c[1], IDKlienta = (string)c[2], KwotaCalkowita = (string)c[3] })
+                                .ToList();
+                        }
+                    }
+
                     break;
                 case "Produkty":
                     break;
