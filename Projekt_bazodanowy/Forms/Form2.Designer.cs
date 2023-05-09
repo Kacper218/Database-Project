@@ -95,6 +95,35 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.textBox22 = new System.Windows.Forms.TextBox();
+            this.textBox21 = new System.Windows.Forms.TextBox();
+            this.textBox17 = new System.Windows.Forms.TextBox();
+            this.textBox16 = new System.Windows.Forms.TextBox();
+            this.textBox15 = new System.Windows.Forms.TextBox();
+            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -107,6 +136,7 @@
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // addButton
@@ -208,6 +238,7 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(8, 28);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl1.Name = "tabControl1";
@@ -289,7 +320,7 @@
             this.segment5_position.Location = new System.Drawing.Point(2363, 169);
             this.segment5_position.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.segment5_position.Name = "segment5_position";
-            this.segment5_position.Size = new System.Drawing.Size(224, 22);
+            this.segment5_position.Size = new System.Drawing.Size(266, 26);
             this.segment5_position.TabIndex = 47;
             this.segment5_position.Text = "Wyszukaj konkrętną pozycję ";
             this.segment5_position.UseVisualStyleBackColor = true;
@@ -316,7 +347,7 @@
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label16.Location = new System.Drawing.Point(2397, 61);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(81, 20);
+            this.label16.Size = new System.Drawing.Size(104, 25);
             this.label16.TabIndex = 43;
             this.label16.Text = "Szukaj w:";
             // 
@@ -335,7 +366,7 @@
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label15.Location = new System.Drawing.Point(1812, 61);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(81, 20);
+            this.label15.Size = new System.Drawing.Size(104, 25);
             this.label15.TabIndex = 34;
             this.label15.Text = "Szukaj w:";
             // 
@@ -346,7 +377,7 @@
             this.segment5_all.Location = new System.Drawing.Point(2363, 215);
             this.segment5_all.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.segment5_all.Name = "segment5_all";
-            this.segment5_all.Size = new System.Drawing.Size(241, 22);
+            this.segment5_all.Size = new System.Drawing.Size(283, 26);
             this.segment5_all.TabIndex = 48;
             this.segment5_all.Text = "Wyszukaj wszystko w kolumnie";
             this.segment5_all.UseVisualStyleBackColor = true;
@@ -382,7 +413,7 @@
             this.segment4_all.Location = new System.Drawing.Point(1778, 215);
             this.segment4_all.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.segment4_all.Name = "segment4_all";
-            this.segment4_all.Size = new System.Drawing.Size(241, 22);
+            this.segment4_all.Size = new System.Drawing.Size(283, 26);
             this.segment4_all.TabIndex = 39;
             this.segment4_all.Text = "Wyszukaj wszystko w kolumnie";
             this.segment4_all.UseVisualStyleBackColor = true;
@@ -394,7 +425,7 @@
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label17.Location = new System.Drawing.Point(2372, 110);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(142, 20);
+            this.label17.Size = new System.Drawing.Size(183, 25);
             this.label17.TabIndex = 46;
             this.label17.Text = "Wybierz kolumne:";
             // 
@@ -412,7 +443,7 @@
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label14.Location = new System.Drawing.Point(1787, 110);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(142, 20);
+            this.label14.Size = new System.Drawing.Size(183, 25);
             this.label14.TabIndex = 37;
             this.label14.Text = "Wybierz kolumne:";
             // 
@@ -423,7 +454,7 @@
             this.segment3_all.Location = new System.Drawing.Point(1193, 215);
             this.segment3_all.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.segment3_all.Name = "segment3_all";
-            this.segment3_all.Size = new System.Drawing.Size(241, 22);
+            this.segment3_all.Size = new System.Drawing.Size(283, 26);
             this.segment3_all.TabIndex = 30;
             this.segment3_all.Text = "Wyszukaj wszystko w kolumnie";
             this.segment3_all.UseVisualStyleBackColor = true;
@@ -444,7 +475,7 @@
             this.segment2_all.Location = new System.Drawing.Point(608, 215);
             this.segment2_all.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.segment2_all.Name = "segment2_all";
-            this.segment2_all.Size = new System.Drawing.Size(241, 22);
+            this.segment2_all.Size = new System.Drawing.Size(283, 26);
             this.segment2_all.TabIndex = 21;
             this.segment2_all.Text = "Wyszukaj wszystko w kolumnie";
             this.segment2_all.UseVisualStyleBackColor = true;
@@ -465,7 +496,7 @@
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label12.Location = new System.Drawing.Point(1202, 110);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(142, 20);
+            this.label12.Size = new System.Drawing.Size(183, 25);
             this.label12.TabIndex = 28;
             this.label12.Text = "Wybierz kolumne:";
             // 
@@ -476,7 +507,7 @@
             this.segment4_position.Location = new System.Drawing.Point(1778, 169);
             this.segment4_position.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.segment4_position.Name = "segment4_position";
-            this.segment4_position.Size = new System.Drawing.Size(224, 22);
+            this.segment4_position.Size = new System.Drawing.Size(266, 26);
             this.segment4_position.TabIndex = 38;
             this.segment4_position.Text = "Wyszukaj konkrętną pozycję ";
             this.segment4_position.UseVisualStyleBackColor = true;
@@ -489,7 +520,7 @@
             this.segment2_position.Location = new System.Drawing.Point(608, 169);
             this.segment2_position.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.segment2_position.Name = "segment2_position";
-            this.segment2_position.Size = new System.Drawing.Size(224, 22);
+            this.segment2_position.Size = new System.Drawing.Size(266, 26);
             this.segment2_position.TabIndex = 20;
             this.segment2_position.Text = "Wyszukaj konkrętną pozycję ";
             this.segment2_position.UseVisualStyleBackColor = true;
@@ -502,7 +533,7 @@
             this.segment3_position.Location = new System.Drawing.Point(1193, 169);
             this.segment3_position.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.segment3_position.Name = "segment3_position";
-            this.segment3_position.Size = new System.Drawing.Size(224, 22);
+            this.segment3_position.Size = new System.Drawing.Size(266, 26);
             this.segment3_position.TabIndex = 29;
             this.segment3_position.Text = "Wyszukaj konkrętną pozycję ";
             this.segment3_position.UseVisualStyleBackColor = true;
@@ -514,7 +545,7 @@
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label10.Location = new System.Drawing.Point(617, 110);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(142, 20);
+            this.label10.Size = new System.Drawing.Size(183, 25);
             this.label10.TabIndex = 19;
             this.label10.Text = "Wybierz kolumne:";
             // 
@@ -524,7 +555,7 @@
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label13.Location = new System.Drawing.Point(1227, 61);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(81, 20);
+            this.label13.Size = new System.Drawing.Size(104, 25);
             this.label13.TabIndex = 25;
             this.label13.Text = "Szukaj w:";
             // 
@@ -575,7 +606,7 @@
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label11.Location = new System.Drawing.Point(642, 61);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(81, 20);
+            this.label11.Size = new System.Drawing.Size(104, 25);
             this.label11.TabIndex = 16;
             this.label11.Text = "Szukaj w:";
             // 
@@ -615,7 +646,7 @@
             this.segment1_all.Location = new System.Drawing.Point(26, 215);
             this.segment1_all.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.segment1_all.Name = "segment1_all";
-            this.segment1_all.Size = new System.Drawing.Size(241, 22);
+            this.segment1_all.Size = new System.Drawing.Size(283, 26);
             this.segment1_all.TabIndex = 12;
             this.segment1_all.Text = "Wyszukaj wszystko w kolumnie";
             this.segment1_all.UseVisualStyleBackColor = true;
@@ -628,7 +659,7 @@
             this.segment1_position.Location = new System.Drawing.Point(26, 169);
             this.segment1_position.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.segment1_position.Name = "segment1_position";
-            this.segment1_position.Size = new System.Drawing.Size(224, 22);
+            this.segment1_position.Size = new System.Drawing.Size(266, 26);
             this.segment1_position.TabIndex = 11;
             this.segment1_position.Text = "Wyszukaj konkrętną pozycję ";
             this.segment1_position.UseVisualStyleBackColor = true;
@@ -640,7 +671,7 @@
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label9.Location = new System.Drawing.Point(35, 110);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(142, 20);
+            this.label9.Size = new System.Drawing.Size(183, 25);
             this.label9.TabIndex = 9;
             this.label9.Text = "Wybierz kolumne:";
             // 
@@ -674,7 +705,7 @@
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label8.Location = new System.Drawing.Point(60, 61);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(81, 20);
+            this.label8.Size = new System.Drawing.Size(104, 25);
             this.label8.TabIndex = 5;
             this.label8.Text = "Szukaj w:";
             // 
@@ -885,6 +916,274 @@
             this.textBox2.Size = new System.Drawing.Size(148, 26);
             this.textBox2.TabIndex = 5;
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.label31);
+            this.tabPage3.Controls.Add(this.label30);
+            this.tabPage3.Controls.Add(this.label29);
+            this.tabPage3.Controls.Add(this.label28);
+            this.tabPage3.Controls.Add(this.label27);
+            this.tabPage3.Controls.Add(this.label26);
+            this.tabPage3.Controls.Add(this.label25);
+            this.tabPage3.Controls.Add(this.label24);
+            this.tabPage3.Controls.Add(this.label23);
+            this.tabPage3.Controls.Add(this.label22);
+            this.tabPage3.Controls.Add(this.label21);
+            this.tabPage3.Controls.Add(this.label20);
+            this.tabPage3.Controls.Add(this.label19);
+            this.tabPage3.Controls.Add(this.textBox22);
+            this.tabPage3.Controls.Add(this.textBox21);
+            this.tabPage3.Controls.Add(this.textBox17);
+            this.tabPage3.Controls.Add(this.textBox16);
+            this.tabPage3.Controls.Add(this.textBox15);
+            this.tabPage3.Controls.Add(this.textBox14);
+            this.tabPage3.Controls.Add(this.textBox13);
+            this.tabPage3.Controls.Add(this.textBox11);
+            this.tabPage3.Controls.Add(this.textBox10);
+            this.tabPage3.Controls.Add(this.textBox9);
+            this.tabPage3.Controls.Add(this.textBox8);
+            this.tabPage3.Controls.Add(this.textBox7);
+            this.tabPage3.Controls.Add(this.textBox6);
+            this.tabPage3.Controls.Add(this.label18);
+            this.tabPage3.Controls.Add(this.comboBox2);
+            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(1226, 306);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "tabPage3";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(911, 235);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(107, 20);
+            this.label31.TabIndex = 31;
+            this.label31.Text = "Cena zakupu:";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(911, 184);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(166, 20);
+            this.label30.TabIndex = 30;
+            this.label30.Text = "Dostępność produktu:";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(911, 139);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(127, 20);
+            this.label29.TabIndex = 29;
+            this.label29.Text = "Kwota całkowita:";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(911, 89);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(52, 20);
+            this.label28.TabIndex = 28;
+            this.label28.Text = "Email:";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(586, 239);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(153, 20);
+            this.label27.TabIndex = 27;
+            this.label27.Text = "Ilość pozycji zakupu:";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(586, 185);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(182, 20);
+            this.label26.TabIndex = 26;
+            this.label26.Text = "Aktualna cena produktu:";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(586, 90);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(98, 20);
+            this.label25.TabIndex = 25;
+            this.label25.Text = "Nazwa firmy:";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(298, 187);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(128, 20);
+            this.label24.TabIndex = 24;
+            this.label24.Text = "Nazwa produktu:";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(298, 139);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(104, 20);
+            this.label23.TabIndex = 23;
+            this.label23.Text = "Data zakupu:";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(298, 92);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(119, 20);
+            this.label22.TabIndex = 22;
+            this.label22.Text = "Imie i nazwisko:";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(13, 184);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(98, 20);
+            this.label21.TabIndex = 21;
+            this.label21.Text = "ID Produktu:";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(13, 139);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(117, 20);
+            this.label20.TabIndex = 20;
+            this.label20.Text = "ID Dokumentu:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(13, 95);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(82, 20);
+            this.label19.TabIndex = 19;
+            this.label19.Text = "ID Klienta:";
+            // 
+            // textBox22
+            // 
+            this.textBox22.Location = new System.Drawing.Point(1100, 232);
+            this.textBox22.Name = "textBox22";
+            this.textBox22.Size = new System.Drawing.Size(100, 26);
+            this.textBox22.TabIndex = 18;
+            // 
+            // textBox21
+            // 
+            this.textBox21.Location = new System.Drawing.Point(780, 233);
+            this.textBox21.Name = "textBox21";
+            this.textBox21.Size = new System.Drawing.Size(100, 26);
+            this.textBox21.TabIndex = 17;
+            // 
+            // textBox17
+            // 
+            this.textBox17.Location = new System.Drawing.Point(1100, 181);
+            this.textBox17.Name = "textBox17";
+            this.textBox17.Size = new System.Drawing.Size(100, 26);
+            this.textBox17.TabIndex = 13;
+            // 
+            // textBox16
+            // 
+            this.textBox16.Location = new System.Drawing.Point(780, 182);
+            this.textBox16.Name = "textBox16";
+            this.textBox16.Size = new System.Drawing.Size(100, 26);
+            this.textBox16.TabIndex = 12;
+            // 
+            // textBox15
+            // 
+            this.textBox15.Location = new System.Drawing.Point(446, 184);
+            this.textBox15.Name = "textBox15";
+            this.textBox15.Size = new System.Drawing.Size(100, 26);
+            this.textBox15.TabIndex = 11;
+            // 
+            // textBox14
+            // 
+            this.textBox14.Location = new System.Drawing.Point(150, 184);
+            this.textBox14.Name = "textBox14";
+            this.textBox14.Size = new System.Drawing.Size(100, 26);
+            this.textBox14.TabIndex = 10;
+            // 
+            // textBox13
+            // 
+            this.textBox13.Location = new System.Drawing.Point(1100, 133);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.Size = new System.Drawing.Size(100, 26);
+            this.textBox13.TabIndex = 9;
+            // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(446, 136);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(100, 26);
+            this.textBox11.TabIndex = 7;
+            // 
+            // textBox10
+            // 
+            this.textBox10.Location = new System.Drawing.Point(150, 136);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(100, 26);
+            this.textBox10.TabIndex = 6;
+            // 
+            // textBox9
+            // 
+            this.textBox9.Location = new System.Drawing.Point(1100, 86);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(100, 26);
+            this.textBox9.TabIndex = 5;
+            // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(780, 87);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(100, 26);
+            this.textBox8.TabIndex = 4;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(446, 89);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(100, 26);
+            this.textBox7.TabIndex = 3;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(150, 89);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(100, 26);
+            this.textBox6.TabIndex = 2;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label18.Location = new System.Drawing.Point(12, 28);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(97, 25);
+            this.label18.TabIndex = 1;
+            this.label18.Text = "Szukaj w:";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Klienci",
+            "Paragony",
+            "Produkty",
+            "Zakupy"});
+            this.comboBox2.Location = new System.Drawing.Point(115, 27);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(150, 28);
+            this.comboBox2.TabIndex = 0;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -909,6 +1208,8 @@
             this.groupBox7.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -983,5 +1284,34 @@
         private System.Windows.Forms.Button segment3_nextButton;
         private System.Windows.Forms.Button segment4_nextButton;
         private System.Windows.Forms.Button segment5_nextButton;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.TextBox textBox17;
+        private System.Windows.Forms.TextBox textBox16;
+        private System.Windows.Forms.TextBox textBox15;
+        private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.TextBox textBox22;
+        private System.Windows.Forms.TextBox textBox21;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
     }
 }
