@@ -109,21 +109,21 @@
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.textBox22 = new System.Windows.Forms.TextBox();
-            this.textBox21 = new System.Windows.Forms.TextBox();
-            this.textBox17 = new System.Windows.Forms.TextBox();
-            this.textBox16 = new System.Windows.Forms.TextBox();
-            this.textBox15 = new System.Windows.Forms.TextBox();
-            this.textBox14 = new System.Windows.Forms.TextBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.cenaZakupu_textBox = new System.Windows.Forms.TextBox();
+            this.ilosc_textBox = new System.Windows.Forms.TextBox();
+            this.dostepnosc_textBox = new System.Windows.Forms.TextBox();
+            this.aktualnaCena_textBox = new System.Windows.Forms.TextBox();
+            this.nazwaProduktu_textBox = new System.Windows.Forms.TextBox();
+            this.idProduktu_textBox = new System.Windows.Forms.TextBox();
+            this.kwotaCalkowita_textBox = new System.Windows.Forms.TextBox();
+            this.dataZakupu_textBox = new System.Windows.Forms.TextBox();
+            this.idDokumentu_textBox = new System.Windows.Forms.TextBox();
+            this.email_textBox = new System.Windows.Forms.TextBox();
+            this.nazwaFirmy_textBox = new System.Windows.Forms.TextBox();
+            this.imieNazwisko_textBox = new System.Windows.Forms.TextBox();
+            this.idKlienta_textBox = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.search_comboBox = new System.Windows.Forms.ComboBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -931,21 +931,21 @@
             this.tabPage3.Controls.Add(this.label21);
             this.tabPage3.Controls.Add(this.label20);
             this.tabPage3.Controls.Add(this.label19);
-            this.tabPage3.Controls.Add(this.textBox22);
-            this.tabPage3.Controls.Add(this.textBox21);
-            this.tabPage3.Controls.Add(this.textBox17);
-            this.tabPage3.Controls.Add(this.textBox16);
-            this.tabPage3.Controls.Add(this.textBox15);
-            this.tabPage3.Controls.Add(this.textBox14);
-            this.tabPage3.Controls.Add(this.textBox13);
-            this.tabPage3.Controls.Add(this.textBox11);
-            this.tabPage3.Controls.Add(this.textBox10);
-            this.tabPage3.Controls.Add(this.textBox9);
-            this.tabPage3.Controls.Add(this.textBox8);
-            this.tabPage3.Controls.Add(this.textBox7);
-            this.tabPage3.Controls.Add(this.textBox6);
+            this.tabPage3.Controls.Add(this.cenaZakupu_textBox);
+            this.tabPage3.Controls.Add(this.ilosc_textBox);
+            this.tabPage3.Controls.Add(this.dostepnosc_textBox);
+            this.tabPage3.Controls.Add(this.aktualnaCena_textBox);
+            this.tabPage3.Controls.Add(this.nazwaProduktu_textBox);
+            this.tabPage3.Controls.Add(this.idProduktu_textBox);
+            this.tabPage3.Controls.Add(this.kwotaCalkowita_textBox);
+            this.tabPage3.Controls.Add(this.dataZakupu_textBox);
+            this.tabPage3.Controls.Add(this.idDokumentu_textBox);
+            this.tabPage3.Controls.Add(this.email_textBox);
+            this.tabPage3.Controls.Add(this.nazwaFirmy_textBox);
+            this.tabPage3.Controls.Add(this.imieNazwisko_textBox);
+            this.tabPage3.Controls.Add(this.idKlienta_textBox);
             this.tabPage3.Controls.Add(this.label18);
-            this.tabPage3.Controls.Add(this.comboBox2);
+            this.tabPage3.Controls.Add(this.search_comboBox);
             this.tabPage3.Location = new System.Drawing.Point(4, 29);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(1226, 306);
@@ -1070,96 +1070,96 @@
             this.label19.TabIndex = 19;
             this.label19.Text = "ID Klienta:";
             // 
-            // textBox22
+            // cenaZakupu_textBox
             // 
-            this.textBox22.Location = new System.Drawing.Point(1100, 232);
-            this.textBox22.Name = "textBox22";
-            this.textBox22.Size = new System.Drawing.Size(100, 26);
-            this.textBox22.TabIndex = 18;
+            this.cenaZakupu_textBox.Location = new System.Drawing.Point(1100, 232);
+            this.cenaZakupu_textBox.Name = "cenaZakupu_textBox";
+            this.cenaZakupu_textBox.Size = new System.Drawing.Size(100, 26);
+            this.cenaZakupu_textBox.TabIndex = 18;
             // 
-            // textBox21
+            // ilosc_textBox
             // 
-            this.textBox21.Location = new System.Drawing.Point(780, 233);
-            this.textBox21.Name = "textBox21";
-            this.textBox21.Size = new System.Drawing.Size(100, 26);
-            this.textBox21.TabIndex = 17;
+            this.ilosc_textBox.Location = new System.Drawing.Point(780, 233);
+            this.ilosc_textBox.Name = "ilosc_textBox";
+            this.ilosc_textBox.Size = new System.Drawing.Size(100, 26);
+            this.ilosc_textBox.TabIndex = 17;
             // 
-            // textBox17
+            // dostepnosc_textBox
             // 
-            this.textBox17.Location = new System.Drawing.Point(1100, 181);
-            this.textBox17.Name = "textBox17";
-            this.textBox17.Size = new System.Drawing.Size(100, 26);
-            this.textBox17.TabIndex = 13;
+            this.dostepnosc_textBox.Location = new System.Drawing.Point(1100, 181);
+            this.dostepnosc_textBox.Name = "dostepnosc_textBox";
+            this.dostepnosc_textBox.Size = new System.Drawing.Size(100, 26);
+            this.dostepnosc_textBox.TabIndex = 13;
             // 
-            // textBox16
+            // aktualnaCena_textBox
             // 
-            this.textBox16.Location = new System.Drawing.Point(780, 182);
-            this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(100, 26);
-            this.textBox16.TabIndex = 12;
+            this.aktualnaCena_textBox.Location = new System.Drawing.Point(780, 182);
+            this.aktualnaCena_textBox.Name = "aktualnaCena_textBox";
+            this.aktualnaCena_textBox.Size = new System.Drawing.Size(100, 26);
+            this.aktualnaCena_textBox.TabIndex = 12;
             // 
-            // textBox15
+            // nazwaProduktu_textBox
             // 
-            this.textBox15.Location = new System.Drawing.Point(446, 184);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(100, 26);
-            this.textBox15.TabIndex = 11;
+            this.nazwaProduktu_textBox.Location = new System.Drawing.Point(446, 184);
+            this.nazwaProduktu_textBox.Name = "nazwaProduktu_textBox";
+            this.nazwaProduktu_textBox.Size = new System.Drawing.Size(100, 26);
+            this.nazwaProduktu_textBox.TabIndex = 11;
             // 
-            // textBox14
+            // idProduktu_textBox
             // 
-            this.textBox14.Location = new System.Drawing.Point(150, 184);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(100, 26);
-            this.textBox14.TabIndex = 10;
+            this.idProduktu_textBox.Location = new System.Drawing.Point(150, 184);
+            this.idProduktu_textBox.Name = "idProduktu_textBox";
+            this.idProduktu_textBox.Size = new System.Drawing.Size(100, 26);
+            this.idProduktu_textBox.TabIndex = 10;
             // 
-            // textBox13
+            // kwotaCalkowita_textBox
             // 
-            this.textBox13.Location = new System.Drawing.Point(1100, 133);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(100, 26);
-            this.textBox13.TabIndex = 9;
+            this.kwotaCalkowita_textBox.Location = new System.Drawing.Point(1100, 133);
+            this.kwotaCalkowita_textBox.Name = "kwotaCalkowita_textBox";
+            this.kwotaCalkowita_textBox.Size = new System.Drawing.Size(100, 26);
+            this.kwotaCalkowita_textBox.TabIndex = 9;
             // 
-            // textBox11
+            // dataZakupu_textBox
             // 
-            this.textBox11.Location = new System.Drawing.Point(446, 136);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(100, 26);
-            this.textBox11.TabIndex = 7;
+            this.dataZakupu_textBox.Location = new System.Drawing.Point(446, 136);
+            this.dataZakupu_textBox.Name = "dataZakupu_textBox";
+            this.dataZakupu_textBox.Size = new System.Drawing.Size(100, 26);
+            this.dataZakupu_textBox.TabIndex = 7;
             // 
-            // textBox10
+            // idDokumentu_textBox
             // 
-            this.textBox10.Location = new System.Drawing.Point(150, 136);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(100, 26);
-            this.textBox10.TabIndex = 6;
+            this.idDokumentu_textBox.Location = new System.Drawing.Point(150, 136);
+            this.idDokumentu_textBox.Name = "idDokumentu_textBox";
+            this.idDokumentu_textBox.Size = new System.Drawing.Size(100, 26);
+            this.idDokumentu_textBox.TabIndex = 6;
             // 
-            // textBox9
+            // email_textBox
             // 
-            this.textBox9.Location = new System.Drawing.Point(1100, 86);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(100, 26);
-            this.textBox9.TabIndex = 5;
+            this.email_textBox.Location = new System.Drawing.Point(1100, 86);
+            this.email_textBox.Name = "email_textBox";
+            this.email_textBox.Size = new System.Drawing.Size(100, 26);
+            this.email_textBox.TabIndex = 5;
             // 
-            // textBox8
+            // nazwaFirmy_textBox
             // 
-            this.textBox8.Location = new System.Drawing.Point(780, 87);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 26);
-            this.textBox8.TabIndex = 4;
+            this.nazwaFirmy_textBox.Location = new System.Drawing.Point(780, 87);
+            this.nazwaFirmy_textBox.Name = "nazwaFirmy_textBox";
+            this.nazwaFirmy_textBox.Size = new System.Drawing.Size(100, 26);
+            this.nazwaFirmy_textBox.TabIndex = 4;
             // 
-            // textBox7
+            // imieNazwisko_textBox
             // 
-            this.textBox7.Location = new System.Drawing.Point(446, 89);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 26);
-            this.textBox7.TabIndex = 3;
+            this.imieNazwisko_textBox.Location = new System.Drawing.Point(446, 89);
+            this.imieNazwisko_textBox.Name = "imieNazwisko_textBox";
+            this.imieNazwisko_textBox.Size = new System.Drawing.Size(100, 26);
+            this.imieNazwisko_textBox.TabIndex = 3;
             // 
-            // textBox6
+            // idKlienta_textBox
             // 
-            this.textBox6.Location = new System.Drawing.Point(150, 89);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 26);
-            this.textBox6.TabIndex = 2;
+            this.idKlienta_textBox.Location = new System.Drawing.Point(150, 89);
+            this.idKlienta_textBox.Name = "idKlienta_textBox";
+            this.idKlienta_textBox.Size = new System.Drawing.Size(100, 26);
+            this.idKlienta_textBox.TabIndex = 2;
             // 
             // label18
             // 
@@ -1171,18 +1171,18 @@
             this.label18.TabIndex = 1;
             this.label18.Text = "Szukaj w:";
             // 
-            // comboBox2
+            // search_comboBox
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
+            this.search_comboBox.FormattingEnabled = true;
+            this.search_comboBox.Items.AddRange(new object[] {
             "Klienci",
             "Paragony",
             "Produkty",
             "Zakupy"});
-            this.comboBox2.Location = new System.Drawing.Point(115, 27);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(150, 28);
-            this.comboBox2.TabIndex = 0;
+            this.search_comboBox.Location = new System.Drawing.Point(115, 27);
+            this.search_comboBox.Name = "search_comboBox";
+            this.search_comboBox.Size = new System.Drawing.Size(150, 28);
+            this.search_comboBox.TabIndex = 0;
             // 
             // Form2
             // 
@@ -1285,21 +1285,21 @@
         private System.Windows.Forms.Button segment4_nextButton;
         private System.Windows.Forms.Button segment5_nextButton;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox idDokumentu_textBox;
+        private System.Windows.Forms.TextBox email_textBox;
+        private System.Windows.Forms.TextBox nazwaFirmy_textBox;
+        private System.Windows.Forms.TextBox imieNazwisko_textBox;
+        private System.Windows.Forms.TextBox idKlienta_textBox;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBox17;
-        private System.Windows.Forms.TextBox textBox16;
-        private System.Windows.Forms.TextBox textBox15;
-        private System.Windows.Forms.TextBox textBox14;
-        private System.Windows.Forms.TextBox textBox13;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox22;
-        private System.Windows.Forms.TextBox textBox21;
+        private System.Windows.Forms.ComboBox search_comboBox;
+        private System.Windows.Forms.TextBox dostepnosc_textBox;
+        private System.Windows.Forms.TextBox aktualnaCena_textBox;
+        private System.Windows.Forms.TextBox nazwaProduktu_textBox;
+        private System.Windows.Forms.TextBox idProduktu_textBox;
+        private System.Windows.Forms.TextBox kwotaCalkowita_textBox;
+        private System.Windows.Forms.TextBox dataZakupu_textBox;
+        private System.Windows.Forms.TextBox cenaZakupu_textBox;
+        private System.Windows.Forms.TextBox ilosc_textBox;
         private System.Windows.Forms.Label label31;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Label label29;
