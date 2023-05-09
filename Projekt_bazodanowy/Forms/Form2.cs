@@ -30,6 +30,9 @@ namespace Projekt_bazodanowy
             instance = this;
             this.sessionFactor = sessionFactor;
 
+            dataGridView1.MultiSelect = true;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
             idKlienta_textBox.Enabled = false;
             idZakupu_textBox.Enabled = false;
             idDokumentu_textBox.Enabled = false;
@@ -84,5 +87,6 @@ namespace Projekt_bazodanowy
             Form1 form1 = new Form1();
             form1.Show();
         }
+
     }
 }
