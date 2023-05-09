@@ -31,6 +31,7 @@ namespace Projekt_bazodanowy
             this.sessionFactor = sessionFactor;
 
             idKlienta_textBox.Enabled = false;
+            idZakupu_textBox.Enabled = false;
             idDokumentu_textBox.Enabled = false;
             idProduktu_textBox.Enabled = false;
             imieNazwisko_textBox.Enabled = false;

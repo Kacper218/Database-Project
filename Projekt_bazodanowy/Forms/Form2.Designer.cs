@@ -125,6 +125,8 @@
             this.label18 = new System.Windows.Forms.Label();
             this.search_comboBox = new System.Windows.Forms.ComboBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.label32 = new System.Windows.Forms.Label();
+            this.idZakupu_textBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -236,9 +238,9 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Location = new System.Drawing.Point(8, 28);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabControl1.Name = "tabControl1";
@@ -918,6 +920,8 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.idZakupu_textBox);
+            this.tabPage3.Controls.Add(this.label32);
             this.tabPage3.Controls.Add(this.label31);
             this.tabPage3.Controls.Add(this.label30);
             this.tabPage3.Controls.Add(this.label29);
@@ -1183,6 +1187,23 @@
             this.search_comboBox.Name = "search_comboBox";
             this.search_comboBox.Size = new System.Drawing.Size(150, 28);
             this.search_comboBox.TabIndex = 0;
+            this.search_comboBox.TextUpdate += new System.EventHandler(this.search_comboBox_TextUpdated);
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(13, 235);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(84, 20);
+            this.label32.TabIndex = 32;
+            this.label32.Text = "ID Zakupu";
+            // 
+            // idZakupu_textBox
+            // 
+            this.idZakupu_textBox.Location = new System.Drawing.Point(150, 233);
+            this.idZakupu_textBox.Name = "idZakupu_textBox";
+            this.idZakupu_textBox.Size = new System.Drawing.Size(100, 26);
+            this.idZakupu_textBox.TabIndex = 33;
             // 
             // Form2
             // 
@@ -1313,5 +1334,7 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox idZakupu_textBox;
+        private System.Windows.Forms.Label label32;
     }
 }
