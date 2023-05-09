@@ -37,6 +37,37 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.idZakupu_textBox = new System.Windows.Forms.TextBox();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.cenaZakupu_textBox = new System.Windows.Forms.TextBox();
+            this.ilosc_textBox = new System.Windows.Forms.TextBox();
+            this.dostepnosc_textBox = new System.Windows.Forms.TextBox();
+            this.aktualnaCena_textBox = new System.Windows.Forms.TextBox();
+            this.nazwaProduktu_textBox = new System.Windows.Forms.TextBox();
+            this.idProduktu_textBox = new System.Windows.Forms.TextBox();
+            this.kwotaCalkowita_textBox = new System.Windows.Forms.TextBox();
+            this.dataZakupu_textBox = new System.Windows.Forms.TextBox();
+            this.idDokumentu_textBox = new System.Windows.Forms.TextBox();
+            this.email_textBox = new System.Windows.Forms.TextBox();
+            this.nazwaFirmy_textBox = new System.Windows.Forms.TextBox();
+            this.imieNazwisko_textBox = new System.Windows.Forms.TextBox();
+            this.idKlienta_textBox = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.search_comboBox = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.segment5_search = new System.Windows.Forms.ComboBox();
             this.segment5_position = new System.Windows.Forms.CheckBox();
@@ -95,42 +126,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.cenaZakupu_textBox = new System.Windows.Forms.TextBox();
-            this.ilosc_textBox = new System.Windows.Forms.TextBox();
-            this.dostepnosc_textBox = new System.Windows.Forms.TextBox();
-            this.aktualnaCena_textBox = new System.Windows.Forms.TextBox();
-            this.nazwaProduktu_textBox = new System.Windows.Forms.TextBox();
-            this.idProduktu_textBox = new System.Windows.Forms.TextBox();
-            this.kwotaCalkowita_textBox = new System.Windows.Forms.TextBox();
-            this.dataZakupu_textBox = new System.Windows.Forms.TextBox();
-            this.idDokumentu_textBox = new System.Windows.Forms.TextBox();
-            this.email_textBox = new System.Windows.Forms.TextBox();
-            this.nazwaFirmy_textBox = new System.Windows.Forms.TextBox();
-            this.imieNazwisko_textBox = new System.Windows.Forms.TextBox();
-            this.idKlienta_textBox = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.search_comboBox = new System.Windows.Forms.ComboBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.label32 = new System.Windows.Forms.Label();
-            this.idZakupu_textBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -138,7 +139,6 @@
             this.groupBox6.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // addButton
@@ -247,6 +247,293 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1234, 339);
             this.tabControl1.TabIndex = 14;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.idZakupu_textBox);
+            this.tabPage3.Controls.Add(this.label32);
+            this.tabPage3.Controls.Add(this.label31);
+            this.tabPage3.Controls.Add(this.label30);
+            this.tabPage3.Controls.Add(this.label29);
+            this.tabPage3.Controls.Add(this.label28);
+            this.tabPage3.Controls.Add(this.label27);
+            this.tabPage3.Controls.Add(this.label26);
+            this.tabPage3.Controls.Add(this.label25);
+            this.tabPage3.Controls.Add(this.label24);
+            this.tabPage3.Controls.Add(this.label23);
+            this.tabPage3.Controls.Add(this.label22);
+            this.tabPage3.Controls.Add(this.label21);
+            this.tabPage3.Controls.Add(this.label20);
+            this.tabPage3.Controls.Add(this.label19);
+            this.tabPage3.Controls.Add(this.cenaZakupu_textBox);
+            this.tabPage3.Controls.Add(this.ilosc_textBox);
+            this.tabPage3.Controls.Add(this.dostepnosc_textBox);
+            this.tabPage3.Controls.Add(this.aktualnaCena_textBox);
+            this.tabPage3.Controls.Add(this.nazwaProduktu_textBox);
+            this.tabPage3.Controls.Add(this.idProduktu_textBox);
+            this.tabPage3.Controls.Add(this.kwotaCalkowita_textBox);
+            this.tabPage3.Controls.Add(this.dataZakupu_textBox);
+            this.tabPage3.Controls.Add(this.idDokumentu_textBox);
+            this.tabPage3.Controls.Add(this.email_textBox);
+            this.tabPage3.Controls.Add(this.nazwaFirmy_textBox);
+            this.tabPage3.Controls.Add(this.imieNazwisko_textBox);
+            this.tabPage3.Controls.Add(this.idKlienta_textBox);
+            this.tabPage3.Controls.Add(this.label18);
+            this.tabPage3.Controls.Add(this.search_comboBox);
+            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(1226, 306);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "tabPage3";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // idZakupu_textBox
+            // 
+            this.idZakupu_textBox.Location = new System.Drawing.Point(150, 233);
+            this.idZakupu_textBox.Name = "idZakupu_textBox";
+            this.idZakupu_textBox.Size = new System.Drawing.Size(100, 26);
+            this.idZakupu_textBox.TabIndex = 33;
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(13, 235);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(84, 20);
+            this.label32.TabIndex = 32;
+            this.label32.Text = "ID Zakupu";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(911, 235);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(107, 20);
+            this.label31.TabIndex = 31;
+            this.label31.Text = "Cena zakupu:";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(911, 184);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(166, 20);
+            this.label30.TabIndex = 30;
+            this.label30.Text = "Dostępność produktu:";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(911, 139);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(127, 20);
+            this.label29.TabIndex = 29;
+            this.label29.Text = "Kwota całkowita:";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(911, 89);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(52, 20);
+            this.label28.TabIndex = 28;
+            this.label28.Text = "Email:";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(586, 239);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(153, 20);
+            this.label27.TabIndex = 27;
+            this.label27.Text = "Ilość pozycji zakupu:";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(586, 185);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(182, 20);
+            this.label26.TabIndex = 26;
+            this.label26.Text = "Aktualna cena produktu:";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(586, 90);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(98, 20);
+            this.label25.TabIndex = 25;
+            this.label25.Text = "Nazwa firmy:";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(298, 187);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(128, 20);
+            this.label24.TabIndex = 24;
+            this.label24.Text = "Nazwa produktu:";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(298, 139);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(104, 20);
+            this.label23.TabIndex = 23;
+            this.label23.Text = "Data zakupu:";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(298, 92);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(119, 20);
+            this.label22.TabIndex = 22;
+            this.label22.Text = "Imie i nazwisko:";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(13, 184);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(98, 20);
+            this.label21.TabIndex = 21;
+            this.label21.Text = "ID Produktu:";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(13, 139);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(117, 20);
+            this.label20.TabIndex = 20;
+            this.label20.Text = "ID Dokumentu:";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(13, 95);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(82, 20);
+            this.label19.TabIndex = 19;
+            this.label19.Text = "ID Klienta:";
+            // 
+            // cenaZakupu_textBox
+            // 
+            this.cenaZakupu_textBox.Location = new System.Drawing.Point(1100, 232);
+            this.cenaZakupu_textBox.Name = "cenaZakupu_textBox";
+            this.cenaZakupu_textBox.Size = new System.Drawing.Size(100, 26);
+            this.cenaZakupu_textBox.TabIndex = 18;
+            // 
+            // ilosc_textBox
+            // 
+            this.ilosc_textBox.Location = new System.Drawing.Point(780, 233);
+            this.ilosc_textBox.Name = "ilosc_textBox";
+            this.ilosc_textBox.Size = new System.Drawing.Size(100, 26);
+            this.ilosc_textBox.TabIndex = 17;
+            // 
+            // dostepnosc_textBox
+            // 
+            this.dostepnosc_textBox.Location = new System.Drawing.Point(1100, 181);
+            this.dostepnosc_textBox.Name = "dostepnosc_textBox";
+            this.dostepnosc_textBox.Size = new System.Drawing.Size(100, 26);
+            this.dostepnosc_textBox.TabIndex = 13;
+            // 
+            // aktualnaCena_textBox
+            // 
+            this.aktualnaCena_textBox.Location = new System.Drawing.Point(780, 182);
+            this.aktualnaCena_textBox.Name = "aktualnaCena_textBox";
+            this.aktualnaCena_textBox.Size = new System.Drawing.Size(100, 26);
+            this.aktualnaCena_textBox.TabIndex = 12;
+            // 
+            // nazwaProduktu_textBox
+            // 
+            this.nazwaProduktu_textBox.Location = new System.Drawing.Point(446, 184);
+            this.nazwaProduktu_textBox.Name = "nazwaProduktu_textBox";
+            this.nazwaProduktu_textBox.Size = new System.Drawing.Size(100, 26);
+            this.nazwaProduktu_textBox.TabIndex = 11;
+            // 
+            // idProduktu_textBox
+            // 
+            this.idProduktu_textBox.Location = new System.Drawing.Point(150, 184);
+            this.idProduktu_textBox.Name = "idProduktu_textBox";
+            this.idProduktu_textBox.Size = new System.Drawing.Size(100, 26);
+            this.idProduktu_textBox.TabIndex = 10;
+            // 
+            // kwotaCalkowita_textBox
+            // 
+            this.kwotaCalkowita_textBox.Location = new System.Drawing.Point(1100, 133);
+            this.kwotaCalkowita_textBox.Name = "kwotaCalkowita_textBox";
+            this.kwotaCalkowita_textBox.Size = new System.Drawing.Size(100, 26);
+            this.kwotaCalkowita_textBox.TabIndex = 9;
+            // 
+            // dataZakupu_textBox
+            // 
+            this.dataZakupu_textBox.Location = new System.Drawing.Point(446, 136);
+            this.dataZakupu_textBox.Name = "dataZakupu_textBox";
+            this.dataZakupu_textBox.Size = new System.Drawing.Size(100, 26);
+            this.dataZakupu_textBox.TabIndex = 7;
+            // 
+            // idDokumentu_textBox
+            // 
+            this.idDokumentu_textBox.Location = new System.Drawing.Point(150, 136);
+            this.idDokumentu_textBox.Name = "idDokumentu_textBox";
+            this.idDokumentu_textBox.Size = new System.Drawing.Size(100, 26);
+            this.idDokumentu_textBox.TabIndex = 6;
+            // 
+            // email_textBox
+            // 
+            this.email_textBox.Location = new System.Drawing.Point(1100, 86);
+            this.email_textBox.Name = "email_textBox";
+            this.email_textBox.Size = new System.Drawing.Size(100, 26);
+            this.email_textBox.TabIndex = 5;
+            // 
+            // nazwaFirmy_textBox
+            // 
+            this.nazwaFirmy_textBox.Location = new System.Drawing.Point(780, 87);
+            this.nazwaFirmy_textBox.Name = "nazwaFirmy_textBox";
+            this.nazwaFirmy_textBox.Size = new System.Drawing.Size(100, 26);
+            this.nazwaFirmy_textBox.TabIndex = 4;
+            // 
+            // imieNazwisko_textBox
+            // 
+            this.imieNazwisko_textBox.Location = new System.Drawing.Point(446, 89);
+            this.imieNazwisko_textBox.Name = "imieNazwisko_textBox";
+            this.imieNazwisko_textBox.Size = new System.Drawing.Size(100, 26);
+            this.imieNazwisko_textBox.TabIndex = 3;
+            // 
+            // idKlienta_textBox
+            // 
+            this.idKlienta_textBox.Location = new System.Drawing.Point(150, 89);
+            this.idKlienta_textBox.Name = "idKlienta_textBox";
+            this.idKlienta_textBox.Size = new System.Drawing.Size(100, 26);
+            this.idKlienta_textBox.TabIndex = 2;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label18.Location = new System.Drawing.Point(12, 28);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(97, 25);
+            this.label18.TabIndex = 1;
+            this.label18.Text = "Szukaj w:";
+            // 
+            // search_comboBox
+            // 
+            this.search_comboBox.FormattingEnabled = true;
+            this.search_comboBox.Items.AddRange(new object[] {
+            "Klienci",
+            "Paragony",
+            "Produkty",
+            "Zakupy"});
+            this.search_comboBox.Location = new System.Drawing.Point(115, 27);
+            this.search_comboBox.Name = "search_comboBox";
+            this.search_comboBox.Size = new System.Drawing.Size(150, 28);
+            this.search_comboBox.TabIndex = 0;
+            this.search_comboBox.TextChanged += new System.EventHandler(this.search_comboBox_TextChanged);
             // 
             // tabPage2
             // 
@@ -918,293 +1205,6 @@
             this.textBox2.Size = new System.Drawing.Size(148, 26);
             this.textBox2.TabIndex = 5;
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.idZakupu_textBox);
-            this.tabPage3.Controls.Add(this.label32);
-            this.tabPage3.Controls.Add(this.label31);
-            this.tabPage3.Controls.Add(this.label30);
-            this.tabPage3.Controls.Add(this.label29);
-            this.tabPage3.Controls.Add(this.label28);
-            this.tabPage3.Controls.Add(this.label27);
-            this.tabPage3.Controls.Add(this.label26);
-            this.tabPage3.Controls.Add(this.label25);
-            this.tabPage3.Controls.Add(this.label24);
-            this.tabPage3.Controls.Add(this.label23);
-            this.tabPage3.Controls.Add(this.label22);
-            this.tabPage3.Controls.Add(this.label21);
-            this.tabPage3.Controls.Add(this.label20);
-            this.tabPage3.Controls.Add(this.label19);
-            this.tabPage3.Controls.Add(this.cenaZakupu_textBox);
-            this.tabPage3.Controls.Add(this.ilosc_textBox);
-            this.tabPage3.Controls.Add(this.dostepnosc_textBox);
-            this.tabPage3.Controls.Add(this.aktualnaCena_textBox);
-            this.tabPage3.Controls.Add(this.nazwaProduktu_textBox);
-            this.tabPage3.Controls.Add(this.idProduktu_textBox);
-            this.tabPage3.Controls.Add(this.kwotaCalkowita_textBox);
-            this.tabPage3.Controls.Add(this.dataZakupu_textBox);
-            this.tabPage3.Controls.Add(this.idDokumentu_textBox);
-            this.tabPage3.Controls.Add(this.email_textBox);
-            this.tabPage3.Controls.Add(this.nazwaFirmy_textBox);
-            this.tabPage3.Controls.Add(this.imieNazwisko_textBox);
-            this.tabPage3.Controls.Add(this.idKlienta_textBox);
-            this.tabPage3.Controls.Add(this.label18);
-            this.tabPage3.Controls.Add(this.search_comboBox);
-            this.tabPage3.Location = new System.Drawing.Point(4, 29);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1226, 306);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "tabPage3";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(911, 235);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(107, 20);
-            this.label31.TabIndex = 31;
-            this.label31.Text = "Cena zakupu:";
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(911, 184);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(166, 20);
-            this.label30.TabIndex = 30;
-            this.label30.Text = "Dostępność produktu:";
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(911, 139);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(127, 20);
-            this.label29.TabIndex = 29;
-            this.label29.Text = "Kwota całkowita:";
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(911, 89);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(52, 20);
-            this.label28.TabIndex = 28;
-            this.label28.Text = "Email:";
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(586, 239);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(153, 20);
-            this.label27.TabIndex = 27;
-            this.label27.Text = "Ilość pozycji zakupu:";
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(586, 185);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(182, 20);
-            this.label26.TabIndex = 26;
-            this.label26.Text = "Aktualna cena produktu:";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(586, 90);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(98, 20);
-            this.label25.TabIndex = 25;
-            this.label25.Text = "Nazwa firmy:";
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(298, 187);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(128, 20);
-            this.label24.TabIndex = 24;
-            this.label24.Text = "Nazwa produktu:";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(298, 139);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(104, 20);
-            this.label23.TabIndex = 23;
-            this.label23.Text = "Data zakupu:";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(298, 92);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(119, 20);
-            this.label22.TabIndex = 22;
-            this.label22.Text = "Imie i nazwisko:";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(13, 184);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(98, 20);
-            this.label21.TabIndex = 21;
-            this.label21.Text = "ID Produktu:";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(13, 139);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(117, 20);
-            this.label20.TabIndex = 20;
-            this.label20.Text = "ID Dokumentu:";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(13, 95);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(82, 20);
-            this.label19.TabIndex = 19;
-            this.label19.Text = "ID Klienta:";
-            // 
-            // cenaZakupu_textBox
-            // 
-            this.cenaZakupu_textBox.Location = new System.Drawing.Point(1100, 232);
-            this.cenaZakupu_textBox.Name = "cenaZakupu_textBox";
-            this.cenaZakupu_textBox.Size = new System.Drawing.Size(100, 26);
-            this.cenaZakupu_textBox.TabIndex = 18;
-            // 
-            // ilosc_textBox
-            // 
-            this.ilosc_textBox.Location = new System.Drawing.Point(780, 233);
-            this.ilosc_textBox.Name = "ilosc_textBox";
-            this.ilosc_textBox.Size = new System.Drawing.Size(100, 26);
-            this.ilosc_textBox.TabIndex = 17;
-            // 
-            // dostepnosc_textBox
-            // 
-            this.dostepnosc_textBox.Location = new System.Drawing.Point(1100, 181);
-            this.dostepnosc_textBox.Name = "dostepnosc_textBox";
-            this.dostepnosc_textBox.Size = new System.Drawing.Size(100, 26);
-            this.dostepnosc_textBox.TabIndex = 13;
-            // 
-            // aktualnaCena_textBox
-            // 
-            this.aktualnaCena_textBox.Location = new System.Drawing.Point(780, 182);
-            this.aktualnaCena_textBox.Name = "aktualnaCena_textBox";
-            this.aktualnaCena_textBox.Size = new System.Drawing.Size(100, 26);
-            this.aktualnaCena_textBox.TabIndex = 12;
-            // 
-            // nazwaProduktu_textBox
-            // 
-            this.nazwaProduktu_textBox.Location = new System.Drawing.Point(446, 184);
-            this.nazwaProduktu_textBox.Name = "nazwaProduktu_textBox";
-            this.nazwaProduktu_textBox.Size = new System.Drawing.Size(100, 26);
-            this.nazwaProduktu_textBox.TabIndex = 11;
-            // 
-            // idProduktu_textBox
-            // 
-            this.idProduktu_textBox.Location = new System.Drawing.Point(150, 184);
-            this.idProduktu_textBox.Name = "idProduktu_textBox";
-            this.idProduktu_textBox.Size = new System.Drawing.Size(100, 26);
-            this.idProduktu_textBox.TabIndex = 10;
-            // 
-            // kwotaCalkowita_textBox
-            // 
-            this.kwotaCalkowita_textBox.Location = new System.Drawing.Point(1100, 133);
-            this.kwotaCalkowita_textBox.Name = "kwotaCalkowita_textBox";
-            this.kwotaCalkowita_textBox.Size = new System.Drawing.Size(100, 26);
-            this.kwotaCalkowita_textBox.TabIndex = 9;
-            // 
-            // dataZakupu_textBox
-            // 
-            this.dataZakupu_textBox.Location = new System.Drawing.Point(446, 136);
-            this.dataZakupu_textBox.Name = "dataZakupu_textBox";
-            this.dataZakupu_textBox.Size = new System.Drawing.Size(100, 26);
-            this.dataZakupu_textBox.TabIndex = 7;
-            // 
-            // idDokumentu_textBox
-            // 
-            this.idDokumentu_textBox.Location = new System.Drawing.Point(150, 136);
-            this.idDokumentu_textBox.Name = "idDokumentu_textBox";
-            this.idDokumentu_textBox.Size = new System.Drawing.Size(100, 26);
-            this.idDokumentu_textBox.TabIndex = 6;
-            // 
-            // email_textBox
-            // 
-            this.email_textBox.Location = new System.Drawing.Point(1100, 86);
-            this.email_textBox.Name = "email_textBox";
-            this.email_textBox.Size = new System.Drawing.Size(100, 26);
-            this.email_textBox.TabIndex = 5;
-            // 
-            // nazwaFirmy_textBox
-            // 
-            this.nazwaFirmy_textBox.Location = new System.Drawing.Point(780, 87);
-            this.nazwaFirmy_textBox.Name = "nazwaFirmy_textBox";
-            this.nazwaFirmy_textBox.Size = new System.Drawing.Size(100, 26);
-            this.nazwaFirmy_textBox.TabIndex = 4;
-            // 
-            // imieNazwisko_textBox
-            // 
-            this.imieNazwisko_textBox.Location = new System.Drawing.Point(446, 89);
-            this.imieNazwisko_textBox.Name = "imieNazwisko_textBox";
-            this.imieNazwisko_textBox.Size = new System.Drawing.Size(100, 26);
-            this.imieNazwisko_textBox.TabIndex = 3;
-            // 
-            // idKlienta_textBox
-            // 
-            this.idKlienta_textBox.Location = new System.Drawing.Point(150, 89);
-            this.idKlienta_textBox.Name = "idKlienta_textBox";
-            this.idKlienta_textBox.Size = new System.Drawing.Size(100, 26);
-            this.idKlienta_textBox.TabIndex = 2;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label18.Location = new System.Drawing.Point(12, 28);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(97, 25);
-            this.label18.TabIndex = 1;
-            this.label18.Text = "Szukaj w:";
-            // 
-            // search_comboBox
-            // 
-            this.search_comboBox.FormattingEnabled = true;
-            this.search_comboBox.Items.AddRange(new object[] {
-            "Klienci",
-            "Paragony",
-            "Produkty",
-            "Zakupy"});
-            this.search_comboBox.Location = new System.Drawing.Point(115, 27);
-            this.search_comboBox.Name = "search_comboBox";
-            this.search_comboBox.Size = new System.Drawing.Size(150, 28);
-            this.search_comboBox.TabIndex = 0;
-            this.search_comboBox.TextUpdate += new System.EventHandler(this.search_comboBox_TextUpdated);
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(13, 235);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(84, 20);
-            this.label32.TabIndex = 32;
-            this.label32.Text = "ID Zakupu";
-            // 
-            // idZakupu_textBox
-            // 
-            this.idZakupu_textBox.Location = new System.Drawing.Point(150, 233);
-            this.idZakupu_textBox.Name = "idZakupu_textBox";
-            this.idZakupu_textBox.Size = new System.Drawing.Size(100, 26);
-            this.idZakupu_textBox.TabIndex = 33;
-            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1220,6 +1220,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -1229,8 +1231,6 @@
             this.groupBox7.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }

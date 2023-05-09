@@ -20,6 +20,82 @@ namespace Projekt_bazodanowy
 {
     public partial class Form2 : Form
     { 
+
+        private void resetSearchTextBoxes ()
+        {
+            idKlienta_textBox.Clear();
+            imieNazwisko_textBox.Clear();
+            nazwaFirmy_textBox.Clear();
+            email_textBox.Clear();
+            idKlienta_textBox.Clear();
+            idDokumentu_textBox.Clear();
+            dataZakupu_textBox.Clear();
+            kwotaCalkowita_textBox.Clear();
+            idProduktu_textBox.Clear();
+            nazwaProduktu_textBox.Clear();
+            aktualnaCena_textBox.Clear();
+            dostepnosc_textBox.Clear();
+            idDokumentu_textBox.Clear();
+            idProduktu_textBox.Clear();
+            idZakupu_textBox.Clear();
+            ilosc_textBox.Clear();
+            cenaZakupu_textBox.Clear();
+
+            idKlienta_textBox.Enabled = false;
+            imieNazwisko_textBox.Enabled = false;
+            nazwaFirmy_textBox.Enabled = false;
+            email_textBox.Enabled = false;
+            idKlienta_textBox.Enabled = false;
+            idDokumentu_textBox.Enabled = false;
+            dataZakupu_textBox.Enabled = false;
+            kwotaCalkowita_textBox.Enabled = false;
+            idProduktu_textBox.Enabled = false;
+            nazwaProduktu_textBox.Enabled = false;
+            aktualnaCena_textBox.Enabled = false;
+            dostepnosc_textBox.Enabled = false;
+            idDokumentu_textBox.Enabled = false;
+            idProduktu_textBox.Enabled = false;
+            idZakupu_textBox.Enabled = false;
+            ilosc_textBox.Enabled = false;
+            cenaZakupu_textBox.Enabled = false;
+        }
+        private void search_comboBox_TextChanged(object sender, EventArgs e)
+        {
+            switch (search_comboBox.Text.ToString())
+            {
+                case "Klienci":
+                    resetSearchTextBoxes();
+                    idKlienta_textBox.Enabled = true;
+                    imieNazwisko_textBox.Enabled = true;
+                    nazwaFirmy_textBox.Enabled = true;
+                    email_textBox.Enabled = true;
+                    break;
+                case "Paragony":
+                    resetSearchTextBoxes();
+                    idKlienta_textBox.Enabled = true;
+                    idDokumentu_textBox.Enabled = true;
+                    dataZakupu_textBox.Enabled = true;
+                    kwotaCalkowita_textBox.Enabled = true;
+                    break;
+                case "Produkty":
+                    resetSearchTextBoxes();
+                    idProduktu_textBox.Enabled = true;
+                    nazwaProduktu_textBox.Enabled = true;
+                    aktualnaCena_textBox.Enabled = true;
+                    dostepnosc_textBox.Enabled = true;
+                    break;
+                case "Zakupy":
+                    resetSearchTextBoxes();
+                    idDokumentu_textBox.Enabled = true;
+                    idProduktu_textBox.Enabled = true;
+                    idZakupu_textBox.Enabled = true;
+                    ilosc_textBox.Enabled = true;
+                    cenaZakupu_textBox.Enabled = true;
+                    break;
+            }
+        }
+
+        //------------------------------------------------------------//
         private void segment1_position_Click(object sender, EventArgs e)
         {
             segment1_all.Checked = false;
