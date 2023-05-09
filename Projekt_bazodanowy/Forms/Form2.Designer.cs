@@ -35,9 +35,9 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.segment5_nextButton = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.search_button = new System.Windows.Forms.Button();
             this.idZakupu_textBox = new System.Windows.Forms.TextBox();
             this.label32 = new System.Windows.Forms.Label();
             this.label31 = new System.Windows.Forms.Label();
@@ -69,6 +69,7 @@
             this.label18 = new System.Windows.Forms.Label();
             this.search_comboBox = new System.Windows.Forms.ComboBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.segment5_search = new System.Windows.Forms.ComboBox();
             this.segment5_position = new System.Windows.Forms.CheckBox();
             this.segment4_search = new System.Windows.Forms.ComboBox();
@@ -127,7 +128,6 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.search_button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -226,23 +226,13 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Operacje";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(384, 227);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(317, 31);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Szukaj";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Location = new System.Drawing.Point(7, 22);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1097, 315);
@@ -288,6 +278,16 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Wyszukiwanie";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // search_button
+            // 
+            this.search_button.Location = new System.Drawing.Point(377, 241);
+            this.search_button.Name = "search_button";
+            this.search_button.Size = new System.Drawing.Size(294, 32);
+            this.search_button.TabIndex = 34;
+            this.search_button.Text = "Szukaj";
+            this.search_button.UseVisualStyleBackColor = true;
+            this.search_button.Click += new System.EventHandler(this.search_button_Click);
             // 
             // idZakupu_textBox
             // 
@@ -597,13 +597,23 @@
             this.tabPage2.Controls.Add(this.groupBox6);
             this.tabPage2.Controls.Add(this.groupBox7);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage2.Size = new System.Drawing.Size(1089, 286);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Wyszukiwanie2";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(384, 227);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(317, 31);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Szukaj";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // segment5_search
             // 
@@ -1096,9 +1106,9 @@
             this.tabPage1.Controls.Add(this.textBox1);
             this.tabPage1.Controls.Add(this.textBox2);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
             this.tabPage1.Size = new System.Drawing.Size(1089, 286);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Dodawanie";
@@ -1156,7 +1166,7 @@
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(108, 154);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(132, 22);
             this.textBox3.TabIndex = 6;
@@ -1174,7 +1184,7 @@
             // textBox5
             // 
             this.textBox5.Location = new System.Drawing.Point(108, 218);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(4);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(132, 22);
             this.textBox5.TabIndex = 8;
@@ -1182,7 +1192,7 @@
             // textBox4
             // 
             this.textBox4.Location = new System.Drawing.Point(108, 186);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(4);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(132, 22);
             this.textBox4.TabIndex = 7;
@@ -1199,7 +1209,7 @@
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(108, 90);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(132, 22);
             this.textBox1.TabIndex = 4;
@@ -1207,19 +1217,10 @@
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(108, 122);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(132, 22);
             this.textBox2.TabIndex = 5;
-            // 
-            // search_button
-            // 
-            this.search_button.Location = new System.Drawing.Point(377, 241);
-            this.search_button.Name = "search_button";
-            this.search_button.Size = new System.Drawing.Size(294, 32);
-            this.search_button.TabIndex = 34;
-            this.search_button.Text = "Szukaj";
-            this.search_button.UseVisualStyleBackColor = true;
             // 
             // Form2
             // 
