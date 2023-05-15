@@ -103,233 +103,53 @@ namespace Projekt_bazodanowy
             {
                 case "Klienci":
                     {
-                        //when user put all three parameters for search
-                        if (!(string.IsNullOrEmpty(idKlienta_textBox.Text)) &&
-                            (!(string.IsNullOrEmpty(imieNazwisko_textBox.Text) ||
-                                !((string.IsNullOrEmpty(nazwaFirmy_textBox.Text))) &&
-                            !(string.IsNullOrEmpty(email_textBox.Text)))))
+                    using (session)
+                    {
+                        var query = session.QueryOver<Klienci>();
+                        if (!string.IsNullOrEmpty(idKlienta_textBox.Text))
                         {
-                            if (!(string.IsNullOrEmpty(imieNazwisko_textBox.Text)) && !(string.IsNullOrEmpty(nazwaFirmy_textBox.Text)))
-                            {
-                                MessageBox.Show("Wpisano za dużo parametrów (Imie Nazwisko oraz Nazwa Firmy)", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                            else
-                            {
-                                if ((string.IsNullOrEmpty(imieNazwisko_textBox.Text)))
-                                {
-                                    //when user want to search with company name
-                                    using (session)
-                                    {
-                                        dataGridView1.DataSource = session.QueryOver<Klienci>()
-                                            .Select(c => c.IDKlienta, c => c.NazwaFirmy, c => c.Email)
-                                            .Where(c => c.IDKlienta == idKlienta_textBox.Text && c.NazwaFirmy == nazwaFirmy_textBox.Text && c.Email == email_textBox.Text)
-                                            .List<object[]>()
-                                            .Select(c => new { IDKlienta = (string)c[0], NazwaFirmy = (string)c[1], Email = (string)c[2] })
-                                            .ToList();
-                                    }
-                                }
-                                else
-                                {
-                                    //when user want to search with name / surname
-                                    using (session)
-                                    {
-                                        dataGridView1.DataSource = session.QueryOver<Klienci>()
-                                            .Select(c => c.IDKlienta, c => c.ImieNazwisko, c => c.Email)
-                                            .Where(c => c.IDKlienta == idKlienta_textBox.Text && c.ImieNazwisko == imieNazwisko_textBox.Text && c.Email == email_textBox.Text)
-                                            .List<object[]>()
-                                            .Select(c => new { IDKlienta = (string)c[0], NazwaFirmy = (string)c[1], Email = (string)c[2] })
-                                            .ToList();
-                                    }
-                                }
-                            }
+                            query = query.Where(c => c.IDKlienta == idKlienta_textBox.Text);
                         }
-                        //when user put ID and name / company name
-                        else if (!(string.IsNullOrEmpty(idKlienta_textBox.Text)) &&
-                            (!(string.IsNullOrEmpty(imieNazwisko_textBox.Text)) ||
-                                !(string.IsNullOrEmpty(nazwaFirmy_textBox.Text))))
+
+                        if (!string.IsNullOrEmpty(nazwaFirmy_textBox.Text))
                         {
-                            if (!(string.IsNullOrEmpty(imieNazwisko_textBox.Text)) && !(string.IsNullOrEmpty(nazwaFirmy_textBox.Text)))
-                            {
-                                MessageBox.Show("Wpisano za dużo parametrów (Imie Nazwisko oraz Nazwa Firmy)", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                            else
-                            {
-                                if ((string.IsNullOrEmpty(imieNazwisko_textBox.Text)))
-                                {
-                                    // ID and company name
-                                    using (session)
-                                    {
-                                        dataGridView1.DataSource = session.QueryOver<Klienci>()
-                                            .Select(c => c.IDKlienta, c => c.NazwaFirmy, c => c.Email)
-                                            .Where(c => c.IDKlienta == idKlienta_textBox.Text && c.NazwaFirmy == nazwaFirmy_textBox.Text)
-                                            .List<object[]>()
-                                            .Select(c => new { IDKlienta = (string)c[0], Nazwa_Firmy = (string)c[1], Email = (string)c[2] })
-                                            .ToList();
-                                    }
+                            if (string.IsNullOrEmpty(imieNazwisko_textBox.Text))
+                                { 
+                                    query = query.WhereRestrictionOn(c => c.NazwaFirmy).IsInsensitiveLike("%" + nazwaFirmy_textBox.Text + "%");
                                 }
-                                else
-                                {
-                                    // ID and name / surname
-                                    using (session)
-                                    {
-                                        dataGridView1.DataSource = session.QueryOver<Klienci>()
-                                            .Select(c => c.IDKlienta, c => c.ImieNazwisko, c => c.Email)
-                                            .Where(c => c.IDKlienta == idKlienta_textBox.Text && c.ImieNazwisko == imieNazwisko_textBox.Text)
-                                            .List<object[]>()
-                                            .Select(c => new { IDKlienta = (string)c[0], Imie_Nazwisko = (string)c[1], Email = (string)c[2] })
-                                            .ToList();
-                                    }
-                                }
-                            }
                         }
-                        //when user put ID and email
-                        else if (!(string.IsNullOrEmpty(idKlienta_textBox.Text)) &&
-                            !(string.IsNullOrEmpty(email_textBox.Text)))
+
+                        if (!string.IsNullOrEmpty(imieNazwisko_textBox.Text))
                         {
-                            using (session)
-                            {
-                                dataGridView1.DataSource = session.QueryOver<Klienci>()
-                                    .Select(c => c.IDKlienta, c => c.ImieNazwisko, c => c.NazwaFirmy, c => c.Email)
-                                    .Where(c => c.IDKlienta == idKlienta_textBox.Text && c.Email == email_textBox.Text)
-                                    .List<object[]>()
-                                    .Select(c => new { IDKlienta = (string)c[0], Imie_Nazwisko = (string)c[1], Nazwa_Firmy = (string)c[2], Email = (string)c[3] })
-                                    .ToList();
-                            }
-                        }
-                        //when user put name / surname or company name and email
-                        else if (!(string.IsNullOrEmpty(email_textBox.Text)) &&
-                            (!(string.IsNullOrEmpty(imieNazwisko_textBox.Text)) ||
-                                !(string.IsNullOrEmpty(nazwaFirmy_textBox.Text))))
-                        {
-
-                            if (!(string.IsNullOrEmpty(imieNazwisko_textBox.Text)) && !(string.IsNullOrEmpty(nazwaFirmy_textBox.Text)))
-                            {
-                                MessageBox.Show("Wpisano za dużo parametrów (Imie Nazwisko oraz Nazwa Firmy)", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                            else
-                            {
-                                if ((string.IsNullOrEmpty(imieNazwisko_textBox.Text)))
-                                {
-                                    // email and company name
-                                    using (session)
-                                    {
-                                        dataGridView1.DataSource = session.QueryOver<Klienci>()
-                                            .Select(c => c.IDKlienta, c => c.NazwaFirmy, c => c.Email)
-                                            .Where(c => c.Email == email_textBox.Text && c.NazwaFirmy == nazwaFirmy_textBox.Text)
-                                            .List<object[]>()
-                                            .Select(c => new { IDKlienta = (string)c[0], Nazwa_Firmy = (string)c[1], Email = (string)c[2] })
-                                            .ToList();
-                                    }
+                            if (string.IsNullOrEmpty(nazwaFirmy_textBox.Text))
+                                { 
+                                    query = query.WhereRestrictionOn(c => c.ImieNazwisko).IsInsensitiveLike("%" + imieNazwisko_textBox.Text + "%");
                                 }
-                                else
-                                {
-                                    // email and name / surname
-                                    using (session)
-                                    {
-                                        dataGridView1.DataSource = session.QueryOver<Klienci>()
-                                            .Select(c => c.IDKlienta, c => c.ImieNazwisko, c => c.Email)
-                                            .Where(c => c.Email == email_textBox.Text && c.ImieNazwisko == imieNazwisko_textBox.Text)
-                                            .List<object[]>()
-                                            .Select(c => new { IDKlienta = (string)c[0], Imie_Nazwisko = (string)c[1], Email = (string)c[2] })
-                                            .ToList();
-                                    }
-                                }
-                            }
-                            /*
-                                            using (session)
-                                            {
-                                                dataGridView1.DataSource = session.QueryOver<Klienci>()
-                                                    .Select(c => c.IDKlienta, c => c.NazwaFirmy, c => c.Email)
-                                                    .Where(c => c.IDKlienta == idKlienta_textBox.Text && c.NazwaFirmy == nazwaFirmy_textBox.Text && c.Email == email_textBox.Text)
-                                                    .List<object[]>()
-                                                    .Select(c => new { IDKlienta = (string)c[0], NazwaFirmy = (string)c[1], Email = (string)c[2] })
-                                                    .ToList();
-                                            }
-                            */
-
-
-
-
-
-                            if (!(string.IsNullOrEmpty(idKlienta_textBox.Text)))
-                            {
-                                string idKlienta = idKlienta_textBox.Text.ToString();
-                            }
-                            break;
-
-
-
-
-
                         }
-                        //when user put only id
-                        else if (!(string.IsNullOrEmpty(idKlienta_textBox.Text)))
+
+                        if (!string.IsNullOrEmpty(imieNazwisko_textBox.Text))
                         {
-                            using (session)
-                            {
-                                dataGridView1.DataSource = session.QueryOver<Klienci>()
-                                    .Select(c => c.IDKlienta, c => c.ImieNazwisko,c => c.NazwaFirmy, c => c.Email)
-                                    .Where(c => c.IDKlienta == idKlienta_textBox.Text)
-                                    .List<object[]>()
-                                    .Select(c => new { IDKlienta = (string)c[0], Imie_Nazwisko = (string)c[1], Nazwa_Firmy = (string)c[2], Email = (string)c[3] })
-                                    .ToList();
-                            }
-                        }
-                        //when user put only email 
-                        else if (!(string.IsNullOrEmpty(email_textBox.Text)))
-                        {
-                            using (session)
-                            {
-                                dataGridView1.DataSource = session.QueryOver<Klienci>()
-                                    .Select(c => c.IDKlienta, c => c.ImieNazwisko ,c => c.NazwaFirmy, c => c.Email)
-                                    .Where(c => c.Email == email_textBox.Text)
-                                    .List<object[]>()
-                                    .Select(c => new { IDKlienta = (string)c[0], Imie_Nazwisko = (string)c[1], Nazwa_Firmy = (string)c[2], Email = (string)c[3] })
-                                    .ToList();
-                            }
-                        }
-                        //when user put only name/surname or company name
-                        else if (!(string.IsNullOrEmpty(imieNazwisko_textBox.Text)) ||
-                            !(string.IsNullOrEmpty(nazwaFirmy_textBox.Text)))
-                        {
-                            if (!(string.IsNullOrEmpty(imieNazwisko_textBox.Text)) && !(string.IsNullOrEmpty(nazwaFirmy_textBox.Text)))
-                            {
-                                MessageBox.Show("Wpisano za dużo parametrów (Imie Nazwisko oraz Nazwa Firmy)", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                            else
-                            {
-                                if ((string.IsNullOrEmpty(imieNazwisko_textBox.Text)))
-                                {
-                                    //when user want to search with company name only
-                                    using (session)
-                                    {
-                                        dataGridView1.DataSource = session.QueryOver<Klienci>()
-                                            .Select(c => c.IDKlienta,c => c.ImieNazwisko, c => c.NazwaFirmy, c => c.Email)
-                                            .Where(c => c.NazwaFirmy == nazwaFirmy_textBox.Text)
-                                            .List<object[]>()
-                                            .Select(c => new { IDKlienta = (string)c[0], Imie_Nazwisko = (string)c[1], Nazwa_Firmy = (string)c[2], Email = (string)c[3] })
-                                            .ToList();
-                                    }
+                            if (!string.IsNullOrEmpty(nazwaFirmy_textBox.Text))
+                                { 
+                                    MessageBox.Show("Wpisano za dużo parametrów (Imie Nazwisko oraz Nazwa Firmy)", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
-                                else
-                                {
-                                    //when user want to search with name / surname
-                                    using (session)
-                                    {
-                                        dataGridView1.DataSource = session.QueryOver<Klienci>()
-                                            .Select(c => c.IDKlienta,c => c.ImieNazwisko, c => c.NazwaFirmy, c => c.Email)
-                                            .Where(c => c.ImieNazwisko == imieNazwisko_textBox.Text)
-                                            .List<object[]>()
-                                            .Select(c => new { IDKlienta = (string)c[0], Imie_Nazwisko = (string)c[1], Nazwa_Firmy = (string)c[2], Email = (string)c[3] })
-                                            .ToList();
-                                    }
-                                }
-                            }
                         }
+
+                        if (!string.IsNullOrEmpty(email_textBox.Text))
+                        {
+                            query = query.WhereRestrictionOn(c => c.Email).IsInsensitiveLike("%" + email_textBox.Text + "%");
+                        }
+
+                        dataGridView1.DataSource = query
+                            .Select(c => c.IDKlienta, c => c.ImieNazwisko,c => c.NazwaFirmy, c => c.Email)
+                            .List<object[]>()
+                            .Select(c => new { IDKlienta = c[0], ImieNazwisko = c[1],NazwaFirmy = c[2], Email = c[3] })
+                            .ToList();
+                    }
                     break;
                     }
                 case "Paragony":
-                        using (session)
+                    using (session)
                         {
                             
                         if (!(string.IsNullOrEmpty(idDokumentu_textBox.Text)) ||
@@ -366,7 +186,6 @@ namespace Projekt_bazodanowy
                                 .ToList();
                         }
                     }
-
                     break;
                 case "Produkty":
                     using (session)
