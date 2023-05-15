@@ -39,7 +39,7 @@
             this.button1.Location = new System.Drawing.Point(104, 178);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(256, 35);
-            this.button1.TabIndex = 0;
+            this.button1.TabIndex = 3;
             this.button1.Text = "Zaloguj";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -49,7 +49,7 @@
             this.passwordTextBox.Location = new System.Drawing.Point(104, 127);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(256, 22);
-            this.passwordTextBox.TabIndex = 1;
+            this.passwordTextBox.TabIndex = 2;
             this.passwordTextBox.Text = "hasło";
             this.passwordTextBox.Click += new System.EventHandler(this.passwordTextBox_Click);
             this.passwordTextBox.TextChanged += new System.EventHandler(this.passwordTextBox_TextChanged);
@@ -59,7 +59,7 @@
             this.loginTextBox.Location = new System.Drawing.Point(104, 88);
             this.loginTextBox.Name = "loginTextBox";
             this.loginTextBox.Size = new System.Drawing.Size(256, 22);
-            this.loginTextBox.TabIndex = 2;
+            this.loginTextBox.TabIndex = 1;
             this.loginTextBox.Text = "login";
             this.loginTextBox.Click += new System.EventHandler(this.loginTextBox_Click);
             // 
