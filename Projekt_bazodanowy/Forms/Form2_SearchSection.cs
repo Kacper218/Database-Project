@@ -329,12 +329,13 @@ namespace Projekt_bazodanowy
                     break;
                     }
                 case "Paragony":
-                    if (!(string.IsNullOrEmpty(idDokumentu_textBox.Text)) ||
-                        !(string.IsNullOrEmpty(dataZakupu_textBox.Text)) ||
-                        !(string.IsNullOrEmpty(idKlienta_textBox.Text)) ||
-                        !(string.IsNullOrEmpty(kwotaCalkowita_textBox.Text)))
-                    {
                         using (session)
+                        {
+                            
+                        if (!(string.IsNullOrEmpty(idDokumentu_textBox.Text)) ||
+                            !(string.IsNullOrEmpty(dataZakupu_textBox.Text)) ||
+                            !(string.IsNullOrEmpty(idKlienta_textBox.Text)) ||
+                            !(string.IsNullOrEmpty(kwotaCalkowita_textBox.Text)))
                         {
                             var query = session.QueryOver<Paragony>();
                             if (!string.IsNullOrEmpty(idDokumentu_textBox.Text))
@@ -368,6 +369,36 @@ namespace Projekt_bazodanowy
 
                     break;
                 case "Produkty":
+                    using (session)
+                    {
+                        var query = session.QueryOver<Produkty>();
+                        if (!string.IsNullOrEmpty(idProduktu_textBox.Text))
+                        {
+                            int idProduktu;
+                            if (int.TryParse(idProduktu_textBox.Text, out idProduktu))
+                            {
+                                query = query.Where(c => c.IDProduktu == idProduktu);
+                            }
+                        }
+                        if (!string.IsNullOrEmpty(nazwaProduktu_textBox.Text))
+                        {
+                            query = query.WhereRestrictionOn(c => c.Nazwa).IsInsensitiveLike("%" + nazwaProduktu_textBox.Text + "%");
+                        }
+                        if (!string.IsNullOrEmpty(aktualnaCena_textBox.Text))
+                        {
+                            query = query.Where(c => c.CenaAktualna == aktualnaCena_textBox.Text);
+                        }
+                        if (!string.IsNullOrEmpty(dostepnosc_textBox.Text))
+                        {
+                            query = query.WhereRestrictionOn(c => c.Dostepnosc).IsInsensitiveLike("%" + dostepnosc_textBox.Text + "%");
+                        }
+
+                        dataGridView1.DataSource = query
+                            .Select(c => c.IDProduktu, c => c.Nazwa, c => c.CenaAktualna, c => c.Dostepnosc)
+                            .List<object[]>()
+                            .Select(c => new { IDProduktu = (int)c[0], Nazwa = (string)c[1], CenaAktualna = (string)c[2], Dostepnosc = (string)c[3] })
+                            .ToList();
+                    }
                     break;
                 case "Zakupy":
                     break;
