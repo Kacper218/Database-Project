@@ -35,7 +35,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.searchTabPage = new System.Windows.Forms.TabPage();
             this.search_button = new System.Windows.Forms.Button();
             this.idZakupu_textBox = new System.Windows.Forms.TextBox();
             this.label32 = new System.Windows.Forms.Label();
@@ -67,7 +67,7 @@
             this.idKlienta_textBox = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.search_comboBox = new System.Windows.Forms.ComboBox();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.addTabPage = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -85,8 +85,8 @@
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.searchTabPage.SuspendLayout();
+            this.addTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // addButton
@@ -110,6 +110,7 @@
             this.dataGridView1.RowTemplate.Height = 28;
             this.dataGridView1.Size = new System.Drawing.Size(1111, 151);
             this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
             // loadButton
             // 
@@ -164,8 +165,8 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.searchTabPage);
+            this.tabControl1.Controls.Add(this.addTabPage);
             this.tabControl1.Location = new System.Drawing.Point(7, 22);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
@@ -173,46 +174,46 @@
             this.tabControl1.Size = new System.Drawing.Size(1097, 315);
             this.tabControl1.TabIndex = 14;
             // 
-            // tabPage3
+            // searchTabPage
             // 
-            this.tabPage3.Controls.Add(this.search_button);
-            this.tabPage3.Controls.Add(this.idZakupu_textBox);
-            this.tabPage3.Controls.Add(this.label32);
-            this.tabPage3.Controls.Add(this.label31);
-            this.tabPage3.Controls.Add(this.label30);
-            this.tabPage3.Controls.Add(this.label29);
-            this.tabPage3.Controls.Add(this.label28);
-            this.tabPage3.Controls.Add(this.label27);
-            this.tabPage3.Controls.Add(this.label26);
-            this.tabPage3.Controls.Add(this.label25);
-            this.tabPage3.Controls.Add(this.label24);
-            this.tabPage3.Controls.Add(this.label23);
-            this.tabPage3.Controls.Add(this.label22);
-            this.tabPage3.Controls.Add(this.label21);
-            this.tabPage3.Controls.Add(this.label20);
-            this.tabPage3.Controls.Add(this.label19);
-            this.tabPage3.Controls.Add(this.cenaZakupu_textBox);
-            this.tabPage3.Controls.Add(this.ilosc_textBox);
-            this.tabPage3.Controls.Add(this.dostepnosc_textBox);
-            this.tabPage3.Controls.Add(this.aktualnaCena_textBox);
-            this.tabPage3.Controls.Add(this.nazwaProduktu_textBox);
-            this.tabPage3.Controls.Add(this.idProduktu_textBox);
-            this.tabPage3.Controls.Add(this.kwotaCalkowita_textBox);
-            this.tabPage3.Controls.Add(this.dataZakupu_textBox);
-            this.tabPage3.Controls.Add(this.idDokumentu_textBox);
-            this.tabPage3.Controls.Add(this.email_textBox);
-            this.tabPage3.Controls.Add(this.nazwaFirmy_textBox);
-            this.tabPage3.Controls.Add(this.imieNazwisko_textBox);
-            this.tabPage3.Controls.Add(this.idKlienta_textBox);
-            this.tabPage3.Controls.Add(this.label18);
-            this.tabPage3.Controls.Add(this.search_comboBox);
-            this.tabPage3.Location = new System.Drawing.Point(4, 25);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1089, 286);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Wyszukiwanie";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.searchTabPage.Controls.Add(this.search_button);
+            this.searchTabPage.Controls.Add(this.idZakupu_textBox);
+            this.searchTabPage.Controls.Add(this.label32);
+            this.searchTabPage.Controls.Add(this.label31);
+            this.searchTabPage.Controls.Add(this.label30);
+            this.searchTabPage.Controls.Add(this.label29);
+            this.searchTabPage.Controls.Add(this.label28);
+            this.searchTabPage.Controls.Add(this.label27);
+            this.searchTabPage.Controls.Add(this.label26);
+            this.searchTabPage.Controls.Add(this.label25);
+            this.searchTabPage.Controls.Add(this.label24);
+            this.searchTabPage.Controls.Add(this.label23);
+            this.searchTabPage.Controls.Add(this.label22);
+            this.searchTabPage.Controls.Add(this.label21);
+            this.searchTabPage.Controls.Add(this.label20);
+            this.searchTabPage.Controls.Add(this.label19);
+            this.searchTabPage.Controls.Add(this.cenaZakupu_textBox);
+            this.searchTabPage.Controls.Add(this.ilosc_textBox);
+            this.searchTabPage.Controls.Add(this.dostepnosc_textBox);
+            this.searchTabPage.Controls.Add(this.aktualnaCena_textBox);
+            this.searchTabPage.Controls.Add(this.nazwaProduktu_textBox);
+            this.searchTabPage.Controls.Add(this.idProduktu_textBox);
+            this.searchTabPage.Controls.Add(this.kwotaCalkowita_textBox);
+            this.searchTabPage.Controls.Add(this.dataZakupu_textBox);
+            this.searchTabPage.Controls.Add(this.idDokumentu_textBox);
+            this.searchTabPage.Controls.Add(this.email_textBox);
+            this.searchTabPage.Controls.Add(this.nazwaFirmy_textBox);
+            this.searchTabPage.Controls.Add(this.imieNazwisko_textBox);
+            this.searchTabPage.Controls.Add(this.idKlienta_textBox);
+            this.searchTabPage.Controls.Add(this.label18);
+            this.searchTabPage.Controls.Add(this.search_comboBox);
+            this.searchTabPage.Location = new System.Drawing.Point(4, 25);
+            this.searchTabPage.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.searchTabPage.Name = "searchTabPage";
+            this.searchTabPage.Size = new System.Drawing.Size(1089, 286);
+            this.searchTabPage.TabIndex = 2;
+            this.searchTabPage.Text = "Wyszukiwanie i usuwanie";
+            this.searchTabPage.UseVisualStyleBackColor = true;
             // 
             // search_button
             // 
@@ -487,31 +488,31 @@
             this.search_comboBox.TabIndex = 0;
             this.search_comboBox.TextChanged += new System.EventHandler(this.search_comboBox_TextChanged);
             // 
-            // tabPage1
+            // addTabPage
             // 
-            this.tabPage1.Controls.Add(this.comboBox1);
-            this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.label7);
-            this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.textBox3);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.loadButton);
-            this.tabPage1.Controls.Add(this.textBox5);
-            this.tabPage1.Controls.Add(this.addButton);
-            this.tabPage1.Controls.Add(this.textBox4);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.textBox1);
-            this.tabPage1.Controls.Add(this.textBox2);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage1.Size = new System.Drawing.Size(1089, 286);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Dodawanie";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.addTabPage.Controls.Add(this.comboBox1);
+            this.addTabPage.Controls.Add(this.label6);
+            this.addTabPage.Controls.Add(this.label7);
+            this.addTabPage.Controls.Add(this.label5);
+            this.addTabPage.Controls.Add(this.label1);
+            this.addTabPage.Controls.Add(this.label4);
+            this.addTabPage.Controls.Add(this.textBox3);
+            this.addTabPage.Controls.Add(this.label3);
+            this.addTabPage.Controls.Add(this.loadButton);
+            this.addTabPage.Controls.Add(this.textBox5);
+            this.addTabPage.Controls.Add(this.addButton);
+            this.addTabPage.Controls.Add(this.textBox4);
+            this.addTabPage.Controls.Add(this.label2);
+            this.addTabPage.Controls.Add(this.textBox1);
+            this.addTabPage.Controls.Add(this.textBox2);
+            this.addTabPage.Location = new System.Drawing.Point(4, 25);
+            this.addTabPage.Margin = new System.Windows.Forms.Padding(4);
+            this.addTabPage.Name = "addTabPage";
+            this.addTabPage.Padding = new System.Windows.Forms.Padding(4);
+            this.addTabPage.Size = new System.Drawing.Size(1089, 286);
+            this.addTabPage.TabIndex = 0;
+            this.addTabPage.Text = "Dodawanie";
+            this.addTabPage.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -636,10 +637,10 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.searchTabPage.ResumeLayout(false);
+            this.searchTabPage.PerformLayout();
+            this.addTabPage.ResumeLayout(false);
+            this.addTabPage.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -665,9 +666,9 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage addTabPage;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage searchTabPage;
         private System.Windows.Forms.TextBox idDokumentu_textBox;
         private System.Windows.Forms.TextBox email_textBox;
         private System.Windows.Forms.TextBox nazwaFirmy_textBox;
