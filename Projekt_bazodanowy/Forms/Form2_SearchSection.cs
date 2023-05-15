@@ -440,27 +440,6 @@ namespace Projekt_bazodanowy
                     break;
             }
         }
-        /*
-                            using (session)
-                            {
-                                dataGridView1.DataSource = session.QueryOver<Klienci>()
-                                    .Select(c => c.IDKlienta, c => c.NazwaFirmy, c => c.Email)
-                                    .Where(c => c.IDKlienta == idKlienta_textBox.Text)
-                                    .List<object[]>()
-                                    .Select(c => new { IDKlienta = (string)c[0], Imie_Nazwisko = (string)c[1],Nazwa_Firmy = (string)c[2], Email = (string)c[3] })
-                                    .ToList();
-                            }
-
-                                    using (session)
-                                    {
-                                        dataGridView1.DataSource = session.QueryOver<Klienci>()
-                                            .Select(c => c.IDKlienta, c => c.NazwaFirmy, c => c.Email)
-                                            .Where(c => c.Email == email_textBox.Text && c.NazwaFirmy == nazwaFirmy_textBox.Text)
-                                            .List<object[]>()
-                                            .Select(c => new { IDKlienta = (string)c[0], Nazwa_Firmy = (string)c[1], Email = (string)c[2] })
-                                            .ToList();
-                                    }
-        */
 
         //------------------------------------------------------------//
         private void segment1_position_Click(object sender, EventArgs e)
