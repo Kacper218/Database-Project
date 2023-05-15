@@ -47,6 +47,10 @@ namespace Projekt_bazodanowy
             dostepnosc_textBox.Enabled = false;
             ilosc_textBox.Enabled = false;
             cenaZakupu_textBox.Enabled = false;
+
+            dataGridView1.AutoResizeColumns();
+
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
