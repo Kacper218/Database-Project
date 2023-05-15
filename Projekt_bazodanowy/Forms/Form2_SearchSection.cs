@@ -20,7 +20,6 @@ namespace Projekt_bazodanowy
 {
     public partial class Form2 : Form
     { 
-
         private void resetSearchTextBoxes ()
         {
             idKlienta_textBox.Clear();
@@ -95,10 +94,120 @@ namespace Projekt_bazodanowy
             }
         }
 
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+                ISession session = sessionFactor.OpenSession();
+                switch (search_comboBox.Text.ToString())
+                {
+                    case "Klienci":
+                        if (e.ColumnIndex == 4)
+                        {
+                            using (session)
+                            {
+                                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                                string rowIdentifier = row.Cells["IDKlienta"].Value.ToString();
+
+                                Klienci rowToDelete = session.Get<Klienci>(rowIdentifier);
+
+                                if (rowToDelete != null)
+                                {
+                                    using (var transaction = session.BeginTransaction())
+                                    {
+                                        session.Delete(rowToDelete);
+                                        transaction.Commit();
+                                    }
+                                }
+
+                                dataGridView1.Rows.RemoveAt(e.RowIndex);
+                            }
+                        }
+                        break;
+                    case "Paragony":
+                        if (e.ColumnIndex == 4)
+                        {
+                            using (session)
+                            {
+                                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                                string rowIdentifier = row.Cells["IDDokumentu"].Value.ToString();
+
+                                Paragony rowToDelete = session.Get<Paragony>(rowIdentifier);
+
+                                if (rowToDelete != null)
+                                {
+                                    using (var transaction = session.BeginTransaction())
+                                    {
+                                        session.Delete(rowToDelete);
+                                        transaction.Commit();
+                                    }
+                                }
+
+                                dataGridView1.Rows.RemoveAt(e.RowIndex);
+                            }
+                        }
+                        break;
+                    case "Produkty":
+                        if (e.ColumnIndex == 4)
+                        {
+                            using (session)
+                            {
+                                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                                string rowIdentifier = row.Cells["IDProduktu"].Value.ToString();
+
+                                Produkty rowToDelete = session.Get<Produkty>(rowIdentifier);
+
+                                if (rowToDelete != null)
+                                {
+                                    using (var transaction = session.BeginTransaction())
+                                    {
+                                        session.Delete(rowToDelete);
+                                        transaction.Commit();
+                                    }
+                                }
+
+                                dataGridView1.Rows.RemoveAt(e.RowIndex);
+                            }
+                        }
+                        break;
+                    case "Zakupy":
+                        if (e.ColumnIndex == 5)
+                        {
+                            using (session)
+                            {
+                                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                                string rowIdentifier = row.Cells["IDZakupu"].Value.ToString();
+
+                                Zakupy rowToDelete = session.Get<Zakupy>(rowIdentifier);
+
+                                if (rowToDelete != null)
+                                {
+                                    using (var transaction = session.BeginTransaction())
+                                    {
+                                        session.Delete(rowToDelete);
+                                        transaction.Commit();
+                                    }
+                                }
+
+                                dataGridView1.Rows.RemoveAt(e.RowIndex);
+                            }
+                        }
+                        break;
+                }
+        }
+        private void deleteRowButtonAdd()
+        {
+            DataGridViewButtonColumn delButton = new DataGridViewButtonColumn();
+            delButton.HeaderText = "Usuń";
+            delButton.Text = "-";
+            delButton.Name = "delButton";
+            delButton.UseColumnTextForButtonValue = true;
+            dataGridView1.Columns.Add(delButton);
+        }
+        
         private void search_button_Click(object sender, EventArgs e)
         {
-            ISession session = sessionFactor.OpenSession();
+            dataGridView1.Columns.Clear();
             dataGridView1.DataSource = null;
+            ISession session = sessionFactor.OpenSession();
             switch (search_comboBox.Text.ToString())
             {
                 case "Klienci":
@@ -139,25 +248,22 @@ namespace Projekt_bazodanowy
                         {
                             query = query.WhereRestrictionOn(c => c.Email).IsInsensitiveLike("%" + email_textBox.Text + "%");
                         }
-
-                        dataGridView1.DataSource = query
-                            .Select(c => c.IDKlienta, c => c.ImieNazwisko,c => c.NazwaFirmy, c => c.Email)
-                            .List<object[]>()
-                            .Select(c => new { IDKlienta = c[0], ImieNazwisko = c[1],NazwaFirmy = c[2], Email = c[3] })
-                            .ToList();
+                            var result = query.List();
+                            var bindingList = new BindingList<Klienci>(result);
+                            dataGridView1.DataSource = bindingList;
+                            dataGridView1.AllowUserToAddRows = false;
                     }
                     break;
                     }
                 case "Paragony":
                     using (session)
                         {
-                            
+                        var query = session.QueryOver<Paragony>();
                         if (!(string.IsNullOrEmpty(idDokumentu_textBox.Text)) ||
                             !(string.IsNullOrEmpty(dataZakupu_textBox.Text)) ||
                             !(string.IsNullOrEmpty(idKlienta_textBox.Text)) ||
                             !(string.IsNullOrEmpty(kwotaCalkowita_textBox.Text)))
                         {
-                            var query = session.QueryOver<Paragony>();
                             if (!string.IsNullOrEmpty(idDokumentu_textBox.Text))
                             {
                                 query = query.Where(c => c.IDDokumentu == idDokumentu_textBox.Text);
@@ -178,13 +284,11 @@ namespace Projekt_bazodanowy
                             {
                                 query = query.Where(c => c.KwotaCalkowita == kwotaCalkowita_textBox.Text);
                             }
-
-                            dataGridView1.DataSource = query
-                                .Select(c => c.IDDokumentu, c => c.DataZakupu, c => c.IDKlienta, c => c.KwotaCalkowita)
-                                .List<object[]>()
-                                .Select(c => new { IDDokumentu = (string)c[0], DataZakupu = (DateTime)c[1], IDKlienta = (string)c[2], KwotaCalkowita = (string)c[3] })
-                                .ToList();
                         }
+                            var result = query.List();
+                            var bindingList = new BindingList<Paragony>(result);
+                            dataGridView1.DataSource = bindingList;
+                            dataGridView1.AllowUserToAddRows = false;
                     }
                     break;
                 case "Produkty":
@@ -193,11 +297,7 @@ namespace Projekt_bazodanowy
                         var query = session.QueryOver<Produkty>();
                         if (!string.IsNullOrEmpty(idProduktu_textBox.Text))
                         {
-                            int idProduktu;
-                            if (int.TryParse(idProduktu_textBox.Text, out idProduktu))
-                            {
-                                query = query.Where(c => c.IDProduktu == idProduktu);
-                            }
+                            query = query.Where(c => c.IDProduktu == idProduktu_textBox.Text);
                         }
                         if (!string.IsNullOrEmpty(nazwaProduktu_textBox.Text))
                         {
@@ -211,12 +311,10 @@ namespace Projekt_bazodanowy
                         {
                             query = query.WhereRestrictionOn(c => c.Dostepnosc).IsInsensitiveLike("%" + dostepnosc_textBox.Text + "%");
                         }
-
-                        dataGridView1.DataSource = query
-                            .Select(c => c.IDProduktu, c => c.Nazwa, c => c.CenaAktualna, c => c.Dostepnosc)
-                            .List<object[]>()
-                            .Select(c => new { IDProduktu = (int)c[0], Nazwa = (string)c[1], CenaAktualna = (string)c[2], Dostepnosc = (string)c[3] })
-                            .ToList();
+                            var result = query.List();
+                            var bindingList = new BindingList<Produkty>(result);
+                            dataGridView1.DataSource = bindingList;
+                            dataGridView1.AllowUserToAddRows = false;
                     }
                     break;
                 case "Zakupy":
@@ -226,7 +324,7 @@ namespace Projekt_bazodanowy
 
                         if (!string.IsNullOrEmpty(idZakupu_textBox.Text))
                         {
-                            query = query.Where(c => c.IDZakupu == int.Parse(idZakupu_textBox.Text));
+                            query = query.Where(c => c.IDZakupu == idZakupu_textBox.Text);
                         }
 
                         if (!string.IsNullOrEmpty(idDokumentu_textBox.Text))
@@ -248,16 +346,15 @@ namespace Projekt_bazodanowy
                         {
                             query = query.Where(c => c.CenaZakupu == cenaZakupu_textBox.Text);
                         }
-
-                        dataGridView1.DataSource = query
-                            .Select(c => c.IDZakupu, c => c.IDDokumentu, c => c.IDProduktu, c => c.Ilosc, c => c.CenaZakupu)
-                            .List<object[]>()
-                            .Select(c => new { IDZakupu = c[0], IDDokumentu =c[1], IDProduktu = c[2], Ilosc = c[3], CenaZakupu =c[4] })
-                            .ToList();
-
+                            var result = query.List();
+                            var bindingList = new BindingList<Zakupy>(result);
+                            dataGridView1.DataSource = bindingList;
+                            dataGridView1.AllowUserToAddRows = false;
                     }
                     break;
             }
+            deleteRowButtonAdd(); 
         }
     }
+
 }
