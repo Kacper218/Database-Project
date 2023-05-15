@@ -401,6 +401,42 @@ namespace Projekt_bazodanowy
                     }
                     break;
                 case "Zakupy":
+                    using (session)
+                    {
+                        var query = session.QueryOver<Zakupy>();
+
+                        if (!string.IsNullOrEmpty(idZakupu_textBox.Text))
+                        {
+                            query = query.Where(c => c.IDZakupu == int.Parse(idZakupu_textBox.Text));
+                        }
+
+                        if (!string.IsNullOrEmpty(idDokumentu_textBox.Text))
+                        {
+                            query = query.Where(c => c.IDDokumentu == idDokumentu_textBox.Text);
+                        }
+
+                        if (!string.IsNullOrEmpty(idProduktu_textBox.Text))
+                        {
+                            query = query.Where(c => c.IDProduktu ==idProduktu_textBox.Text);
+                        }
+
+                        if (!string.IsNullOrEmpty(ilosc_textBox.Text))
+                        {
+                            query = query.Where(c => c.Ilosc == ilosc_textBox.Text);
+                        }
+
+                        if (!string.IsNullOrEmpty(cenaZakupu_textBox.Text))
+                        {
+                            query = query.Where(c => c.CenaZakupu == cenaZakupu_textBox.Text);
+                        }
+
+                        dataGridView1.DataSource = query
+                            .Select(c => c.IDZakupu, c => c.IDDokumentu, c => c.IDProduktu, c => c.Ilosc, c => c.CenaZakupu)
+                            .List<object[]>()
+                            .Select(c => new { IDZakupu = c[0], IDDokumentu =c[1], IDProduktu = c[2], Ilosc = c[3], CenaZakupu =c[4] })
+                            .ToList();
+
+                    }
                     break;
             }
         }
