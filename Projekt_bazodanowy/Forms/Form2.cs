@@ -47,39 +47,6 @@ namespace Projekt_bazodanowy
             dostepnosc_textBox.Enabled = false;
             ilosc_textBox.Enabled = false;
             cenaZakupu_textBox.Enabled = false;
-
-            //-------------------------------//
-
-            segment2_search.Enabled = false;
-            segment3_search.Enabled = false;
-            segment4_search.Enabled = false;
-            segment5_search.Enabled = false;
-
-            segment2_column.Enabled = false;
-            segment3_all.Enabled = false;
-            segment4_column.Enabled = false;
-            segment5_column.Enabled = false;
-
-            segment2_textBox.Enabled = false;
-            segment3_textBox.Enabled = false;
-            segment4_textBox.Enabled = false;
-            segment5_textBox.Enabled = false;
-
-            segment2_position.Enabled = false;
-            segment3_position.Enabled = false;
-            segment4_position.Enabled = false;
-            segment5_position.Enabled = false;
-
-            segment2_all.Enabled = false;
-            segment3_column.Enabled = false;
-            segment4_all.Enabled = false;
-            segment5_all.Enabled = false;
-
-            segment2_nextButton.Enabled = false;
-            segment3_nextButton.Enabled = false;
-            segment4_nextButton.Enabled = false;
-            segment5_nextButton.Enabled = false;
-            segment5_nextButton.Hide();
         }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
