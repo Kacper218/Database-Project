@@ -28,6 +28,7 @@ namespace Projekt_bazodanowy
         {
             InitializeComponent();
             instance = this;
+            instance.CenterToScreen();
             this.sessionFactor = sessionFactor;
 
             dataGridView1.MultiSelect = true;

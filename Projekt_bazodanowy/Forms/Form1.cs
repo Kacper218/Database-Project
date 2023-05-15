@@ -25,6 +25,7 @@ namespace Projekt_bazodanowy
         {
             InitializeComponent();
             instance = this;
+            instance.CenterToScreen();
         }
 
         public bool connectToDataSource(string connStr)
@@ -57,7 +58,7 @@ namespace Projekt_bazodanowy
                 string user = loginTextBox.Text.ToString();
                 string password = passwordTextBox.Text.ToString();
                 // change databaseName to yours data base name
-                string databaseName = "DESKTOP-9QOBELF\\SQLEXPRESS";
+                string databaseName = "DESKTOP\\SQLEXPRESS";
 
                 string connStr = "Data Source=" + databaseName + "; Initial Catalog=master; User Id=" + user + "; Password=" + password;
                 
