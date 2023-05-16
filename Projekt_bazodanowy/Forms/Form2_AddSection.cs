@@ -24,43 +24,48 @@ namespace Projekt_bazodanowy
         {
             ISession session = sessionFactor.OpenSession();
 
-            switch (comboBox1.Text.ToString())
-            {
-                case "Klienci":
-                    using (session)
-                    {
-                        IQuery query = session.CreateQuery("FROM Klienci");
-                        IList<Models.Klienci> prodInfo = query.List<Models.Klienci>();
-                        dataGridView1.DataSource = prodInfo;
-                        break;
-                    }
-                case "Produkty":
-                    using (session)
-                    {
-                        IQuery query1 = session.CreateQuery("FROM Produkty");
-                        IList<Models.Produkty> prodInfo1 = query1.List<Models.Produkty>();
-                        dataGridView1.DataSource = prodInfo1;
-                        break;
-                    }
+            try { 
+                switch (comboBox1.Text.ToString())
+                {
+                    case "Klienci":
+                        using (session)
+                        {
+                            IQuery query = session.CreateQuery("FROM Klienci");
+                            IList<Models.Klienci> prodInfo = query.List<Models.Klienci>();
+                            dataGridView1.DataSource = prodInfo;
+                            break;
+                        }
+                    case "Produkty":
+                        using (session)
+                        {
+                            IQuery query1 = session.CreateQuery("FROM Produkty");
+                            IList<Models.Produkty> prodInfo1 = query1.List<Models.Produkty>();
+                            dataGridView1.DataSource = prodInfo1;
+                            break;
+                        }
                 case "Paragony":
-                    using (session)
-                    {
-                        IQuery query2 = session.CreateQuery("FROM Paragony");
-                        IList<Models.Paragony> prodInfo2 = query2.List<Models.Paragony>();
-                        dataGridView1.DataSource = prodInfo2;
-                        break;
-                    }
+                        using (session)
+                        {
+                            IQuery query2 = session.CreateQuery("FROM Paragony");
+                            IList<Models.Paragony> prodInfo2 = query2.List<Models.Paragony>();
+                            dataGridView1.DataSource = prodInfo2;
+                            break;
+                        }
                 case "Zakupy":
-                    using (session)
-                    {
-                        IQuery query3 = session.CreateQuery("FROM Zakupy");
-                        IList<Models.Zakupy> prodInfo3 = query3.List<Models.Zakupy>();
-                        dataGridView1.DataSource = prodInfo3;
-                        break;
-                    }
+                        using (session)
+                        {
+                            IQuery query3 = session.CreateQuery("FROM Zakupy");
+                            IList<Models.Zakupy> prodInfo3 = query3.List<Models.Zakupy>();
+                            dataGridView1.DataSource = prodInfo3;
+                            break;
+                        }
+                }
+            } catch (Exception ex)
+            {
+                    MessageBox.Show("Wystapił nastepujący błąd: \n" + ex.ToString(),"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+    }
 
-        }
 
         private void addButton_Click(object sender, EventArgs e)
         {
@@ -133,7 +138,7 @@ namespace Projekt_bazodanowy
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.ToString());
+                    MessageBox.Show("Wystapił nastepujący błąd: \n" + ex.ToString(),"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 

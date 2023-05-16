@@ -93,7 +93,6 @@ namespace Projekt_bazodanowy
                     break;
             }
         }
-
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
                 ISession session = sessionFactor.OpenSession();
@@ -202,158 +201,162 @@ namespace Projekt_bazodanowy
             delButton.UseColumnTextForButtonValue = true;
             dataGridView1.Columns.Add(delButton);
         }
-        
         private void search_button_Click(object sender, EventArgs e)
         {
             dataGridView1.Columns.Clear();
             dataGridView1.DataSource = null;
             ISession session = sessionFactor.OpenSession();
-            switch (search_comboBox.Text.ToString())
+            try
             {
-                case "Klienci":
-                    {
-                    using (session)
-                    {
-                        var query = session.QueryOver<Klienci>();
-                        if (!string.IsNullOrEmpty(idKlienta_textBox.Text))
+                switch (search_comboBox.Text.ToString())
+                {
+                    case "Klienci":
                         {
-                            query = query.Where(c => c.IDKlienta == idKlienta_textBox.Text);
-                        }
-
-                        if (!string.IsNullOrEmpty(nazwaFirmy_textBox.Text))
-                        {
-                            if (string.IsNullOrEmpty(imieNazwisko_textBox.Text))
-                                { 
-                                    query = query.WhereRestrictionOn(c => c.NazwaFirmy).IsInsensitiveLike("%" + nazwaFirmy_textBox.Text + "%");
-                                }
-                        }
-
-                        if (!string.IsNullOrEmpty(imieNazwisko_textBox.Text))
-                        {
-                            if (string.IsNullOrEmpty(nazwaFirmy_textBox.Text))
-                                { 
-                                    query = query.WhereRestrictionOn(c => c.ImieNazwisko).IsInsensitiveLike("%" + imieNazwisko_textBox.Text + "%");
-                                }
-                        }
-
-                        if (!string.IsNullOrEmpty(imieNazwisko_textBox.Text))
-                        {
-                            if (!string.IsNullOrEmpty(nazwaFirmy_textBox.Text))
-                                { 
-                                    MessageBox.Show("Wpisano za dużo parametrów (Imie Nazwisko oraz Nazwa Firmy)", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                }
-                        }
-
-                        if (!string.IsNullOrEmpty(email_textBox.Text))
-                        {
-                            query = query.WhereRestrictionOn(c => c.Email).IsInsensitiveLike("%" + email_textBox.Text + "%");
-                        }
-                            var result = query.List();
-                            var bindingList = new BindingList<Klienci>(result);
-                            dataGridView1.DataSource = bindingList;
-                            dataGridView1.AllowUserToAddRows = false;
-                    }
-                    break;
-                    }
-                case "Paragony":
-                    using (session)
-                        {
-                        var query = session.QueryOver<Paragony>();
-                        if (!(string.IsNullOrEmpty(idDokumentu_textBox.Text)) ||
-                            !(string.IsNullOrEmpty(dataZakupu_textBox.Text)) ||
-                            !(string.IsNullOrEmpty(idKlienta_textBox.Text)) ||
-                            !(string.IsNullOrEmpty(kwotaCalkowita_textBox.Text)))
-                        {
-                            if (!string.IsNullOrEmpty(idDokumentu_textBox.Text))
+                            using (session)
                             {
-                                query = query.Where(c => c.IDDokumentu == idDokumentu_textBox.Text);
-                            }
-                            if (!string.IsNullOrEmpty(dataZakupu_textBox.Text))
-                            {
-                                DateTime dataZakupu;
-                                if (DateTime.TryParse(dataZakupu_textBox.Text, out dataZakupu))
+                                var query = session.QueryOver<Klienci>();
+                                if (!string.IsNullOrEmpty(idKlienta_textBox.Text))
                                 {
-                                    query = query.Where(c => c.DataZakupu == dataZakupu);
+                                    query = query.Where(c => c.IDKlienta == idKlienta_textBox.Text);
+                                }
+
+                                if (!string.IsNullOrEmpty(nazwaFirmy_textBox.Text))
+                                {
+                                    if (string.IsNullOrEmpty(imieNazwisko_textBox.Text))
+                                    {
+                                        query = query.WhereRestrictionOn(c => c.NazwaFirmy).IsInsensitiveLike("%" + nazwaFirmy_textBox.Text + "%");
+                                    }
+                                }
+
+                                if (!string.IsNullOrEmpty(imieNazwisko_textBox.Text))
+                                {
+                                    if (string.IsNullOrEmpty(nazwaFirmy_textBox.Text))
+                                    {
+                                        query = query.WhereRestrictionOn(c => c.ImieNazwisko).IsInsensitiveLike("%" + imieNazwisko_textBox.Text + "%");
+                                    }
+                                }
+
+                                if (!string.IsNullOrEmpty(imieNazwisko_textBox.Text))
+                                {
+                                    if (!string.IsNullOrEmpty(nazwaFirmy_textBox.Text))
+                                    {
+                                        MessageBox.Show("Wpisano za dużo parametrów (Imie Nazwisko oraz Nazwa Firmy)", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                }
+
+                                if (!string.IsNullOrEmpty(email_textBox.Text))
+                                {
+                                    query = query.WhereRestrictionOn(c => c.Email).IsInsensitiveLike("%" + email_textBox.Text + "%");
+                                }
+                                var result = query.List();
+                                var bindingList = new BindingList<Klienci>(result);
+                                dataGridView1.DataSource = bindingList;
+                                dataGridView1.AllowUserToAddRows = false;
+                            }
+                            break;
+                        }
+                    case "Paragony":
+                        using (session)
+                        {
+                            var query = session.QueryOver<Paragony>();
+                            if (!(string.IsNullOrEmpty(idDokumentu_textBox.Text)) ||
+                                !(string.IsNullOrEmpty(dataZakupu_textBox.Text)) ||
+                                !(string.IsNullOrEmpty(idKlienta_textBox.Text)) ||
+                                !(string.IsNullOrEmpty(kwotaCalkowita_textBox.Text)))
+                            {
+                                if (!string.IsNullOrEmpty(idDokumentu_textBox.Text))
+                                {
+                                    query = query.Where(c => c.IDDokumentu == idDokumentu_textBox.Text);
+                                }
+                                if (!string.IsNullOrEmpty(dataZakupu_textBox.Text))
+                                {
+                                    DateTime dataZakupu;
+                                    if (DateTime.TryParse(dataZakupu_textBox.Text, out dataZakupu))
+                                    {
+                                        query = query.Where(c => c.DataZakupu == dataZakupu);
+                                    }
+                                }
+                                if (!string.IsNullOrEmpty(idKlienta_textBox.Text))
+                                {
+                                    query = query.Where(c => c.IDKlienta == idKlienta_textBox.Text);
+                                }
+                                if (!string.IsNullOrEmpty(kwotaCalkowita_textBox.Text))
+                                {
+                                    query = query.Where(c => c.KwotaCalkowita == kwotaCalkowita_textBox.Text);
                                 }
                             }
-                            if (!string.IsNullOrEmpty(idKlienta_textBox.Text))
-                            {
-                                query = query.Where(c => c.IDKlienta == idKlienta_textBox.Text);
-                            }
-                            if (!string.IsNullOrEmpty(kwotaCalkowita_textBox.Text))
-                            {
-                                query = query.Where(c => c.KwotaCalkowita == kwotaCalkowita_textBox.Text);
-                            }
-                        }
                             var result = query.List();
                             var bindingList = new BindingList<Paragony>(result);
                             dataGridView1.DataSource = bindingList;
                             dataGridView1.AllowUserToAddRows = false;
-                    }
-                    break;
-                case "Produkty":
-                    using (session)
-                    {
-                        var query = session.QueryOver<Produkty>();
-                        if (!string.IsNullOrEmpty(idProduktu_textBox.Text))
-                        {
-                            query = query.Where(c => c.IDProduktu == idProduktu_textBox.Text);
                         }
-                        if (!string.IsNullOrEmpty(nazwaProduktu_textBox.Text))
+                        break;
+                    case "Produkty":
+                        using (session)
                         {
-                            query = query.WhereRestrictionOn(c => c.Nazwa).IsInsensitiveLike("%" + nazwaProduktu_textBox.Text + "%");
-                        }
-                        if (!string.IsNullOrEmpty(aktualnaCena_textBox.Text))
-                        {
-                            query = query.Where(c => c.CenaAktualna == aktualnaCena_textBox.Text);
-                        }
-                        if (!string.IsNullOrEmpty(dostepnosc_textBox.Text))
-                        {
-                            query = query.WhereRestrictionOn(c => c.Dostepnosc).IsInsensitiveLike("%" + dostepnosc_textBox.Text + "%");
-                        }
+                            var query = session.QueryOver<Produkty>();
+                            if (!string.IsNullOrEmpty(idProduktu_textBox.Text))
+                            {
+                                query = query.Where(c => c.IDProduktu == idProduktu_textBox.Text);
+                            }
+                            if (!string.IsNullOrEmpty(nazwaProduktu_textBox.Text))
+                            {
+                                query = query.WhereRestrictionOn(c => c.Nazwa).IsInsensitiveLike("%" + nazwaProduktu_textBox.Text + "%");
+                            }
+                            if (!string.IsNullOrEmpty(aktualnaCena_textBox.Text))
+                            {
+                                query = query.Where(c => c.CenaAktualna == aktualnaCena_textBox.Text);
+                            }
+                            if (!string.IsNullOrEmpty(dostepnosc_textBox.Text))
+                            {
+                                query = query.WhereRestrictionOn(c => c.Dostepnosc).IsInsensitiveLike("%" + dostepnosc_textBox.Text + "%");
+                            }
                             var result = query.List();
                             var bindingList = new BindingList<Produkty>(result);
                             dataGridView1.DataSource = bindingList;
                             dataGridView1.AllowUserToAddRows = false;
-                    }
-                    break;
-                case "Zakupy":
-                    using (session)
-                    {
-                        var query = session.QueryOver<Zakupy>();
-
-                        if (!string.IsNullOrEmpty(idZakupu_textBox.Text))
-                        {
-                            query = query.Where(c => c.IDZakupu == idZakupu_textBox.Text);
                         }
-
-                        if (!string.IsNullOrEmpty(idDokumentu_textBox.Text))
+                        break;
+                    case "Zakupy":
+                        using (session)
                         {
-                            query = query.Where(c => c.IDDokumentu == idDokumentu_textBox.Text);
-                        }
+                            var query = session.QueryOver<Zakupy>();
 
-                        if (!string.IsNullOrEmpty(idProduktu_textBox.Text))
-                        {
-                            query = query.Where(c => c.IDProduktu ==idProduktu_textBox.Text);
-                        }
+                            if (!string.IsNullOrEmpty(idZakupu_textBox.Text))
+                            {
+                                query = query.Where(c => c.IDZakupu == idZakupu_textBox.Text);
+                            }
 
-                        if (!string.IsNullOrEmpty(ilosc_textBox.Text))
-                        {
-                            query = query.Where(c => c.Ilosc == ilosc_textBox.Text);
-                        }
+                            if (!string.IsNullOrEmpty(idDokumentu_textBox.Text))
+                            {
+                                query = query.Where(c => c.IDDokumentu == idDokumentu_textBox.Text);
+                            }
 
-                        if (!string.IsNullOrEmpty(cenaZakupu_textBox.Text))
-                        {
-                            query = query.Where(c => c.CenaZakupu == cenaZakupu_textBox.Text);
-                        }
+                            if (!string.IsNullOrEmpty(idProduktu_textBox.Text))
+                            {
+                                query = query.Where(c => c.IDProduktu == idProduktu_textBox.Text);
+                            }
+
+                            if (!string.IsNullOrEmpty(ilosc_textBox.Text))
+                            {
+                                query = query.Where(c => c.Ilosc == ilosc_textBox.Text);
+                            }
+
+                            if (!string.IsNullOrEmpty(cenaZakupu_textBox.Text))
+                            {
+                                query = query.Where(c => c.CenaZakupu == cenaZakupu_textBox.Text);
+                            }
                             var result = query.List();
                             var bindingList = new BindingList<Zakupy>(result);
                             dataGridView1.DataSource = bindingList;
                             dataGridView1.AllowUserToAddRows = false;
-                    }
-                    break;
-            }
+                        }
+                        break;
+                }
             deleteRowButtonAdd(); 
+            } catch (Exception ex) { 
+                MessageBox.Show("Wystapił nastepujący błąd: \n" + ex.ToString(),"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 
