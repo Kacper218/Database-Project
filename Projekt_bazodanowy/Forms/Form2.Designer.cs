@@ -229,6 +229,8 @@
             // 
             // search_button
             // 
+            this.search_button.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.search_button.Location = new System.Drawing.Point(424, 301);
             this.search_button.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.search_button.Name = "search_button";
