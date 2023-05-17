@@ -45,7 +45,7 @@ namespace Projekt_bazodanowy
                 sessionFactor = session;
             }
             catch (Exception ex) {
-                MessageBox.Show("Wystapil bład podczas próby połączenia się z baza.","Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Wystapil bład podczas próby połączenia się z baza:\n" + ex.Message,"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             return true;
@@ -58,7 +58,7 @@ namespace Projekt_bazodanowy
                 string user = loginTextBox.Text.ToString();
                 string password = passwordTextBox.Text.ToString();
                 // change databaseName to yours data base name
-                string databaseName = "DESKTOP\\SQLEXPRESS";
+                string databaseName = "DESKTOP-9QOBELF\\SQLEXPRESS";
 
                 string connStr = "Data Source=" + databaseName + "; Initial Catalog=master; User Id=" + user + "; Password=" + password;
                 
