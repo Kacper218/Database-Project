@@ -81,12 +81,24 @@
             this.field1_textBox = new System.Windows.Forms.TextBox();
             this.field2_textBox = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.reportPage = new System.Windows.Forms.TabPage();
+            this.report_dateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.dayReport_checkBox = new System.Windows.Forms.CheckBox();
+            this.monthReport_checkBox = new System.Windows.Forms.CheckBox();
+            this.weekReport_checkBox = new System.Windows.Forms.CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.searchTabPage.SuspendLayout();
             this.addTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.reportPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // add_Button
@@ -179,6 +191,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.searchTabPage);
             this.tabControl1.Controls.Add(this.addTabPage);
+            this.tabControl1.Controls.Add(this.reportPage);
             this.tabControl1.Location = new System.Drawing.Point(7, 22);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tabControl1.Name = "tabControl1";
@@ -504,6 +517,7 @@
             // 
             // addTabPage
             // 
+            this.addTabPage.Controls.Add(this.dataGridView2);
             this.addTabPage.Controls.Add(this.add_comboBox);
             this.addTabPage.Controls.Add(this.label6);
             this.addTabPage.Controls.Add(this.label7);
@@ -636,6 +650,104 @@
             this.field2_textBox.Size = new System.Drawing.Size(132, 22);
             this.field2_textBox.TabIndex = 5;
             // 
+            // dataGridView2
+            // 
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(561, 0);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowHeadersWidth = 51;
+            this.dataGridView2.RowTemplate.Height = 24;
+            this.dataGridView2.Size = new System.Drawing.Size(8, 8);
+            this.dataGridView2.TabIndex = 14;
+            // 
+            // reportPage
+            // 
+            this.reportPage.Controls.Add(this.label9);
+            this.reportPage.Controls.Add(this.button1);
+            this.reportPage.Controls.Add(this.label8);
+            this.reportPage.Controls.Add(this.weekReport_checkBox);
+            this.reportPage.Controls.Add(this.monthReport_checkBox);
+            this.reportPage.Controls.Add(this.dayReport_checkBox);
+            this.reportPage.Controls.Add(this.report_dateTimePicker);
+            this.reportPage.Location = new System.Drawing.Point(4, 25);
+            this.reportPage.Name = "reportPage";
+            this.reportPage.Size = new System.Drawing.Size(1089, 286);
+            this.reportPage.TabIndex = 3;
+            this.reportPage.Text = "Raporty";
+            this.reportPage.UseVisualStyleBackColor = true;
+            // 
+            // report_dateTimePicker
+            // 
+            this.report_dateTimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.report_dateTimePicker.Location = new System.Drawing.Point(19, 189);
+            this.report_dateTimePicker.Name = "report_dateTimePicker";
+            this.report_dateTimePicker.Size = new System.Drawing.Size(321, 28);
+            this.report_dateTimePicker.TabIndex = 0;
+            // 
+            // dayReport_checkBox
+            // 
+            this.dayReport_checkBox.AutoSize = true;
+            this.dayReport_checkBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.dayReport_checkBox.Location = new System.Drawing.Point(15, 76);
+            this.dayReport_checkBox.Name = "dayReport_checkBox";
+            this.dayReport_checkBox.Size = new System.Drawing.Size(86, 24);
+            this.dayReport_checkBox.TabIndex = 1;
+            this.dayReport_checkBox.Text = "Dniowy";
+            this.dayReport_checkBox.UseVisualStyleBackColor = true;
+            // 
+            // monthReport_checkBox
+            // 
+            this.monthReport_checkBox.AutoSize = true;
+            this.monthReport_checkBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.monthReport_checkBox.Location = new System.Drawing.Point(298, 76);
+            this.monthReport_checkBox.Name = "monthReport_checkBox";
+            this.monthReport_checkBox.Size = new System.Drawing.Size(115, 24);
+            this.monthReport_checkBox.TabIndex = 2;
+            this.monthReport_checkBox.Text = "Miesięczny";
+            this.monthReport_checkBox.UseVisualStyleBackColor = true;
+            // 
+            // weekReport_checkBox
+            // 
+            this.weekReport_checkBox.AutoSize = true;
+            this.weekReport_checkBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.weekReport_checkBox.Location = new System.Drawing.Point(144, 76);
+            this.weekReport_checkBox.Name = "weekReport_checkBox";
+            this.weekReport_checkBox.Size = new System.Drawing.Size(118, 24);
+            this.weekReport_checkBox.TabIndex = 3;
+            this.weekReport_checkBox.Text = "Tygodniowy";
+            this.weekReport_checkBox.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label8.Location = new System.Drawing.Point(14, 13);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(224, 29);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "Wybierz typ raportu:";
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button1.Location = new System.Drawing.Point(3, 244);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(1083, 39);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Generuj raport";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label9.Location = new System.Drawing.Point(14, 133);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(291, 29);
+            this.label9.TabIndex = 6;
+            this.label9.Text = "Wybierz początkową date:";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -655,6 +767,9 @@
             this.searchTabPage.PerformLayout();
             this.addTabPage.ResumeLayout(false);
             this.addTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.reportPage.ResumeLayout(false);
+            this.reportPage.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -714,5 +829,15 @@
         private System.Windows.Forms.TextBox idZakupu_textBox;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Button search_button;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.TabPage reportPage;
+        private System.Windows.Forms.DateTimePicker report_dateTimePicker;
+        private System.ComponentModel.BackgroundWorker backgroundWorker2;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox weekReport_checkBox;
+        private System.Windows.Forms.CheckBox monthReport_checkBox;
+        private System.Windows.Forms.CheckBox dayReport_checkBox;
     }
 }
