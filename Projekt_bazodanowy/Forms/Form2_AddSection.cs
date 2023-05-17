@@ -25,7 +25,7 @@ namespace Projekt_bazodanowy
             ISession session = sessionFactor.OpenSession();
 
             try { 
-                switch (comboBox1.Text.ToString())
+                switch (add_comboBox.Text.ToString())
                 {
                     case "Klienci":
                         using (session)
@@ -73,24 +73,24 @@ namespace Projekt_bazodanowy
             {
                 try
                 {
-                    switch (comboBox1.Text.ToString())
+                    switch (add_comboBox.Text.ToString())
                     {
                         case "Klienci":
                             using (session)
                             {
                                 var klient = new Klienci();
-                                if(textBox3.Text.ToString() == "")
+                                if(field3_textBox.Text.ToString() == "")
                                 {
-                                    klient.ImieNazwisko = textBox2.Text.ToString();
+                                    klient.ImieNazwisko = field2_textBox.Text.ToString();
                                     klient.NazwaFirmy = "";
                                 }
-                                if(textBox2.Text.ToString() == "")
+                                if(field2_textBox.Text.ToString() == "")
                                 {
 
                                     klient.ImieNazwisko = "";
-                                    klient.NazwaFirmy = textBox3.Text.ToString();
+                                    klient.NazwaFirmy = field3_textBox.Text.ToString();
                                 }
-                                klient.Email = textBox4.Text.ToString();
+                                klient.Email = field4_textBox.Text.ToString();
                                 session.Save(klient);
                                 session.Flush();
                                 session.Clear();
@@ -100,9 +100,9 @@ namespace Projekt_bazodanowy
                             using (session)
                             {
                                 var produkt = new Produkty();
-                                produkt.Nazwa = textBox2.Text.ToString();
-                                produkt.CenaAktualna = textBox3.Text.ToString();
-                                produkt.Dostepnosc = textBox4.Text.ToString();
+                                produkt.Nazwa = field2_textBox.Text.ToString();
+                                produkt.CenaAktualna = field3_textBox.Text.ToString();
+                                produkt.Dostepnosc = field4_textBox.Text.ToString();
                                 session.Save(produkt);
                                 session.Flush();
                                 session.Clear();
@@ -112,10 +112,10 @@ namespace Projekt_bazodanowy
                             using (session)
                             {
                                 var paragon = new Paragony();
-                                paragon.IDDokumentu = textBox1.Text.ToString();
-                                paragon.DataZakupu = DateTime.Parse(textBox2.Text.ToString());
-                                paragon.IDKlienta = textBox3.Text.ToString();
-                                paragon.KwotaCalkowita = textBox4.Text.ToString();
+                                paragon.IDDokumentu = field1_textBox.Text.ToString();
+                                paragon.DataZakupu = DateTime.Parse(field2_textBox.Text.ToString());
+                                paragon.IDKlienta = field3_textBox.Text.ToString();
+                                paragon.KwotaCalkowita = field4_textBox.Text.ToString();
                                 session.Save(paragon);
                                 session.Flush();
                                 session.Clear();
@@ -125,10 +125,10 @@ namespace Projekt_bazodanowy
                             using (session)
                             {
                                 var zakup = new Zakupy();
-                                zakup.IDDokumentu = textBox2.Text.ToString();
-                                zakup.IDProduktu = textBox3.Text.ToString();
-                                zakup.Ilosc = textBox4.Text.ToString();
-                                zakup.CenaZakupu = textBox5.Text.ToString();
+                                zakup.IDDokumentu = field2_textBox.Text.ToString();
+                                zakup.IDProduktu = field3_textBox.Text.ToString();
+                                zakup.Ilosc = field4_textBox.Text.ToString();
+                                zakup.CenaZakupu = field5_textBox.Text.ToString();
                                 session.Save(zakup);
                                 session.Flush();
                                 session.Clear();
@@ -146,35 +146,35 @@ namespace Projekt_bazodanowy
         
         private void resetTextBoxes(object sender)
         {
-            textBox1.Clear();
-            textBox2.Clear();
-            textBox3.Clear();
-            textBox4.Clear();
-            textBox5.Clear();
+            field1_textBox.Clear();
+            field2_textBox.Clear();
+            field3_textBox.Clear();
+            field4_textBox.Clear();
+            field5_textBox.Clear();
         }
 
         private void comboBox1_TextUpdate(object sender, EventArgs e)
         {
-            switch (comboBox1.Text.ToString())
+            switch (add_comboBox.Text.ToString())
             {
                 case "Klienci":
-                    textBox1.Enabled = false;
-                    textBox5.Enabled = false;
+                    field1_textBox.Enabled = false;
+                    field5_textBox.Enabled = false;
                     resetTextBoxes(sender);
                     break;
                 case "Produkty":
-                    textBox1.Enabled = false;
-                    textBox5.Enabled = false;
+                    field1_textBox.Enabled = false;
+                    field5_textBox.Enabled = false;
                     resetTextBoxes(sender);
                     break;
                 case "Paragony":
-                    textBox1.Enabled = true;
-                    textBox5.Enabled = false;
+                    field1_textBox.Enabled = true;
+                    field5_textBox.Enabled = false;
                     resetTextBoxes(sender);
                     break;
                 case "Zakupy":
-                    textBox1.Enabled = false;
-                    textBox5.Enabled = true;
+                    field1_textBox.Enabled = false;
+                    field5_textBox.Enabled = true;
                     resetTextBoxes(sender);
                     break;
             }

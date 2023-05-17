@@ -34,7 +34,7 @@ namespace Projekt_bazodanowy
             dataGridView1.MultiSelect = true;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-            comboBox1.SelectedIndex = 0;
+            add_comboBox.SelectedIndex = 0;
             search_comboBox.SelectedIndex = 0;
 
             idKlienta_textBox.Enabled = false;
