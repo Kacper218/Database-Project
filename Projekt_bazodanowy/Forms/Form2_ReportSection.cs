@@ -60,7 +60,7 @@ namespace Projekt_bazodanowy
             return selectedPeriod;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void report_button_Click(object sender, EventArgs e)
         {
             DateTime selectedDate;
             selectedDate = report_dateTimePicker.Value;

@@ -82,7 +82,7 @@
             this.field2_textBox = new System.Windows.Forms.TextBox();
             this.reportPage = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.report_button = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.weekReport_checkBox = new System.Windows.Forms.CheckBox();
             this.monthReport_checkBox = new System.Windows.Forms.CheckBox();
@@ -650,7 +650,7 @@
             // reportPage
             // 
             this.reportPage.Controls.Add(this.label9);
-            this.reportPage.Controls.Add(this.button1);
+            this.reportPage.Controls.Add(this.report_button);
             this.reportPage.Controls.Add(this.label8);
             this.reportPage.Controls.Add(this.weekReport_checkBox);
             this.reportPage.Controls.Add(this.monthReport_checkBox);
@@ -673,16 +673,16 @@
             this.label9.TabIndex = 6;
             this.label9.Text = "Wybierz początkową date:";
             // 
-            // button1
+            // report_button
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button1.Location = new System.Drawing.Point(3, 244);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(1083, 39);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Generuj raport";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.report_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.report_button.Location = new System.Drawing.Point(3, 244);
+            this.report_button.Name = "report_button";
+            this.report_button.Size = new System.Drawing.Size(1083, 39);
+            this.report_button.TabIndex = 5;
+            this.report_button.Text = "Generuj raport";
+            this.report_button.UseVisualStyleBackColor = true;
+            this.report_button.Click += new System.EventHandler(this.button1_Click);
             // 
             // label8
             // 
@@ -704,6 +704,7 @@
             this.weekReport_checkBox.TabIndex = 3;
             this.weekReport_checkBox.Text = "Tygodniowy";
             this.weekReport_checkBox.UseVisualStyleBackColor = true;
+            this.weekReport_checkBox.CheckedChanged += new System.EventHandler(this.checkBoxesChanged);
             // 
             // monthReport_checkBox
             // 
@@ -715,6 +716,7 @@
             this.monthReport_checkBox.TabIndex = 2;
             this.monthReport_checkBox.Text = "Miesięczny";
             this.monthReport_checkBox.UseVisualStyleBackColor = true;
+            this.monthReport_checkBox.CheckedChanged += new System.EventHandler(this.checkBoxesChanged);
             // 
             // dayReport_checkBox
             // 
@@ -726,6 +728,7 @@
             this.dayReport_checkBox.TabIndex = 1;
             this.dayReport_checkBox.Text = "Dniowy";
             this.dayReport_checkBox.UseVisualStyleBackColor = true;
+            this.dayReport_checkBox.CheckedChanged += new System.EventHandler(this.checkBoxesChanged);
             // 
             // report_dateTimePicker
             // 
@@ -819,7 +822,7 @@
         private System.Windows.Forms.DateTimePicker report_dateTimePicker;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button report_button;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox weekReport_checkBox;
         private System.Windows.Forms.CheckBox monthReport_checkBox;
