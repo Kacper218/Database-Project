@@ -15,6 +15,10 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
+using NHibernate.Linq.Functions;
 
 namespace Projekt_bazodanowy
 {
@@ -23,7 +27,8 @@ namespace Projekt_bazodanowy
     {
         Day,
         Week,
-        Month
+        Month,
+        Year
     }
 
 
@@ -60,6 +65,63 @@ namespace Projekt_bazodanowy
             return selectedPeriod;
         }
 
+        private string getFolderPath()
+        {
+            string path="";
+            using (var fbd = new FolderBrowserDialog())
+            {
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                {
+                    return fbd.SelectedPath;
+                }
+            }
+            return path;
+        }
+
+        public void GeneratePdfReport(List<Paragony> filteredParagony, Dictionary<int, int> topSellingProducts, ISession session)
+        {
+            // Create the document and specify the file path
+            Document document = new Document();
+            string pathToSave = getFolderPath();
+            if (pathToSave == "") throw new Exception("Nie podano ścieżki do folderu");
+            string filePath = pathToSave + "\\sales_report_" + DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".pdf";
+            PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(filePath, FileMode.Create));
+
+            // Open the document for writing
+            document.Open();
+
+            // Add a title to the report
+            Paragraph title = new Paragraph("Sales Report");
+            title.Alignment = Element.ALIGN_CENTER;
+            document.Add(title);
+
+            // Add the filtered paragony data to the report
+            foreach (var paragon in filteredParagony)
+            {
+                Paragraph paragonData = new Paragraph($"Paragon ID: {paragon.IDDokumentu}, Date: {paragon.DataZakupu}, Customer ID: {paragon.IDKlienta}, Total Amount: {paragon.KwotaCalkowita}");
+                document.Add(paragonData);
+            }
+
+            // Add the top selling products data to the report
+            foreach (var kv in topSellingProducts)
+            {
+                int productId = kv.Key;
+                int quantitySold = kv.Value;
+
+                // Retrieve the product name from the database using the productId
+                var product = session.Get<Produkty>(productId.ToString());
+                string productName = product?.Nazwa;
+
+                Paragraph productData = new Paragraph($"Product: {productName}, Quantity Sold: {quantitySold}");
+                document.Add(productData);
+            }
+
+            // Close the document
+            document.Close();
+        }
+
         private void report_button_Click(object sender, EventArgs e)
         {
             DateTime selectedDate;
@@ -70,25 +132,22 @@ namespace Projekt_bazodanowy
             var paragony = session.Query<Paragony>().ToList();
             var zakupy = session.Query<Zakupy>().ToList();
 
+
             Period selectedPeriod = whichPeriod();
-            
 
             // Process sales for the selected period
             List<Paragony> filteredParagony;
             switch (selectedPeriod)
             {
                 case Period.Day:
-                    MessageBox.Show($"przypadek dnia");
                     filteredParagony = paragony.Where(p => p.DataZakupu.Date == selectedDate.Date).ToList();
                     break;
                 case Period.Week:
-                    MessageBox.Show($"przypadek tygodnia");
                     var startDateOfWeek = selectedDate.AddDays(-(int)selectedDate.DayOfWeek);
                     var endDateOfWeek = startDateOfWeek.AddDays(6);
                     filteredParagony = paragony.Where(p => p.DataZakupu.Date >= startDateOfWeek.Date && p.DataZakupu.Date <= endDateOfWeek.Date).ToList();
                     break;
                 case Period.Month:
-                    MessageBox.Show($"przypadek miesiaca");
                     filteredParagony = paragony.Where(p => p.DataZakupu.Month == selectedDate.Month && p.DataZakupu.Year == selectedDate.Year).ToList();
                     //filteredParagony = paragony.Where(p => p.DataZakupu.Year == selectedDate.Year).ToList();
                     break;
@@ -119,16 +178,11 @@ namespace Projekt_bazodanowy
                 }
             }
 
-            var topSellingProducts = productSales.OrderByDescending(kv => kv.Value).Take(3).ToList();
-
-            dataGridView1.DataSource = productSales;
-
-            /*
-            foreach (var product in topSellingProducts)
-            {
-                MessageBox.Show($"Product ID: {product.Key}, Quantity Sold: {product.Value}");
+            try { 
+                GeneratePdfReport(filteredParagony, productSales,session);
+            } catch (Exception ex) { 
+                MessageBox.Show("Wystapil bład:\n" + ex.Message,"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            */
         }
     }
 }

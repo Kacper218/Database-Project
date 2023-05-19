@@ -90,6 +90,7 @@
             this.report_dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -97,6 +98,7 @@
             this.searchTabPage.SuspendLayout();
             this.addTabPage.SuspendLayout();
             this.reportPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // add_Button
@@ -738,6 +740,11 @@
             this.report_dateTimePicker.Size = new System.Drawing.Size(321, 28);
             this.report_dateTimePicker.TabIndex = 0;
             // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -759,6 +766,7 @@
             this.addTabPage.PerformLayout();
             this.reportPage.ResumeLayout(false);
             this.reportPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -827,5 +835,6 @@
         private System.Windows.Forms.CheckBox weekReport_checkBox;
         private System.Windows.Forms.CheckBox monthReport_checkBox;
         private System.Windows.Forms.CheckBox dayReport_checkBox;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
     }
 }
