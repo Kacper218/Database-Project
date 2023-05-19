@@ -682,7 +682,7 @@
             this.report_button.TabIndex = 5;
             this.report_button.Text = "Generuj raport";
             this.report_button.UseVisualStyleBackColor = true;
-            this.report_button.Click += new System.EventHandler(this.button1_Click);
+            this.report_button.Click += new System.EventHandler(this.report_button_Click);
             // 
             // label8
             // 
