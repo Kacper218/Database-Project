@@ -25,33 +25,72 @@ namespace Projekt_bazodanowy
         Week,
         Month
     }
+
+
     public partial class Form2 : Form
     {
+        private void checkBoxesChanged(object sender, EventArgs e)
+        {
+            var clickedCheckbox = (CheckBox)sender;
+
+            if (clickedCheckbox.Name != dayReport_checkBox.Name)
+            {
+                dayReport_checkBox.Checked = false;
+            }
+
+            if (clickedCheckbox.Name != weekReport_checkBox.Name)
+            {
+                weekReport_checkBox.Checked = false;
+            }
+
+            if (clickedCheckbox.Name != monthReport_checkBox.Name)
+            {
+                monthReport_checkBox.Checked = false;
+            }
+        }
+
+        private Period whichPeriod()
+        {
+            Period selectedPeriod = Period.Week;
+
+            if (dayReport_checkBox.Checked) selectedPeriod = Period.Day;
+            else if (weekReport_checkBox.Checked) selectedPeriod = Period.Week;
+            else if (monthReport_checkBox.Checked) selectedPeriod = Period.Month;
+
+            return selectedPeriod;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             DateTime selectedDate;
             selectedDate = report_dateTimePicker.Value;
-            Period selectedPeriod = Period.Day;
             DateTime startDate = DateTime.UtcNow, endDate = DateTime.UtcNow;
             ISession session = sessionFactor.OpenSession();
             // Retrieve sales data from the database
             var paragony = session.Query<Paragony>().ToList();
             var zakupy = session.Query<Zakupy>().ToList();
 
+            Period selectedPeriod = whichPeriod();
+            
+
             // Process sales for the selected period
             List<Paragony> filteredParagony;
             switch (selectedPeriod)
             {
                 case Period.Day:
+                    MessageBox.Show($"przypadek dnia");
                     filteredParagony = paragony.Where(p => p.DataZakupu.Date == selectedDate.Date).ToList();
                     break;
                 case Period.Week:
+                    MessageBox.Show($"przypadek tygodnia");
                     var startDateOfWeek = selectedDate.AddDays(-(int)selectedDate.DayOfWeek);
                     var endDateOfWeek = startDateOfWeek.AddDays(6);
                     filteredParagony = paragony.Where(p => p.DataZakupu.Date >= startDateOfWeek.Date && p.DataZakupu.Date <= endDateOfWeek.Date).ToList();
                     break;
                 case Period.Month:
+                    MessageBox.Show($"przypadek miesiaca");
                     filteredParagony = paragony.Where(p => p.DataZakupu.Month == selectedDate.Month && p.DataZakupu.Year == selectedDate.Year).ToList();
+                    //filteredParagony = paragony.Where(p => p.DataZakupu.Year == selectedDate.Year).ToList();
                     break;
                 default:
                     filteredParagony = paragony;
@@ -83,6 +122,13 @@ namespace Projekt_bazodanowy
             var topSellingProducts = productSales.OrderByDescending(kv => kv.Value).Take(3).ToList();
 
             dataGridView1.DataSource = productSales;
+
+            /*
+            foreach (var product in topSellingProducts)
+            {
+                MessageBox.Show($"Product ID: {product.Key}, Quantity Sold: {product.Value}");
+            }
+            */
         }
     }
 }
