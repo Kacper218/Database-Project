@@ -91,6 +91,7 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.yearReport_checkBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -651,6 +652,7 @@
             // 
             // reportPage
             // 
+            this.reportPage.Controls.Add(this.yearReport_checkBox);
             this.reportPage.Controls.Add(this.label9);
             this.reportPage.Controls.Add(this.report_button);
             this.reportPage.Controls.Add(this.label8);
@@ -745,6 +747,17 @@
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
             // 
+            // yearReport_checkBox
+            // 
+            this.yearReport_checkBox.AutoSize = true;
+            this.yearReport_checkBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.yearReport_checkBox.Location = new System.Drawing.Point(438, 76);
+            this.yearReport_checkBox.Name = "yearReport_checkBox";
+            this.yearReport_checkBox.Size = new System.Drawing.Size(87, 24);
+            this.yearReport_checkBox.TabIndex = 7;
+            this.yearReport_checkBox.Text = "Roczny";
+            this.yearReport_checkBox.UseVisualStyleBackColor = true;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -836,5 +849,6 @@
         private System.Windows.Forms.CheckBox monthReport_checkBox;
         private System.Windows.Forms.CheckBox dayReport_checkBox;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
+        private System.Windows.Forms.CheckBox yearReport_checkBox;
     }
 }

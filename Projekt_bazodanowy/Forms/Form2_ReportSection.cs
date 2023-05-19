@@ -52,6 +52,10 @@ namespace Projekt_bazodanowy
             {
                 monthReport_checkBox.Checked = false;
             }
+            if (clickedCheckbox.Name != yearReport_checkBox.Name)
+            {
+                yearReport_checkBox.Checked = false;
+            }
         }
 
         private Period whichPeriod()
@@ -61,6 +65,7 @@ namespace Projekt_bazodanowy
             if (dayReport_checkBox.Checked) selectedPeriod = Period.Day;
             else if (weekReport_checkBox.Checked) selectedPeriod = Period.Week;
             else if (monthReport_checkBox.Checked) selectedPeriod = Period.Month;
+            else if (yearReport_checkBox.Checked) selectedPeriod = Period.Year;
 
             return selectedPeriod;
         }
@@ -80,7 +85,7 @@ namespace Projekt_bazodanowy
             return path;
         }
 
-        public void GeneratePdfReport(List<Paragony> filteredParagony, Dictionary<int, int> topSellingProducts, ISession session)
+        public void GeneratePdfReport(List<Paragony> filteredParagony, Dictionary<int, int> productSales, ISession session)
         {
             // Create the document and specify the file path
             Document document = new Document();
@@ -105,7 +110,7 @@ namespace Projekt_bazodanowy
             }
 
             // Add the top selling products data to the report
-            foreach (var kv in topSellingProducts)
+            foreach (var kv in productSales)
             {
                 int productId = kv.Key;
                 int quantitySold = kv.Value;
@@ -150,6 +155,9 @@ namespace Projekt_bazodanowy
                 case Period.Month:
                     filteredParagony = paragony.Where(p => p.DataZakupu.Month == selectedDate.Month && p.DataZakupu.Year == selectedDate.Year).ToList();
                     //filteredParagony = paragony.Where(p => p.DataZakupu.Year == selectedDate.Year).ToList();
+                    break;
+                case Period.Year:
+                    filteredParagony = paragony.Where(p => p.DataZakupu.Year == selectedDate.Year).ToList();
                     break;
                 default:
                     filteredParagony = paragony;
