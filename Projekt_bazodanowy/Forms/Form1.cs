@@ -28,51 +28,44 @@ namespace Projekt_bazodanowy
             instance.CenterToScreen();
         }
 
-        public bool connectToDataSource(string connStr)
+        public void connectToDataSource(string connStr)
         {
-            try
+            var config = new Configuration();
+            config.DataBaseIntegration(d =>
             {
-                var config = new Configuration();
-                config.DataBaseIntegration(d =>
-                {
-                    d.ConnectionString = connStr;
-                    d.Dialect<MsSql2012Dialect>();
-                    d.Driver<SqlClientDriver>();
-                });
-                config.AddAssembly(Assembly.GetExecutingAssembly());
+                d.ConnectionString = connStr;
+                d.Dialect<MsSql2012Dialect>();
+                d.Driver<SqlClientDriver>();
+            });
+            config.AddAssembly(Assembly.GetExecutingAssembly());
 
-                var session= config.BuildSessionFactory();
-                sessionFactor = session;
-            }
-            catch (Exception ex) {
-                MessageBox.Show("Wystapil bład podczas próby połączenia się z baza:\n" + ex.Message,"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            return true;
+            var session= config.BuildSessionFactory();
+            sessionFactor = session;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(passwordTextBox.Text.Length > 0 && loginTextBox.Text.Length > 0)
+            try
             {
                 string user = loginTextBox.Text.ToString();
                 string password = passwordTextBox.Text.ToString();
+                if(string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+                {
+                    throw new Exception("Nie podano loginu lub hasla!");
+                }
                 // change databaseName to yours data base name
-                string databaseName = "DESKTOP-9QOBELF\\SQLEXPRESS";
+                string databaseName = "DESKTOP-9QOBELFasd\\SQLEXPRESS";
 
                 string connStr = "Data Source=" + databaseName + "; Initial Catalog=master; User Id=" + user + "; Password=" + password;
-                
-                if(connectToDataSource(connStr))
-                {
-                    Form2 form2 = new Form2(sessionFactor);
-                    this.Hide();
-                    form2.Show();
-                    form2.BringToFront();
-                }
 
-            } else
-            {
-                MessageBox.Show("Nie podano loginu i hasla!", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                connectToDataSource(connStr);
+                Form2 form2 = new Form2(sessionFactor);
+                this.Hide();
+                form2.Show();
+                form2.BringToFront();
+
+            } catch (Exception ex) { 
+                MessageBox.Show("Wystapił nastepujący błąd: \n" + ex.Message,"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
