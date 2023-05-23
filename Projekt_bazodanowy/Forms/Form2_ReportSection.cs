@@ -19,7 +19,6 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
 using NHibernate.Linq.Functions;
-using Font = iTextSharp.text.Font;
 
 namespace Projekt_bazodanowy
 {
@@ -162,10 +161,14 @@ namespace Projekt_bazodanowy
                     filteredParagony = paragony.Where(p => p.DataZakupu.Date >= startDateOfWeek.Date && p.DataZakupu.Date <= endDateOfWeek.Date).ToList();
                     break;
                 case Period.Month:
-                    filteredParagony = paragony.Where(p => p.DataZakupu.Month == selectedDate.Month && p.DataZakupu.Year == selectedDate.Year).ToList();
+                    var startDateOfMonth = selectedDate.AddDays(-(int)selectedDate.DayOfWeek);
+                    var endDateOfMonth = startDateOfMonth.AddDays(30);
+                    filteredParagony = paragony.Where(p => p.DataZakupu.Date >= startDateOfMonth.Date && p.DataZakupu.Date <= endDateOfMonth.Date).ToList();
                     break;
                 case Period.Year:
-                    filteredParagony = paragony.Where(p => p.DataZakupu.Year == selectedDate.Year).ToList();
+                    var startDateOfYear = selectedDate.AddDays(-(int)selectedDate.DayOfWeek);
+                    var endDateOfYear = startDateOfYear.AddDays(365);
+                    filteredParagony = paragony.Where(p => p.DataZakupu.Date >= startDateOfYear.Date && p.DataZakupu.Date <= endDateOfYear.Date).ToList();
                     break;
                 default:
                     filteredParagony = paragony;
