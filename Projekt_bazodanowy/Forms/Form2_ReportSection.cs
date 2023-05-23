@@ -154,7 +154,6 @@ namespace Projekt_bazodanowy
                     break;
                 case Period.Month:
                     filteredParagony = paragony.Where(p => p.DataZakupu.Month == selectedDate.Month && p.DataZakupu.Year == selectedDate.Year).ToList();
-                    //filteredParagony = paragony.Where(p => p.DataZakupu.Year == selectedDate.Year).ToList();
                     break;
                 case Period.Year:
                     filteredParagony = paragony.Where(p => p.DataZakupu.Year == selectedDate.Year).ToList();
@@ -164,32 +163,36 @@ namespace Projekt_bazodanowy
                     break;
             }
 
-            // Generate sales report
-            int numberOfReceipts = filteredParagony.Count;
-
-            var productSales = new Dictionary<int, int>(); // ProductID -> TotalQuantitySold
-            foreach (var paragon in filteredParagony)
-            {
-                foreach (var zakup in zakupy)
+            try { 
+                // Generate sales report
+                int numberOfReceipts = filteredParagony.Count;
+                if(numberOfReceipts == 0)
                 {
-                    if (zakup.IDDokumentu == paragon.IDDokumentu)
+                    throw new Exception("Raport z tego okresu nie posiada żadnych pozycji.");
+                }
+
+                var productSales = new Dictionary<int, int>(); // ProductID -> TotalQuantitySold
+                foreach (var paragon in filteredParagony)
+                {
+                    foreach (var zakup in zakupy)
                     {
-                        if (productSales.ContainsKey(int.Parse(zakup.IDProduktu)))
+                        if (zakup.IDDokumentu == paragon.IDDokumentu)
                         {
-                            productSales[int.Parse(zakup.IDProduktu)] += int.Parse(zakup.Ilosc);
-                        }
-                        else
-                        {
-                            productSales[int.Parse(zakup.IDProduktu)] = int.Parse(zakup.Ilosc);
+                            if (productSales.ContainsKey(int.Parse(zakup.IDProduktu)))
+                            {
+                                productSales[int.Parse(zakup.IDProduktu)] += int.Parse(zakup.Ilosc);
+                            }
+                            else
+                            {
+                                productSales[int.Parse(zakup.IDProduktu)] = int.Parse(zakup.Ilosc);
+                            }
                         }
                     }
                 }
-            }
 
-            try { 
                 GeneratePdfReport(filteredParagony, productSales,session);
             } catch (Exception ex) { 
-                MessageBox.Show("Wystapil bład:\n" + ex.Message,"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Wystapil bład podczas generowania raportu:\n" + ex.Message,"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
