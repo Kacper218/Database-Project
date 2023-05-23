@@ -31,15 +31,20 @@ namespace Projekt_bazodanowy
         public void connectToDataSource(string connStr)
         {
             var config = new Configuration();
+
+            // Configure the database integration
             config.DataBaseIntegration(d =>
             {
                 d.ConnectionString = connStr;
                 d.Dialect<MsSql2012Dialect>();
                 d.Driver<SqlClientDriver>();
             });
+
+            // Add the assembly
             config.AddAssembly(Assembly.GetExecutingAssembly());
 
-            var session= config.BuildSessionFactory();
+            // Build the session factory
+            var session = config.BuildSessionFactory();
             sessionFactor = session;
         }
 
@@ -49,23 +54,30 @@ namespace Projekt_bazodanowy
             {
                 string user = loginTextBox.Text.ToString();
                 string password = passwordTextBox.Text.ToString();
-                if(string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
+
+                if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(password))
                 {
                     throw new Exception("Nie podano loginu lub hasla!");
                 }
-                // change databaseName to yours data base name
-                string databaseName = "DESKTOP-9QOBELFasd\\SQLEXPRESS";
+
+                // Change databaseName to your database name
+                string databaseName = "DESKTOP-9QOBELF\\SQLEXPRESS";
 
                 string connStr = "Data Source=" + databaseName + "; Initial Catalog=master; User Id=" + user + "; Password=" + password;
 
+                // Connect to the data source
                 connectToDataSource(connStr);
+
+                // Create an instance of Form2 and show it
                 Form2 form2 = new Form2(sessionFactor);
                 this.Hide();
                 form2.Show();
                 form2.BringToFront();
-
-            } catch (Exception ex) { 
-                MessageBox.Show("Wystapił nastepujący błąd: \n" + ex.Message,"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                // Display error message
+                MessageBox.Show("Wystapił nastepujący błąd: \n" + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -73,6 +85,7 @@ namespace Projekt_bazodanowy
         {
             passwordTextBox.PasswordChar = '*';
         }
+
         private void loginTextBox_Click(object sender, EventArgs e)
         {
             loginTextBox.Clear();
@@ -89,3 +102,4 @@ namespace Projekt_bazodanowy
         }
     }
 }
+
