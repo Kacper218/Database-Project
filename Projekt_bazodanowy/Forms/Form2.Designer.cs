@@ -152,8 +152,7 @@
             this.add_comboBox.Name = "add_comboBox";
             this.add_comboBox.Size = new System.Drawing.Size(140, 24);
             this.add_comboBox.TabIndex = 3;
-            this.add_comboBox.TextUpdate += new System.EventHandler(this.comboBox1_TextUpdate);
-            this.add_comboBox.TextChanged += new System.EventHandler(this.comboBox1_TextUpdate);
+            this.add_comboBox.TextChanged += new System.EventHandler(this.add_comboBox_TextUpdate);
             // 
             // groupBox1
             // 
