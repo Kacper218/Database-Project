@@ -22,8 +22,10 @@ namespace Projekt_bazodanowy
 {
     public partial class Form2 : Form
     { 
+        // Reset all search text boxes and disable the,
         private void resetSearchTextBoxes ()
         {
+            // Clear the text in all search text boxes
             idKlienta_textBox.Clear();
             imieNazwisko_textBox.Clear();
             nazwaFirmy_textBox.Clear();
@@ -42,6 +44,7 @@ namespace Projekt_bazodanowy
             ilosc_textBox.Clear();
             cenaZakupu_textBox.Clear();
 
+            // Disable all search text boxes
             idKlienta_textBox.Enabled = false;
             imieNazwisko_textBox.Enabled = false;
             nazwaFirmy_textBox.Enabled = false;
@@ -60,8 +63,10 @@ namespace Projekt_bazodanowy
             ilosc_textBox.Enabled = false;
             cenaZakupu_textBox.Enabled = false;
         }
+        // Handle the event when the search combo boc text changes
         private void search_comboBox_TextChanged(object sender, EventArgs e)
         {
+            // Reset all search text boxes and enable the relevant ones based od the selected search option
             switch (search_comboBox.Text.ToString())
             {
                 case "Klienci":
@@ -95,14 +100,18 @@ namespace Projekt_bazodanowy
                     break;
             }
         }
+
+        // Handle the event when a cell is clicked in the data grid view, used to handle deleting a row funtionality
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            // Open a session for database operations
             ISession session = sessionFactor.OpenSession();
             try
             {
                 switch (search_comboBox.Text.ToString())
                 {
                     case "Klienci":
+                        // Check if the delete button column is clicked
                         if (e.ColumnIndex == 4)
                         {
                             using (session)
@@ -136,6 +145,7 @@ namespace Projekt_bazodanowy
                         }
                         break;
                     case "Paragony":
+                        // Check if the delete button column is clicked
                         if (e.ColumnIndex == 4)
                         {
                             using (session)
@@ -169,6 +179,7 @@ namespace Projekt_bazodanowy
                         }
                         break;
                     case "Produkty":
+                        // Check if the delete button column is clicked
                         if (e.ColumnIndex == 4)
                         {
                             using (session)
@@ -202,6 +213,7 @@ namespace Projekt_bazodanowy
                         }
                         break;
                     case "Zakupy":
+                        // Check if the delete button column is clicked
                         if (e.ColumnIndex == 5)
                         {
                             using (session)
@@ -229,6 +241,7 @@ namespace Projekt_bazodanowy
                 MessageBox.Show("Wystapił nastepujący błąd: \n" + ex.Message,"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        // Adds a delete button column to the DataGridView
         private void deleteRowButtonAdd()
         {
             DataGridViewButtonColumn delButton = new DataGridViewButtonColumn();
@@ -240,8 +253,8 @@ namespace Projekt_bazodanowy
         }
         private void search_button_Click(object sender, EventArgs e)
         {
-            dataGridView1.Columns.Clear();
-            dataGridView1.DataSource = null;
+            dataGridView1.Columns.Clear(); // Clears existing columns in the DataGridView
+            dataGridView1.DataSource = null; // Clears the data source of the DataGridView
             ISession session = sessionFactor.OpenSession();
             try
             {
@@ -252,6 +265,7 @@ namespace Projekt_bazodanowy
                             using (session)
                             {
                                 var query = session.QueryOver<Klienci>();
+                                // Perform search based on provided criteria
                                 if (!string.IsNullOrEmpty(idKlienta_textBox.Text))
                                 {
                                     query = query.Where(c => c.IDKlienta == idKlienta_textBox.Text);
@@ -296,6 +310,7 @@ namespace Projekt_bazodanowy
                         using (session)
                         {
                             var query = session.QueryOver<Paragony>();
+                            // Perform search based on provided criteria
                             if (!(string.IsNullOrEmpty(idDokumentu_textBox.Text)) ||
                                 !(string.IsNullOrEmpty(dataZakupu_textBox.Text)) ||
                                 !(string.IsNullOrEmpty(idKlienta_textBox.Text)) ||
@@ -332,6 +347,7 @@ namespace Projekt_bazodanowy
                         using (session)
                         {
                             var query = session.QueryOver<Produkty>();
+                            // Perform search based on provided criteria
                             if (!string.IsNullOrEmpty(idProduktu_textBox.Text))
                             {
                                 query = query.Where(c => c.IDProduktu == idProduktu_textBox.Text);
@@ -358,6 +374,7 @@ namespace Projekt_bazodanowy
                         using (session)
                         {
                             var query = session.QueryOver<Zakupy>();
+                            // Perform search based on provided criteria
 
                             if (!string.IsNullOrEmpty(idZakupu_textBox.Text))
                             {
@@ -390,7 +407,7 @@ namespace Projekt_bazodanowy
                         }
                         break;
                 }
-                deleteRowButtonAdd(); 
+                deleteRowButtonAdd();  // Adds the delete button column to the DataGridView
             } catch (Exception ex) { 
                 MessageBox.Show("Wystapił nastepujący błąd: \n" + ex.Message,"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
