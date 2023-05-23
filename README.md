@@ -42,10 +42,6 @@ The application is developed using the following technologies:
 
 - **.NET Framework**: The development framework providing the environment for the application.
 
-## User Interface Design
-
-The user interface of the application incorporates elements for searching items with customizable parameters and search filters. It also allows for editing the contents of tables, such as adding new customers, removing outdated products, and editing prices and receipts.
-
 ## Installation and Usage
 
 To use the application locally, follow these steps:
@@ -54,6 +50,12 @@ To use the application locally, follow these steps:
 2. Open the solution file (`Projekt_bazodanowy.sln`) in Visual Studio.
 3. Build the solution to restore dependencies and compile the application.
 4. Run the application and start exploring the features through the intuitive graphical user interface.
+
+## User Interface Design
+
+The user interface of the application incorporates elements for searching items with customizable parameters and search filters. It also allows for editing the contents of tables, such as adding new customers, removing outdated products, and editing prices and receipts.
+
+Here are some screenshots that demonstrate the user interface of our application:
 
 ![Login Screen](docs/login_screen.png) <br/>
 *Figure 1: The login screen of the application.*
@@ -69,4 +71,3 @@ To use the application locally, follow these steps:
 ## Acknowledgements
 
 The project was developed by Kacper Przybyszewski and Karol Porożyński as a database project for a shop application.
-.
