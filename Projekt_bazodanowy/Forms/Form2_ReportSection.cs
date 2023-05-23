@@ -34,8 +34,10 @@ namespace Projekt_bazodanowy
 
     public partial class Form2 : Form
     {
+        // Event handler for when any checkbox is clicked
         private void checkBoxesChanged(object sender, EventArgs e)
         {
+            // Uncheck other checkboxes when a checkbox is clicked
             var clickedCheckbox = (CheckBox)sender;
 
             if (clickedCheckbox.Name != dayReport_checkBox.Name)
@@ -58,6 +60,7 @@ namespace Projekt_bazodanowy
             }
         }
 
+        // Determine the selected period based on the checked checkbox
         private Period whichPeriod()
         {
             Period selectedPeriod = Period.Week;
@@ -70,6 +73,7 @@ namespace Projekt_bazodanowy
             return selectedPeriod;
         }
 
+        // Open a folder browser dialog and return the selected folder path
         private string getFolderPath()
         {
             string path="";
@@ -85,6 +89,7 @@ namespace Projekt_bazodanowy
             return path;
         }
 
+        // Generate raport to pdf file
         public void GeneratePdfReport(List<Paragony> filteredParagony, Dictionary<int, int> productSales, ISession session)
         {
             // Create the document and specify the file path
@@ -135,6 +140,7 @@ namespace Projekt_bazodanowy
             document.Close();
         }
 
+        // Handle click event on report button
         private void report_button_Click(object sender, EventArgs e)
         {
             DateTime selectedDate;
@@ -152,6 +158,7 @@ namespace Projekt_bazodanowy
             List<Paragony> filteredParagony;
             switch (selectedPeriod)
             {
+                // Based on selected period filter Paragony table 
                 case Period.Day:
                     filteredParagony = paragony.Where(p => p.DataZakupu.Date == selectedDate.Date).ToList();
                     break;
@@ -176,13 +183,15 @@ namespace Projekt_bazodanowy
             }
 
             try { 
-                // Generate sales report
+
+                // Check for the case of an empty report
                 int numberOfReceipts = filteredParagony.Count;
                 if(numberOfReceipts == 0)
                 {
                     throw new Exception("Raport z tego okresu nie posiada żadnych pozycji.");
                 }
 
+                // Prepare data for report genereting
                 var productSales = new Dictionary<int, int>(); // ProductID -> TotalQuantitySold
                 foreach (var paragon in filteredParagony)
                 {
@@ -202,7 +211,8 @@ namespace Projekt_bazodanowy
                     }
                 }
 
-                GeneratePdfReport(filteredParagony, productSales,session);
+            // Generate sales report
+            GeneratePdfReport(filteredParagony, productSales,session);
             } catch (Exception ex) { 
                 MessageBox.Show("Wystapil bład podczas generowania raportu:\n" + ex.Message,"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
