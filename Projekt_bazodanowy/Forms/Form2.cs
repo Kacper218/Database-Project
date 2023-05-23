@@ -30,6 +30,7 @@ namespace Projekt_bazodanowy
             instance = this;
             instance.CenterToScreen();
             this.sessionFactor = sessionFactor;
+            this.Text = "Eksplorator Bazy Danych";
 
             dataGridView1.MultiSelect = true;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;

@@ -26,6 +26,7 @@ namespace Projekt_bazodanowy
             InitializeComponent();
             instance = this;
             instance.CenterToScreen();
+            this.Text = "Logowanie";
         }
 
         public void connectToDataSource(string connStr)
