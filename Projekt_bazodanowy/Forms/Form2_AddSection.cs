@@ -25,6 +25,8 @@ namespace Projekt_bazodanowy
         {
             // Open a session for database operations
             ISession session = sessionFactor.OpenSession();
+            dataGridView1.Columns.Clear(); // Clears existing columns in the DataGridView
+            dataGridView1.DataSource = null; // Clears the data source of the DataGridView
 
             try
             {
