@@ -60,9 +60,8 @@ namespace Projekt_bazodanowy
                             break;
                         }
                 }
-            } catch (Exception ex)
-            {
-                    MessageBox.Show("Wystapił nastepujący błąd: \n" + ex.ToString(),"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } catch (Exception ex) { 
+                MessageBox.Show("Wystapił bład podczas wczytywania podglądu:\n" + ex.Message,"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
     }
 
@@ -79,6 +78,17 @@ namespace Projekt_bazodanowy
                             using (session)
                             {
                                 var klient = new Klienci();
+
+                                if(!(field2_textBox.Text.ToString() == "") && !(field3_textBox.Text.ToString() == ""))
+                                {
+                                    throw new Exception("Uzupelniono za duzo pól: Imię Nazwisko oraz Nazwa Firmy");
+                                }    
+
+                                if((field2_textBox.Text.ToString() == "") && (field3_textBox.Text.ToString() == ""))
+                                {
+                                    throw new Exception("Nie podano wystarczającej ilości informacji.");
+                                }    
+
                                 if(field3_textBox.Text.ToString() == "")
                                 {
                                     klient.ImieNazwisko = field2_textBox.Text.ToString();
@@ -90,6 +100,7 @@ namespace Projekt_bazodanowy
                                     klient.ImieNazwisko = "";
                                     klient.NazwaFirmy = field3_textBox.Text.ToString();
                                 }
+
                                 klient.Email = field4_textBox.Text.ToString();
                                 session.Save(klient);
                                 session.Flush();
@@ -136,12 +147,20 @@ namespace Projekt_bazodanowy
                             }
                     }
                 }
+
+                catch (FormatException)
+                {
+                    MessageBox.Show("Podano zły format daty","Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (NHibernate.Exceptions.GenericADOException)
+                {
+                    MessageBox.Show("Nie podano wystarczającej ilości informacji","Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Wystapił nastepujący błąd: \n" + ex.ToString(),"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Wystapił nastepujący błąd: \n" + ex.Message,"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
         }
         
         private void resetTextBoxes(object sender)
