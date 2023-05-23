@@ -19,6 +19,7 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
 using NHibernate.Linq.Functions;
+using Font = iTextSharp.text.Font;
 
 namespace Projekt_bazodanowy
 {
@@ -102,12 +103,20 @@ namespace Projekt_bazodanowy
             title.Alignment = Element.ALIGN_CENTER;
             document.Add(title);
 
+            Paragraph recieptInfoHeader = new Paragraph("Reciept Information");
+            recieptInfoHeader.Alignment = Element.ALIGN_LEFT;
+            document.Add(recieptInfoHeader);
+
             // Add the filtered paragony data to the report
             foreach (var paragon in filteredParagony)
             {
                 Paragraph paragonData = new Paragraph($"Paragon ID: {paragon.IDDokumentu}, Date: {paragon.DataZakupu}, Customer ID: {paragon.IDKlienta}, Total Amount: {paragon.KwotaCalkowita}");
                 document.Add(paragonData);
             }
+
+            Paragraph productInfoHeader = new Paragraph("Product Information");
+            productInfoHeader.Alignment = Element.ALIGN_LEFT;
+            document.Add(productInfoHeader);
 
             // Add the top selling products data to the report
             foreach (var kv in productSales)
