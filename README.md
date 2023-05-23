@@ -55,6 +55,17 @@ To use the application locally, follow these steps:
 3. Build the solution to restore dependencies and compile the application.
 4. Run the application and start exploring the features through the intuitive graphical user interface.
 
+![Login Screen](docs/login_screen.png) <br/>
+*Figure 1: The login screen of the application.*
+
+![Search Screen](docs/searching_screen.png) <br/>
+*Figure 1: The search screen of the application.*
+
+![Add Screen](docs/adding_screen.png) <br/>
+*Figure 1: The add screen of the application.*
+
+![Report Screen](docs/report_screen.png) <br/>
+*Figure 1: The report screen of the application.*
 ## Acknowledgements
 
 The project was developed by Kacper Przybyszewski and Karol Porożyński as a database project for a shop application.
