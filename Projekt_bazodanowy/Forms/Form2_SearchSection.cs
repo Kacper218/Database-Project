@@ -1,5 +1,7 @@
 ﻿using NHibernate;
 using NHibernate.Cfg;
+using NHibernate.Dialect;
+using NHibernate.Hql.Ast;
 using Projekt_bazodanowy.Models;
 using Remotion.Linq.Parsing.ExpressionVisitors.Transformation.PredefinedTransformations;
 using System;
@@ -95,7 +97,9 @@ namespace Projekt_bazodanowy
         }
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-                ISession session = sessionFactor.OpenSession();
+            ISession session = sessionFactor.OpenSession();
+            try
+            {
                 switch (search_comboBox.Text.ToString())
                 {
                     case "Klienci":
@@ -107,6 +111,16 @@ namespace Projekt_bazodanowy
                                 string rowIdentifier = row.Cells["IDKlienta"].Value.ToString();
 
                                 Klienci rowToDelete = session.Get<Klienci>(rowIdentifier);
+
+                                // Check if the primary key is referenced in another table
+                                bool isReferenced = session.QueryOver<Paragony>()
+                                    .Where(re => re.IDKlienta == rowIdentifier)
+                                    .RowCount() > 0;
+
+                                if(isReferenced)
+                                {
+                                    throw new Exception("Nie można usunąć wiersza używanego przez inne tabele.");
+                                }
 
                                 if (rowToDelete != null)
                                 {
@@ -131,6 +145,16 @@ namespace Projekt_bazodanowy
 
                                 Paragony rowToDelete = session.Get<Paragony>(rowIdentifier);
 
+                                // Check if the primary key is referenced in another table
+                                bool isReferenced = session.QueryOver<Zakupy>()
+                                    .Where(re => re.IDDokumentu == rowIdentifier)
+                                    .RowCount() > 0;
+
+                                if(isReferenced)
+                                {
+                                    throw new Exception("Nie można usunąć wiersza używanego przez inne tabele.");
+                                }
+
                                 if (rowToDelete != null)
                                 {
                                     using (var transaction = session.BeginTransaction())
@@ -153,6 +177,16 @@ namespace Projekt_bazodanowy
                                 string rowIdentifier = row.Cells["IDProduktu"].Value.ToString();
 
                                 Produkty rowToDelete = session.Get<Produkty>(rowIdentifier);
+
+                                // Check if the primary key is referenced in another table
+                                bool isReferenced = session.QueryOver<Zakupy>()
+                                    .Where(re => re.IDProduktu == rowIdentifier)
+                                    .RowCount() > 0;
+
+                                if(isReferenced)
+                                {
+                                    throw new Exception("Nie można usunąć wiersza używanego przez inne tabele.");
+                                }
 
                                 if (rowToDelete != null)
                                 {
@@ -191,6 +225,9 @@ namespace Projekt_bazodanowy
                         }
                         break;
                 }
+            } catch (Exception ex) { 
+                MessageBox.Show("Wystapił nastepujący błąd: \n" + ex.Message,"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void deleteRowButtonAdd()
         {
@@ -240,7 +277,7 @@ namespace Projekt_bazodanowy
                                 {
                                     if (!string.IsNullOrEmpty(nazwaFirmy_textBox.Text))
                                     {
-                                        MessageBox.Show("Wpisano za dużo parametrów (Imie Nazwisko oraz Nazwa Firmy)", "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        throw new Exception("Wpisano za dużo parametrów! (Imie Nazwisko oraz Nazwa Firmy)");
                                     }
                                 }
 
@@ -353,9 +390,9 @@ namespace Projekt_bazodanowy
                         }
                         break;
                 }
-            deleteRowButtonAdd(); 
+                deleteRowButtonAdd(); 
             } catch (Exception ex) { 
-                MessageBox.Show("Wystapił nastepujący błąd: \n" + ex.ToString(),"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Wystapił nastepujący błąd: \n" + ex.Message,"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
