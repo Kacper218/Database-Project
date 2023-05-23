@@ -59,13 +59,13 @@ To use the application locally, follow these steps:
 *Figure 1: The login screen of the application.*
 
 ![Search Screen](docs/searching_screen.png) <br/>
-*Figure 1: The search screen of the application.*
+*Figure 2: The search screen of the application.*
 
 ![Add Screen](docs/adding_screen.png) <br/>
-*Figure 1: The add screen of the application.*
+*Figure 3: The add screen of the application.*
 
 ![Report Screen](docs/report_screen.png) <br/>
-*Figure 1: The report screen of the application.*
+*Figure 4: The report screen of the application.*
 ## Acknowledgements
 
 The project was developed by Kacper Przybyszewski and Karol Porożyński as a database project for a shop application.
