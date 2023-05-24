@@ -19,6 +19,7 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
 using NHibernate.Linq.Functions;
+using NHibernate.Mapping;
 
 namespace Projekt_bazodanowy
 {
@@ -148,8 +149,10 @@ namespace Projekt_bazodanowy
             productTable.AddCell("Product");
             productTable.AddCell("Quantity Sold");
 
+            var sortedDict = from entry in productSales orderby entry.Value descending select entry;
+
             // Add table data
-            foreach (var kv in productSales)
+            foreach (var kv in sortedDict)
             {
                 int productId = kv.Key;
                 int quantitySold = kv.Value;
@@ -189,22 +192,22 @@ namespace Projekt_bazodanowy
             {
                 // Based on selected period filter Paragony table 
                 case Period.Day:
-                    filteredParagony = paragony.Where(p => p.DataZakupu.Date == selectedDate.Date).ToList();
+                    filteredParagony = paragony.Where(p => p.DataZakupu.Date == selectedDate.Date).OrderBy(p => p.DataZakupu).ToList();
                     break;
                 case Period.Week:
                     var startDateOfWeek = selectedDate.AddDays(-(int)selectedDate.DayOfWeek);
                     var endDateOfWeek = startDateOfWeek.AddDays(6);
-                    filteredParagony = paragony.Where(p => p.DataZakupu.Date >= startDateOfWeek.Date && p.DataZakupu.Date <= endDateOfWeek.Date).ToList();
+                    filteredParagony = paragony.Where(p => p.DataZakupu.Date >= startDateOfWeek.Date && p.DataZakupu.Date <= endDateOfWeek.Date).OrderBy(p => p.DataZakupu).ToList();
                     break;
                 case Period.Month:
                     var startDateOfMonth = selectedDate.AddDays(-(int)selectedDate.DayOfWeek);
                     var endDateOfMonth = startDateOfMonth.AddDays(30);
-                    filteredParagony = paragony.Where(p => p.DataZakupu.Date >= startDateOfMonth.Date && p.DataZakupu.Date <= endDateOfMonth.Date).ToList();
+                    filteredParagony = paragony.Where(p => p.DataZakupu.Date >= startDateOfMonth.Date && p.DataZakupu.Date <= endDateOfMonth.Date).OrderBy(p => p.DataZakupu).ToList();
                     break;
                 case Period.Year:
                     var startDateOfYear = selectedDate.AddDays(-(int)selectedDate.DayOfWeek);
                     var endDateOfYear = startDateOfYear.AddDays(365);
-                    filteredParagony = paragony.Where(p => p.DataZakupu.Date >= startDateOfYear.Date && p.DataZakupu.Date <= endDateOfYear.Date).ToList();
+                    filteredParagony = paragony.Where(p => p.DataZakupu.Date >= startDateOfYear.Date && p.DataZakupu.Date <= endDateOfYear.Date).OrderBy(p => p.DataZakupu).ToList();
                     break;
                 default:
                     filteredParagony = paragony;
@@ -239,7 +242,6 @@ namespace Projekt_bazodanowy
                         }
                     }
                 }
-
                 // Generate sales report
                 GeneratePdfReport(filteredParagony, productSales,session);
                 MessageBox.Show("Raport wykonany pomyślnie\n", "Powodzenie operacji", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
