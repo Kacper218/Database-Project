@@ -47,7 +47,12 @@ The application is developed using the following technologies:
 To use the application locally, follow these steps:
 
 1. Clone this repository to your local machine.
-2. Open the solution file (`Projekt_bazodanowy.sln`) in Visual Studio.
+2. Open the solution file (`Projekt_bazodanowy.sln`) in Visual Studio. <br/>
+   **Note!** 
+   Make sure that your SQL Server database is set up correctly:
+    - For table creation use (`TableCreation.sql`).
+    - For sample data input use (`SampleDataCreation.sql`).
+    - Make sure yours database name matches name in Form1.cs in connStr.
 3. Build the solution to restore dependencies and compile the application.
 4. Run the application and start exploring the features through the intuitive graphical user interface.
 
