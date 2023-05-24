@@ -105,24 +105,50 @@ namespace Projekt_bazodanowy
             // Add a title to the report
             Paragraph title = new Paragraph("Sales Report");
             title.Alignment = Element.ALIGN_CENTER;
+
+            // Add spacing after the title
+            title.SpacingAfter = 10f; // Adjust the spacing value as needed
             document.Add(title);
 
-            Paragraph recieptInfoHeader = new Paragraph("Reciept Information");
-            recieptInfoHeader.Alignment = Element.ALIGN_LEFT;
-            document.Add(recieptInfoHeader);
-
             // Add the filtered paragony data to the report
+            PdfPTable paragonTable = new PdfPTable(4); // Number of columns in the table
+            paragonTable.WidthPercentage = 100;
+
+            // Add table headers
+            paragonTable.AddCell("Paragon ID");
+            paragonTable.AddCell("Date");
+            paragonTable.AddCell("Customer ID");
+            paragonTable.AddCell("Total Amount");
+
+            // Add table data
             foreach (var paragon in filteredParagony)
             {
-                Paragraph paragonData = new Paragraph($"Paragon ID: {paragon.IDDokumentu}, Date: {paragon.DataZakupu}, Customer ID: {paragon.IDKlienta}, Total Amount: {paragon.KwotaCalkowita}");
-                document.Add(paragonData);
+                paragonTable.AddCell(paragon.IDDokumentu.ToString());
+                paragonTable.AddCell(paragon.DataZakupu.ToString());
+                paragonTable.AddCell(paragon.IDKlienta.ToString());
+                paragonTable.AddCell(paragon.KwotaCalkowita.ToString());
             }
 
-            Paragraph productInfoHeader = new Paragraph("Product Information");
-            productInfoHeader.Alignment = Element.ALIGN_LEFT;
-            document.Add(productInfoHeader);
+            document.Add(paragonTable);
+
+            // Add a title to the report
+            Paragraph Salestitle = new Paragraph("Best selling products");
+            Salestitle.Alignment = Element.ALIGN_CENTER;
+            // Add spacing after the title
+            Salestitle.SpacingBefore = 10f; // Adjust the spacing value as needed
+            // Add spacing after the title
+            Salestitle.SpacingAfter = 10f; // Adjust the spacing value as needed
+            document.Add(Salestitle);
 
             // Add the top selling products data to the report
+            PdfPTable productTable = new PdfPTable(2); // Number of columns in the table
+            productTable.WidthPercentage = 100;
+
+            // Add table headers
+            productTable.AddCell("Product");
+            productTable.AddCell("Quantity Sold");
+
+            // Add table data
             foreach (var kv in productSales)
             {
                 int productId = kv.Key;
@@ -132,13 +158,16 @@ namespace Projekt_bazodanowy
                 var product = session.Get<Produkty>(productId.ToString());
                 string productName = product?.Nazwa;
 
-                Paragraph productData = new Paragraph($"Product: {productName}, Quantity Sold: {quantitySold}");
-                document.Add(productData);
+                productTable.AddCell(productName);
+                productTable.AddCell(quantitySold.ToString());
             }
+
+            document.Add(productTable);
 
             // Close the document
             document.Close();
         }
+
 
         // Handle click event on report button
         private void report_button_Click(object sender, EventArgs e)
@@ -211,9 +240,12 @@ namespace Projekt_bazodanowy
                     }
                 }
 
-            // Generate sales report
-            GeneratePdfReport(filteredParagony, productSales,session);
-            } catch (Exception ex) { 
+                // Generate sales report
+                GeneratePdfReport(filteredParagony, productSales,session);
+                MessageBox.Show("Raport wykonany pomyślnie\n", "Powodzenie operacji", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            }
+            catch (Exception ex) { 
                 MessageBox.Show("Wystapil bład podczas generowania raportu:\n" + ex.Message,"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
