@@ -39,6 +39,27 @@ namespace Projekt_bazodanowy
             detailsFormInfoDisplay();
         }
 
+        // Adds a delete button column to the DataGridView
+        private void deleteRowButtonAdd()
+        {
+            DataGridViewButtonColumn delButton = new DataGridViewButtonColumn();
+            delButton.HeaderText = "Usuń";
+            delButton.Text = "-";
+            delButton.Name = "delButton";
+            delButton.UseColumnTextForButtonValue = true;
+            klienci_dataGridView.Columns.Add(delButton);
+        }
+
+        // Adds a details button column to the DataGridView
+        private void detailsRowButtonAdd()
+        {
+            DataGridViewButtonColumn detailsButton = new DataGridViewButtonColumn();
+            detailsButton.HeaderText = "Szczegóły";
+            detailsButton.Name = "detailsButton";
+            detailsButton.UseColumnTextForButtonValue = true;
+            klienci_dataGridView.Columns.Add(detailsButton);
+        }
+
         public void detailsFormInfoDisplay()
         {
             klienci_dataGridView.Columns.Clear(); // Clears existing columns in the DataGridView
@@ -61,17 +82,20 @@ namespace Projekt_bazodanowy
                 List<Klienci> filteredKlienci;
                 filteredKlienci = klienci.Where(d => d.IDKlienta == identifier).ToList();
 
-                idKlienta_label.Text = "ID Klienta: " + identifier; 
+                idKlienta_label.Text = "ID Klienta: " + identifier;
                 email_label.Text = "Email: " + filteredKlienci[0].Email;
 
                 if (string.IsNullOrEmpty(filteredKlienci[0].ImieNazwisko))
                 {
                     nazwaKlienta_label.Text = "Nazwa Firmy: " + filteredKlienci[0].NazwaFirmy;
-                } else
+                }
+                else
                 {
                     nazwaKlienta_label.Text = "Nazwa Klienta: " + filteredKlienci[0].ImieNazwisko;
                 }
             }
+            detailsRowButtonAdd();
+            deleteRowButtonAdd();
         }
 
         private void close_button_Click(object sender, EventArgs e)
@@ -93,9 +117,51 @@ namespace Projekt_bazodanowy
                 session.Save(paragon);
                 session.Flush();
                 session.Clear();
-                detailsFormInfoDisplay(); 
+                detailsFormInfoDisplay();
             }
         }
 
+        private void klienci_dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ISession session = sessionFactor.OpenSession();
+            try
+            {
+                // Check if the delete button column is clicked
+                if (e.ColumnIndex == 1)
+                {
+                    using (session)
+                    {
+                        DataGridViewRow row = klienci_dataGridView.Rows[e.RowIndex];
+                        string rowIdentifier = row.Cells["IDDokumentu"].Value.ToString();
+
+                        Paragony rowToDelete = session.Get<Paragony>(rowIdentifier);
+
+                        // Check if the primary key is referenced in another table
+                        bool isReferenced = session.QueryOver<Zakupy>()
+                        .Where(re => re.IDDokumentu == rowIdentifier)
+                        .RowCount() > 0;
+
+                        if (isReferenced)
+                        {
+                            throw new Exception("Nie można usunąć wiersza używanego przez inne tabele.");
+                        }
+
+                        if (rowToDelete != null)
+                        {
+                            using (var transaction = session.BeginTransaction())
+                            {
+                                session.Delete(rowToDelete);
+                                transaction.Commit();
+                            }
+                        }
+                        klienci_dataGridView.Rows.RemoveAt(e.RowIndex);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Wystapił nastepujący błąd: \n" + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

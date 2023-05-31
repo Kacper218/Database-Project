@@ -56,6 +56,7 @@
             this.klienci_dataGridView.RowTemplate.Height = 24;
             this.klienci_dataGridView.Size = new System.Drawing.Size(764, 244);
             this.klienci_dataGridView.TabIndex = 0;
+            this.klienci_dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.klienci_dataGridView_CellClick);
             // 
             // groupBox1
             // 
