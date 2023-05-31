@@ -156,6 +156,15 @@ namespace Projekt_bazodanowy
                         }
                         klienci_dataGridView.Rows.RemoveAt(e.RowIndex);
                     }
+                } else if (e.ColumnIndex == 0)
+                {
+                    DataGridViewRow row = klienci_dataGridView.Rows[e.RowIndex];
+                    string rowIdentifier = row.Cells["IDDokumentu"].Value.ToString();
+
+                    // Create an instance of Form4 and show it
+                    Form4 form4 = new Form4(sessionFactor, rowIdentifier);
+                    form4.Show();
+                    form4.BringToFront();
                 }
             }
             catch (Exception ex)
