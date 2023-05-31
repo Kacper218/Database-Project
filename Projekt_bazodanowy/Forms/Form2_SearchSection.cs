@@ -238,18 +238,30 @@ namespace Projekt_bazodanowy
                         {
                             using (session)
                             {
+                                session.BeginTransaction();
+
                                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
                                 string rowIdentifier = row.Cells["IDZakupu"].Value.ToString();
 
-                                Zakupy rowToDelete = session.Get<Zakupy>(rowIdentifier);
+                                // Create a delete query using HQL or SQL
+                                string deleteQuery = "DELETE FROM Zakupy WHERE IDZakupu = :id";
+                                var query = session.CreateQuery(deleteQuery);
+                                query.SetParameter("id", rowIdentifier);
 
-                                if (rowToDelete != null)
+                                // Execute the delete query
+                                int deletedCount = query.ExecuteUpdate();
+
+                                if (deletedCount > 0)
                                 {
-                                    using (var transaction = session.BeginTransaction())
-                                    {
-                                        session.Delete(rowToDelete);
-                                        transaction.Commit();
-                                    }
+                                    // Commit the transaction
+                                    session.Transaction.Commit();
+                                }
+                                else
+                                {
+                                    // Rollback the transaction
+                                    session.Transaction.Rollback();
+
+                                    throw new Exception("Wystapil problem podczas usuwania pozycji");
                                 }
 
                                 dataGridView1.Rows.RemoveAt(e.RowIndex);
