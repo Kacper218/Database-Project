@@ -37,7 +37,7 @@ CREATE TABLE Zakupy(
     IDDokumentu varchar(128) FOREIGN KEY REFERENCES Paragony(IDDokumentu),
     IDProduktu integer FOREIGN KEY REFERENCES Produkty(IDProduktu),
     Ilosc integer NOT NULL,
-    CenaZakupu decimal(5,2) NOT NULL
+    CenaZakupu decimal(5,2) NOT NULL default 0
 );
 
 COMMIT;
