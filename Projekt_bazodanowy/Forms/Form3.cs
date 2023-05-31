@@ -126,8 +126,10 @@ namespace Projekt_bazodanowy
             ISession session = sessionFactor.OpenSession();
             try
             {
+                DataGridViewColumn clickedColumn = klienci_dataGridView.Columns[e.ColumnIndex];
+                string columnName = clickedColumn.Name;
                 // Check if the delete button column is clicked
-                if (e.ColumnIndex == 1)
+                if (columnName == "delButton")
                 {
                     using (session)
                     {
@@ -156,7 +158,7 @@ namespace Projekt_bazodanowy
                         }
                         klienci_dataGridView.Rows.RemoveAt(e.RowIndex);
                     }
-                } else if (e.ColumnIndex == 0)
+                } else if (columnName == "detailsButton")
                 {
                     DataGridViewRow row = klienci_dataGridView.Rows[e.RowIndex];
                     string rowIdentifier = row.Cells["IDDokumentu"].Value.ToString();
