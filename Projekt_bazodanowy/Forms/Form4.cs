@@ -170,26 +170,38 @@ namespace Projekt_bazodanowy
             ISession session = sessionFactor.OpenSession();
             try
             {
+                DataGridViewColumn clickedColumn = paragony_dataGridView.Columns[e.ColumnIndex];
+                string columnName = clickedColumn.Name;
                 // Check if the delete button column is clicked
-                if (e.ColumnIndex == 0)
+                if (columnName == "delButton")
                 {
                     using (session)
                     {
+                        session.BeginTransaction();
+
                         DataGridViewRow row = paragony_dataGridView.Rows[e.RowIndex];
                         string rowIdentifier = row.Cells["IDZakupu"].Value.ToString();
 
-                        Zakupy rowToDelete = session.Get<Zakupy>(rowIdentifier);
-                        MessageBox.Show(rowToDelete.IDZakupu);
+                        // Create a delete query using HQL or SQL
+                        string deleteQuery = "DELETE FROM Zakupy WHERE IDZakupu = :id";
+                        var query = session.CreateQuery(deleteQuery);
+                        query.SetParameter("id", rowIdentifier);
 
+                        // Execute the delete query
+                        int deletedCount = query.ExecuteUpdate();
 
-                        if (rowToDelete != null)
+                        if (deletedCount > 0)
                         {
-                            using (var transaction = session.BeginTransaction())
-                            {
-                                session.Delete(rowToDelete);
-                                transaction.Commit();
-                            }
+                            // Commit the transaction
+                            session.Transaction.Commit();
                         }
+                        else
+                        {
+                            // Rollback the transaction
+                            session.Transaction.Rollback();
+                            throw new Exception("Wystapil problem podczas usuwania pozycji");
+                        }
+
                         paragony_dataGridView.Rows.RemoveAt(e.RowIndex);
                     }
                 }
@@ -198,6 +210,7 @@ namespace Projekt_bazodanowy
             {
                 MessageBox.Show("Wystapił nastepujący błąd: \n" + ex.ToString(), "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            detailsFormInfoDisplay();
         }
     }
 }
