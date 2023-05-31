@@ -112,7 +112,7 @@ namespace Projekt_bazodanowy
                 {
                     case "Klienci":
                         // Check if the delete button column is clicked
-                        if (e.ColumnIndex == 4)
+                        if (e.ColumnIndex == 5)
                         {
                             using (session)
                             {
@@ -142,11 +142,21 @@ namespace Projekt_bazodanowy
 
                                 dataGridView1.Rows.RemoveAt(e.RowIndex);
                             }
+                        // Check if the details button column is clicked
+                        } else if(e.ColumnIndex == 4)
+                        {
+                            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                            string rowIdentifier = row.Cells["IDKlienta"].Value.ToString();
+
+                            // Create an instance of Form3 and show it
+                            Form3 form3 = new Form3(sessionFactor, rowIdentifier);
+                            form3.Show();
+                            form3.BringToFront();
                         }
                         break;
                     case "Paragony":
                         // Check if the delete button column is clicked
-                        if (e.ColumnIndex == 4)
+                        if (e.ColumnIndex == 5)
                         {
                             using (session)
                             {
@@ -176,6 +186,16 @@ namespace Projekt_bazodanowy
 
                                 dataGridView1.Rows.RemoveAt(e.RowIndex);
                             }
+                        // Check if the details button column is clicked
+                        } else if(e.ColumnIndex == 4)
+                        {
+                            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                            string rowIdentifier = row.Cells["IDDokumentu"].Value.ToString();
+
+                            // Create an instance of Form4 and show it
+                            Form4 form4 = new Form4(sessionFactor, rowIdentifier);
+                            form4.Show();
+                            form4.BringToFront();
                         }
                         break;
                     case "Produkty":
@@ -251,6 +271,16 @@ namespace Projekt_bazodanowy
             delButton.UseColumnTextForButtonValue = true;
             dataGridView1.Columns.Add(delButton);
         }
+
+        // Adds a details button column to the DataGridView
+        private void detailsRowButtonAdd()
+        {
+            DataGridViewButtonColumn detailsButton = new DataGridViewButtonColumn();
+            detailsButton.HeaderText = "Szczegóły";
+            detailsButton.Name = "detailsButton";
+            detailsButton.UseColumnTextForButtonValue = true;
+            dataGridView1.Columns.Add(detailsButton);
+        }
         private void search_button_Click(object sender, EventArgs e)
         {
             dataGridView1.Columns.Clear(); // Clears existing columns in the DataGridView
@@ -304,6 +334,7 @@ namespace Projekt_bazodanowy
                                 dataGridView1.DataSource = bindingList;
                                 dataGridView1.AllowUserToAddRows = false;
                             }
+                            detailsRowButtonAdd();
                             break;
                         }
                     case "Paragony":
@@ -341,6 +372,7 @@ namespace Projekt_bazodanowy
                             var bindingList = new BindingList<Paragony>(result);
                             dataGridView1.DataSource = bindingList;
                             dataGridView1.AllowUserToAddRows = false;
+                            detailsRowButtonAdd();
                         }
                         break;
                     case "Produkty":
