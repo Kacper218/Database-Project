@@ -191,7 +191,7 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
             this.Name = "Form3";
-            this.Text = "Form3";
+            this.Text = "Szczegóły klienta";
             ((System.ComponentModel.ISupportInitialize)(this.klienci_dataGridView)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
