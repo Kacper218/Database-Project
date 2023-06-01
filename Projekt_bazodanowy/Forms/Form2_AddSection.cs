@@ -203,21 +203,41 @@ namespace Projekt_bazodanowy
                     case "Klienci":
                         field1_textBox.Enabled = false;
                         field5_textBox.Enabled = false;
+                        field1_label.Text = "ID Klienta";
+                        field2_label.Text = "Imie i nazwisko";
+                        field3_label.Text = "Nazwa Firmy";
+                        field4_label.Text = "Email";
+                        field5_label.Text = "-";
                         resetTextBoxes(sender);
                         break;
                     case "Produkty":
                         field1_textBox.Enabled = false;
                         field5_textBox.Enabled = false;
+                        field1_label.Text = "ID Produktu";
+                        field2_label.Text = "Nazwa";
+                        field3_label.Text = "Aktualna Cena";
+                        field4_label.Text = "Dostępna ilość";
+                        field5_label.Text = "-";
                         resetTextBoxes(sender);
                         break;
                     case "Paragony":
                         field1_textBox.Enabled = true;
                         field5_textBox.Enabled = false;
+                        field1_label.Text = "ID Dokumentu";
+                        field2_label.Text = "Data Zakupu";
+                        field3_label.Text = "ID Klienta";
+                        field4_label.Text = "Kwota całkowita";
+                        field5_label.Text = "-";
                         resetTextBoxes(sender);
                         break;
                     case "Zakupy":
                         field1_textBox.Enabled = false;
                         field5_textBox.Enabled = true;
+                        field1_label.Text = "ID Zakupu";
+                        field2_label.Text = "ID Dokumentu";
+                        field3_label.Text = "ID Produktu";
+                        field4_label.Text = "Ilość";
+                        field5_label.Text = "Cena zakupu";
                         resetTextBoxes(sender);
                         break;
                 }
