@@ -51,8 +51,10 @@ To use the application locally, follow these steps:
    **Note!** 
    Make sure that your SQL Server database is set up correctly:
     - For table creation use (`TableCreation.sql`).
+    - Use (`UpdateTrigger.sql`) for price conformity on receipts.
     - For sample data input use (`SampleDataCreation.sql`).
     - Make sure yours database name matches name in Form1.cs in connStr.
+    - Make sure you installed NHibernate and iTextSharp extensions in your Visual Studio.
 3. Build the solution to restore dependencies and compile the application.
 4. Run the application and start exploring the features through the intuitive graphical user interface.
 
