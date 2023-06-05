@@ -1,4 +1,4 @@
-# Shop Database Application
+# Database management for the store
 
 This is a database application designed for efficient and convenient searching of purchase history in a shop. The application is targeted towards store managers or accounting staff.
 
@@ -68,11 +68,17 @@ Here are some screenshots that demonstrate the user interface of our application
 ![Search Screen](docs/searching_screen.png) <br/>
 *Figure 2: The search screen of the application.*
 
+![Client Details Screen](docs/client_details_screen.PNG) <br/>
+*Figure 3: The client details screen of the application.*
+
+![Reciept Details Screen](docs/reciept_details_screen.PNG) <br/>
+*Figure 4: The reciept details screen of the application.*
+
 ![Add Screen](docs/adding_screen.png) <br/>
-*Figure 3: The add screen of the application.*
+*Figure 5: The add screen of the application.*
 
 ![Report Screen](docs/report_screen.png) <br/>
-*Figure 4: The report screen of the application.*
+*Figure 6: The report screen of the application.*
 ## Acknowledgements
 
 The project was developed by Kacper Przybyszewski and Karol Porożyński as a database project for a shop application.
