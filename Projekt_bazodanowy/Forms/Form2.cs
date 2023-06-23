@@ -2,6 +2,7 @@
 using NHibernate.Cfg;
 using Projekt_bazodanowy.Models;
 using Remotion.Linq.Parsing.ExpressionVisitors.Transformation.PredefinedTransformations;
+using SimpleTCP;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,6 +11,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,11 +26,14 @@ namespace Projekt_bazodanowy
 
         public static Form2 instance;
         public readonly ISessionFactory sessionFactor;
-        public Form2(ISessionFactory sessionFactor)
+        private SimpleTcpClient connection;
+        private static string json;
+        public Form2(SimpleTcpClient connection)
         {
             InitializeComponent();
             instance = this;
             instance.CenterToScreen();
+            this.connection = connection;
             this.sessionFactor = sessionFactor;
             this.Text = "Eksplorator Bazy Danych";
 

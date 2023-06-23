@@ -1,5 +1,7 @@
-﻿using NHibernate;
+﻿using Newtonsoft.Json;
+using NHibernate;
 using NHibernate.Cfg;
+using Projekt_bazodanowy.DataRepository;
 using Projekt_bazodanowy.Models;
 using Remotion.Linq.Parsing.ExpressionVisitors.Transformation.PredefinedTransformations;
 using System;
@@ -24,7 +26,7 @@ namespace Projekt_bazodanowy
         private void loadButton_Click(object sender, EventArgs e)
         {
             // Open a session for database operations
-            ISession session = sessionFactor.OpenSession();
+            //ISession session = sessionFactor.OpenSession();
             dataGridView1.Columns.Clear(); // Clears existing columns in the DataGridView
             dataGridView1.DataSource = null; // Clears the data source of the DataGridView
 
@@ -34,41 +36,29 @@ namespace Projekt_bazodanowy
                 switch (add_comboBox.Text.ToString())
                 {
                     case "Klienci":
-                        // Fetch all Klienci records from the database
-                        using (session)
-                        {
-                            IQuery query = session.CreateQuery("FROM Klienci");
-                            IList<Models.Klienci> prodInfo = query.List<Models.Klienci>();
-                            dataGridView1.DataSource = prodInfo;
-                            break;
-                        }
+                        string messege = "SIMPLE_SEARCH:Clients:";
+                        connection.WriteLineAndGetReply(messege, TimeSpan.FromSeconds(3));
+                        IList<Klienci> clientsInfo = ClientsJsonDataRepository.DataList;
+                        dataGridView1.DataSource = clientsInfo;
+                        break;
                     case "Produkty":
-                        // Fetch all Produkty records from the database
-                        using (session)
-                        {
-                            IQuery query1 = session.CreateQuery("FROM Produkty");
-                            IList<Models.Produkty> prodInfo1 = query1.List<Models.Produkty>();
-                            dataGridView1.DataSource = prodInfo1;
-                            break;
-                        }
+                        string messege2 = "SIMPLE_SEARCH:Products:";
+                        connection.WriteLineAndGetReply(messege2, TimeSpan.FromSeconds(3));
+                        IList<Produkty> productsInfo = ProductsJsonDataRepository.DataList;
+                        dataGridView1.DataSource = productsInfo;
+                        break;
                     case "Paragony":
-                        // Fetch all Paragony records from the database
-                        using (session)
-                        {
-                            IQuery query2 = session.CreateQuery("FROM Paragony");
-                            IList<Models.Paragony> prodInfo2 = query2.List<Models.Paragony>();
-                            dataGridView1.DataSource = prodInfo2;
-                            break;
-                        }
+                        string messege3 = "SIMPLE_SEARCH:Receipts:";
+                        connection.WriteLineAndGetReply(messege3, TimeSpan.FromSeconds(3));
+                        IList<Paragony> receiptsInfo = ReceiptsJsonDataRepository.DataList;
+                        dataGridView1.DataSource = receiptsInfo;
+                        break;
                     case "Zakupy":
-                        // Fetch all Zakupy records from the database
-                        using (session)
-                        {
-                            IQuery query3 = session.CreateQuery("FROM Zakupy");
-                            IList<Models.Zakupy> prodInfo3 = query3.List<Models.Zakupy>();
-                            dataGridView1.DataSource = prodInfo3;
-                            break;
-                        }
+                        string messege4 = "SIMPLE_SEARCH:Purchase:";
+                        connection.WriteLineAndGetReply(messege4, TimeSpan.FromSeconds(3));
+                        IList<Zakupy> purchaseInfo = PurchaseJsonDataRepository.DataList;
+                        dataGridView1.DataSource = purchaseInfo;
+                        break;
                 }
             }
             catch (Exception ex)

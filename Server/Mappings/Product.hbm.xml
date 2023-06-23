@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="Server" namespace ="Server.Models">
+
+	<class name="Klienci">
+		<id name="IDKlienta">
+			<generator class="native"/>
+		</id>
+		<property name="ImieNazwisko"/>
+		<property name="NazwaFirmy"/>
+		<property name="Email"/>
+	</class>
+
+	<class name="Produkty">
+		<id name="IDProduktu">
+			<generator class="native"/>
+		</id>
+		<property name="Nazwa"/>
+		<property name="CenaAktualna"/>
+		<property name="Dostepnosc"/>
+	</class>
+
+	<class name="Paragony">
+		<id name="IDDokumentu" type="string">
+			<generator class="assigned"/>
+		</id>
+		<property name="DataZakupu"/>
+		<property name="IDKlienta"/>
+		<property name="KwotaCalkowita"/>
+	</class>
+
+	<class name="Zakupy">
+		<id name="IDZakupu">
+			<generator class="native"/>
+		</id>
+		<property name="IDDokumentu"/>
+		<property name="IDProduktu"/>
+		<property name="Ilosc"/>
+		<property name="CenaZakupu"/>
+	</class>
+
+</hibernate-mapping>
