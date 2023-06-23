@@ -37,25 +37,25 @@ namespace Projekt_bazodanowy
                 {
                     case "Klienci":
                         string messege = "SIMPLE_SEARCH:Clients:";
-                        connection.WriteLineAndGetReply(messege, TimeSpan.FromSeconds(3));
+                        connection.WriteLineAndGetReply(messege, TimeSpan.FromSeconds(2));
                         IList<Klienci> clientsInfo = ClientsJsonDataRepository.DataList;
                         dataGridView1.DataSource = clientsInfo;
                         break;
                     case "Produkty":
                         string messege2 = "SIMPLE_SEARCH:Products:";
-                        connection.WriteLineAndGetReply(messege2, TimeSpan.FromSeconds(3));
+                        connection.WriteLineAndGetReply(messege2, TimeSpan.FromSeconds(2));
                         IList<Produkty> productsInfo = ProductsJsonDataRepository.DataList;
                         dataGridView1.DataSource = productsInfo;
                         break;
                     case "Paragony":
                         string messege3 = "SIMPLE_SEARCH:Receipts:";
-                        connection.WriteLineAndGetReply(messege3, TimeSpan.FromSeconds(3));
+                        connection.WriteLineAndGetReply(messege3, TimeSpan.FromSeconds(2));
                         IList<Paragony> receiptsInfo = ReceiptsJsonDataRepository.DataList;
                         dataGridView1.DataSource = receiptsInfo;
                         break;
                     case "Zakupy":
                         string messege4 = "SIMPLE_SEARCH:Purchase:";
-                        connection.WriteLineAndGetReply(messege4, TimeSpan.FromSeconds(3));
+                        connection.WriteLineAndGetReply(messege4, TimeSpan.FromSeconds(2));
                         IList<Zakupy> purchaseInfo = PurchaseJsonDataRepository.DataList;
                         dataGridView1.DataSource = purchaseInfo;
                         break;
@@ -72,17 +72,13 @@ namespace Projekt_bazodanowy
         private void addButton_Click(object sender, EventArgs e)
             {
                 // Open a session for database operations
-                using (var session = sessionFactor.OpenSession())
-                {
                     try
                     {
                         // Perform diffrent actions based on the selected add option
                         switch (add_comboBox.Text.ToString())
                         {
                             case "Klienci":
-                                using (session)
-                                {
-                                    var klient = new Klienci();
+                                    string clientToAdd = "ADD:Clients:";
 
                                     // Check if both ImieNazwisko and NazwaFirmy fields are filled
                                     if (!(field2_textBox.Text.ToString() == "") && !(field3_textBox.Text.ToString() == ""))
@@ -99,64 +95,43 @@ namespace Projekt_bazodanowy
                                     // Set fields based on user input
                                     if (field3_textBox.Text.ToString() == "")
                                     {
-                                        klient.ImieNazwisko = field2_textBox.Text.ToString();
-                                        klient.NazwaFirmy = "";
+                                        clientToAdd += "Individual:" + field2_textBox.Text.ToString() + ":";
                                     }
                                     if (field2_textBox.Text.ToString() == "")
                                     {
-
-                                        klient.ImieNazwisko = "";
-                                        klient.NazwaFirmy = field3_textBox.Text.ToString();
+                                        clientToAdd += "Company:" + field3_textBox.Text.ToString() + ":";
                                     }
 
-                                    klient.Email = field4_textBox.Text.ToString();
-                                    session.Save(klient);
-                                    session.Flush();
-                                    session.Clear();
+                                    clientToAdd += field4_textBox.Text.ToString() + ":";
+                                    connection.WriteLineAndGetReply(clientToAdd, TimeSpan.FromSeconds(2));
                                     break;
-                                }
                             case "Produkty":
-                                using (session)
-                                {
-                                    var produkt = new Produkty();
+                                    string productToAdd = "ADD:Products:";
                                     // Set fields based on user input
-                                    produkt.Nazwa = field2_textBox.Text.ToString();
-                                    produkt.CenaAktualna = field3_textBox.Text.ToString();
-                                    produkt.Dostepnosc = field4_textBox.Text.ToString();
-                                    session.Save(produkt);
-                                    session.Flush();
-                                    session.Clear();
+                                    productToAdd += field2_textBox.Text.ToString() + ":";
+                                    productToAdd += field3_textBox.Text.ToString() + ":";
+                                    productToAdd += field4_textBox.Text.ToString() + ":";
+                                    connection.WriteLineAndGetReply(productToAdd, TimeSpan.FromSeconds(2));
                                     break;
-                                }
                             case "Paragony":
-                                using (session)
-                                {
-                                    var paragon = new Paragony();
+                                    string receiptToAdd = "ADD:Receipts:";
                                     // Set fields based on user input
-                                    paragon.IDDokumentu = field1_textBox.Text.ToString();
+                                    receiptToAdd += field1_textBox.Text.ToString() + ":";
                                     // Parse user date input to correct DateTime format
-                                    paragon.DataZakupu = DateTime.Parse(field2_textBox.Text.ToString());
-                                    paragon.IDKlienta = field3_textBox.Text.ToString();
-                                    paragon.KwotaCalkowita = field4_textBox.Text.ToString();
-                                    session.Save(paragon);
-                                    session.Flush();
-                                    session.Clear();
+                                    receiptToAdd += field2_textBox.Text.ToString();
+                                    receiptToAdd += field3_textBox.Text.ToString() + ":";
+                                    receiptToAdd += field4_textBox.Text.ToString() + ":";
+                                    connection.WriteLineAndGetReply(receiptToAdd, TimeSpan.FromSeconds(2));
                                     break;
-                                }
                             case "Zakupy":
-                                using (session)
-                                {
-                                    var zakup = new Zakupy();
+                                    string purchaseToAdd = "ADD:Purchase:";
                                     // Set fields based on user input
-                                    zakup.IDDokumentu = field2_textBox.Text.ToString();
-                                    zakup.IDProduktu = field3_textBox.Text.ToString();
-                                    zakup.Ilosc = field4_textBox.Text.ToString();
-                                    zakup.CenaZakupu = field5_textBox.Text.ToString();
-                                    session.Save(zakup);
-                                    session.Flush();
-                                    session.Clear();
+                                    purchaseToAdd += field2_textBox.Text.ToString() + ":";
+                                    purchaseToAdd += field3_textBox.Text.ToString() + ":";
+                                    purchaseToAdd += field4_textBox.Text.ToString() + ":";
+                                    purchaseToAdd += field5_textBox.Text.ToString() + ":";
+                                    connection.WriteLineAndGetReply(purchaseToAdd, TimeSpan.FromSeconds(2));
                                     break;
-                                }
                         }
                     }
 
@@ -172,7 +147,6 @@ namespace Projekt_bazodanowy
                     {
                         MessageBox.Show("Wystapił nastepujący błąd: \n" + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                }
             }
 
             // Reset textBoxes when comboBox changed

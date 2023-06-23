@@ -3,6 +3,7 @@ using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Dialect;
 using NHibernate.Driver;
+using Server.Models;
 using SimpleTCP;
 using System;
 using System.Collections.Generic;
@@ -121,8 +122,8 @@ namespace Server
                 switch(command)
                 {
                     case "SIMPLE_SEARCH":
-                        string queryName = messageParts[1];
-                        switch(queryName)
+                        string queryNameSimpleSearch = messageParts[1];
+                        switch(queryNameSimpleSearch)
                         {
                             case "Clients":
                                 Console.WriteLine("Otrzymalem zgłoszenie szybkiego wyszukiwania tabeli Klienci.");
@@ -159,6 +160,72 @@ namespace Server
                                 string purchaseMessageToReply = "SIMPLE_SEARCH" + ";" + "Purchase" + ";" + purchaseJson;
                                 e.Reply(purchaseMessageToReply);
                                 Console.WriteLine("Odeslalem dane");
+                                break;
+                        }
+                        break;
+
+                    case "ADD":
+                        string queryNameAdd = messageParts[1];
+                        switch(queryNameAdd)
+                        {
+                            case "Clients":
+                                Console.WriteLine("Otrzymalem zgłoszenie dodania nowej pozycji do tabeli Klienci.");
+                                using (session)
+                                {
+                                    var klient = new Klienci();
+                                    if (messageParts[2] == "Individual")
+                                    {
+                                        klient.ImieNazwisko = messageParts[3];
+                                    } else if (messageParts[2] == "Company")
+                                    {
+                                        klient.NazwaFirmy = messageParts[3];
+                                    }
+                                    klient.Email = messageParts[4];
+                                    session.Save(klient);
+                                    session.Flush();
+                                    session.Clear();
+                                }
+                                break;
+                            case "Products":
+                                Console.WriteLine("Otrzymalem zgłoszenie dodania nowej pozycji do tabeli Produkty.");
+                                using (session)
+                                {
+                                    var produkt = new Produkty();
+                                    produkt.Nazwa = messageParts[2];
+                                    produkt.CenaAktualna = messageParts[3];
+                                    produkt.Dostepnosc = messageParts[4];
+                                    session.Save(produkt);
+                                    session.Flush();
+                                    session.Clear();
+                                }
+                                break;
+                            case "Receipts":
+                                Console.WriteLine("Otrzymalem zgłoszenie dodania nowej pozycji do tabeli Paragony.");
+                                using (session)
+                                {
+                                    var paragon = new Paragony();
+                                    paragon.IDDokumentu = messageParts[2];
+                                    paragon.DataZakupu = DateTime.Parse(messageParts[3]);
+                                    paragon.IDKlienta = messageParts[4];
+                                    paragon.KwotaCalkowita = messageParts[5];
+                                    session.Save(paragon);
+                                    session.Flush();
+                                    session.Clear();
+                                }
+                                break;
+                            case "Purchase":
+                                Console.WriteLine("Otrzymalem zgłoszenie dodania nowej pozycji do tabeli Zakupy.");
+                                using (session)
+                                {
+                                    var zakup = new Zakupy();
+                                    zakup.IDDokumentu = messageParts[2];
+                                    zakup.IDProduktu = messageParts[3];
+                                    zakup.Ilosc = messageParts[4];
+                                    zakup.CenaZakupu = messageParts[5];
+                                    session.Save(zakup);
+                                    session.Flush();
+                                    session.Clear();
+                                }
                                 break;
                         }
                         break;
