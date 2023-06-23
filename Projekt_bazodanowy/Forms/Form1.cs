@@ -103,26 +103,6 @@ namespace Projekt_bazodanowy
             }
         }
 
-        public void connectToDataSource(string connStr)
-        {
-            var config = new Configuration();
-
-            // Configure the database integration
-            config.DataBaseIntegration(d =>
-            {
-                d.ConnectionString = connStr;
-                d.Dialect<MsSql2012Dialect>();
-                d.Driver<SqlClientDriver>();
-            });
-
-            // Add the assembly
-            config.AddAssembly(Assembly.GetExecutingAssembly());
-
-            // Build the session factory
-            var session = config.BuildSessionFactory();
-            sessionFactor = session;
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -138,15 +118,6 @@ namespace Projekt_bazodanowy
 
                 string messege = "connect" + ":" + user + ":" + password + ":";
                 client.WriteLineAndGetReply(messege, TimeSpan.FromSeconds(3));
-                //MessageBox.Show("Wyslano dane do serwera: " + messege);
-
-                // Change databaseName to your database name
-                //string databaseName = "DESKTOP-9QOBELF\\SQLEXPRESS";
-
-                //string connStr = "Data Source=" + databaseName + "; Initial Catalog=master; User Id=" + user + "; Password=" + password;
-
-                // Connect to the data source
-                //connectToDataSource(connStr);
 
                 if(isLoggedIn)
                 {
