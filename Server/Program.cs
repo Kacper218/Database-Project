@@ -10,9 +10,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
 using System.Reflection;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.IO;
 
 namespace Server
 {
@@ -96,12 +100,102 @@ namespace Server
                 return false;
             }
         }
+        public static byte []GeneratePdfReport(List<Paragony> filteredParagony, Dictionary<int, int> productSales)
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+            // Create the document and specify the file path
+            Document document = new Document();
+            //string pathToSave = getFolderPath();
+            //if (pathToSave == "") throw new Exception("Nie podano ścieżki do folderu");
+            //string filePath = pathToSave + "\\sales_report_" + DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".pdf";
+            PdfWriter writer = PdfWriter.GetInstance(document,stream);
+            ISession session = sessionFactor.OpenSession();
 
+            // Open the document for writing
+            document.Open();
+
+            // Add a title to the report
+            Paragraph title = new Paragraph("Sales Report");
+            title.Alignment = Element.ALIGN_CENTER;
+
+            // Add spacing after the title
+            title.SpacingAfter = 10f; // Adjust the spacing value as needed
+            document.Add(title);
+
+            // Add the filtered paragony data to the report
+            PdfPTable paragonTable = new PdfPTable(4); // Number of columns in the table
+            paragonTable.WidthPercentage = 100;
+
+            // Add table headers
+            paragonTable.AddCell("Paragon ID");
+            paragonTable.AddCell("Date");
+            paragonTable.AddCell("Customer ID");
+            paragonTable.AddCell("Total Amount");
+
+                // Add table data
+                    foreach (var paragon in filteredParagony)
+                    {
+                            paragonTable.AddCell(paragon.IDDokumentu.ToString());
+                            paragonTable.AddCell(paragon.DataZakupu.ToString());
+                            paragonTable.AddCell(paragon.IDKlienta.ToString());
+                            if (paragon.KwotaCalkowita != null)
+                            {
+                                paragonTable.AddCell(paragon.KwotaCalkowita.ToString());
+                            }
+                            else
+                            {
+                                paragonTable.AddCell(string.Empty);
+                            }
+                }
+
+            document.Add(paragonTable);
+            // Add a title to the report
+            Paragraph Salestitle = new Paragraph("Best selling products");
+            Salestitle.Alignment = Element.ALIGN_CENTER;
+            // Add spacing after the title
+            Salestitle.SpacingBefore = 10f; // Adjust the spacing value as needed
+            // Add spacing after the title
+            Salestitle.SpacingAfter = 10f; // Adjust the spacing value as needed
+            document.Add(Salestitle);
+
+            // Add the top selling products data to the report
+            PdfPTable productTable = new PdfPTable(2); // Number of columns in the table
+            productTable.WidthPercentage = 100;
+
+            // Add table headers
+            productTable.AddCell("Product");
+            productTable.AddCell("Quantity Sold");
+
+            var sortedDict = from entry in productSales orderby entry.Value descending select entry;
+
+            // Add table data
+            foreach (var kv in sortedDict)
+            {
+                int productId = kv.Key;
+                int quantitySold = kv.Value;
+
+                // Retrieve the product name from the database using the productId
+                var product = session.Get<Produkty>(productId.ToString());
+                string productName = product?.Nazwa;
+
+                productTable.AddCell(productName);
+                productTable.AddCell(quantitySold.ToString());
+            }
+
+            document.Add(productTable);
+
+            // Close the document
+            document.Close();
+
+            byte[] bytesToReturn=stream.ToArray();
+            return bytesToReturn;
+            }
+        }
         private static void Server_DataReceived(object sender, Message e)
         {
-
             string request = e.MessageString;
-            string[] messageParts = request.Split(':');
+            string[] messageParts = request.Split(';');
             string command = messageParts[0];
 
             if(!isClientLoggedIn || command == "connect")
@@ -227,6 +321,95 @@ namespace Server
                                     session.Clear();
                                 }
                                 break;
+                        }
+                        break;
+
+                    case "REPORT":
+                        Console.WriteLine("Otrzymalem zgłoszenie wygenerowania raportu ");
+                        DateTime selectedDate;
+                        DateTime startDate = DateTime.UtcNow, endDate = DateTime.UtcNow;
+                        var paragony = session.Query<Paragony>().ToList();
+                        var zakupy = session.Query<Zakupy>().ToList();
+                        List<Paragony> filteredParagony;
+                        selectedDate = DateTime.ParseExact(messageParts[2], "yyyy-MM-ddTHH:mm:ss", CultureInfo.InvariantCulture);
+                        Console.WriteLine("Dla okresu: " + messageParts[1]);
+
+                        switch (messageParts[1])
+                        {
+                            // Based on selected period filter Paragony table 
+                            case "Day":
+                                filteredParagony = paragony.Where(p => p.DataZakupu.Date == selectedDate.Date).OrderBy(p => p.DataZakupu).ToList();
+                                break;
+                            case "Week":
+                                var startDateOfWeek = selectedDate.AddDays(-(int)selectedDate.DayOfWeek);
+                                var endDateOfWeek = startDateOfWeek.AddDays(6);
+                                filteredParagony = paragony.Where(p => p.DataZakupu.Date >= startDateOfWeek.Date && p.DataZakupu.Date <= endDateOfWeek.Date).OrderBy(p => p.DataZakupu).ToList();
+                                break;
+                            case "Month":
+                                var startDateOfMonth = selectedDate.AddDays(-(int)selectedDate.DayOfWeek);
+                                var endDateOfMonth = startDateOfMonth.AddDays(30);
+                                filteredParagony = paragony.Where(p => p.DataZakupu.Date >= startDateOfMonth.Date && p.DataZakupu.Date <= endDateOfMonth.Date).OrderBy(p => p.DataZakupu).ToList();
+                                break;
+                            case "Year":
+                                var startDateOfYear = selectedDate.AddDays(-(int)selectedDate.DayOfWeek);
+                                var endDateOfYear = startDateOfYear.AddDays(365);
+                                filteredParagony = paragony.Where(p => p.DataZakupu.Date >= startDateOfYear.Date && p.DataZakupu.Date <= endDateOfYear.Date).OrderBy(p => p.DataZakupu).ToList();
+                                break;
+                            default:
+                                filteredParagony = paragony;
+                                break;
+                        }
+
+                        try { 
+
+                            // Check for the case of an empty report
+                            int numberOfReceipts = filteredParagony.Count;
+                            if(numberOfReceipts == 0)
+                            {
+                                throw new Exception("Raport z tego okresu nie posiada żadnych pozycji.");
+                            }
+
+                            Console.WriteLine("Zaczynam zbierać potrzebne informacje...");
+                            // Prepare data for report genereting
+                            var productSales = new Dictionary<int, int>(); // ProductID -> TotalQuantitySold
+                            foreach (var paragon in filteredParagony)
+                            {
+                                foreach (var zakup in zakupy)
+                                {
+                                    if (zakup.IDDokumentu == paragon.IDDokumentu)
+                                    {
+                                        if (productSales.ContainsKey(int.Parse(zakup.IDProduktu)))
+                                        {
+                                            productSales[int.Parse(zakup.IDProduktu)] += int.Parse(zakup.Ilosc);
+                                        }
+                                        else
+                                        {
+                                            productSales[int.Parse(zakup.IDProduktu)] = int.Parse(zakup.Ilosc);
+                                        }
+                                    }
+                                }
+                            }
+                            // Generate sales report
+                            Console.WriteLine("Zebrałem potrzebne informacje, generuje raport...");
+                            byte[] reportBytes = GeneratePdfReport(filteredParagony, productSales);
+                            string base64String = Convert.ToBase64String(reportBytes);
+
+                            PdfReportDto reportDto = new PdfReportDto
+                            {
+                                Base64Data = base64String,
+                            };
+
+                            string filePath = messageParts[3] + "\\sales_report_" + DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".pdf";
+
+                            string json = "REPORT;" + filePath + ";" + JsonConvert.SerializeObject(reportDto) + ";";
+                            e.Reply(json);
+                            Console.WriteLine("Wysłałem odpowiedź.");
+
+                        }
+                        catch (Exception ex) {
+                            string errorToReply = "ERROR;" + ex.Message + ";";
+                            e.Reply(errorToReply);
+                            Console.WriteLine("Nie udalo sie wygererować raportu: " + ex.ToString()) ;
                         }
                         break;
                 }

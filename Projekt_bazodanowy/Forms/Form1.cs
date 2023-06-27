@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -57,28 +58,47 @@ namespace Projekt_bazodanowy
             } else
             {
                 string[] jsonResponse = e.MessageString.Split(';');
-                string table = jsonResponse[1];
-                switch(table)
+                string command = jsonResponse[0];
+                //MessageBox.Show(command);
+                switch(command)
                 {
-                    case "Clients":
-                        List<Klienci> clientsResponseData = JsonConvert.DeserializeObject<List<Klienci>>(jsonResponse[2]);
-                        IList<Klienci> clientsDataList = clientsResponseData;
-                        ClientsJsonDataRepository.DataList = clientsDataList;
+                    case "SIMPLE_SEARCH":
+                        string table = jsonResponse[1];
+                        switch(table)
+                        {
+                            case "Clients":
+                                List<Klienci> clientsResponseData = JsonConvert.DeserializeObject<List<Klienci>>(jsonResponse[2]);
+                                IList<Klienci> clientsDataList = clientsResponseData;
+                                ClientsJsonDataRepository.DataList = clientsDataList;
+                                break;
+                            case "Products":
+                                List<Produkty> productsResponseData = JsonConvert.DeserializeObject<List<Produkty>>(jsonResponse[2]);
+                                IList<Produkty> produtsDataList = productsResponseData;
+                                ProductsJsonDataRepository.DataList = produtsDataList;
+                                break;
+                            case "Purchase":
+                                List<Zakupy> purchaseResponseData = JsonConvert.DeserializeObject<List<Zakupy>>(jsonResponse[2]);
+                                IList<Zakupy> purchaseDataList = purchaseResponseData;
+                                PurchaseJsonDataRepository.DataList = purchaseDataList;
+                                break;
+                            case "Receipts":
+                                List<Paragony> receiptsResponseData = JsonConvert.DeserializeObject<List<Paragony>>(jsonResponse[2]);
+                                IList<Paragony> receiptsDataList = receiptsResponseData;
+                                ReceiptsJsonDataRepository.DataList = receiptsDataList;
+                                break;
+                        }
                         break;
-                    case "Products":
-                        List<Produkty> productsResponseData = JsonConvert.DeserializeObject<List<Produkty>>(jsonResponse[2]);
-                        IList<Produkty> produtsDataList = productsResponseData;
-                        ProductsJsonDataRepository.DataList = produtsDataList;
+
+                    case "REPORT":
+                        PdfReportDto reportDto = JsonConvert.DeserializeObject<PdfReportDto>(jsonResponse[2]);
+                        string base64String = reportDto.Base64Data;
+                        byte[] reportBytes = Convert.FromBase64String(base64String);
+                        File.WriteAllBytes(jsonResponse[1], reportBytes);
+                        MessageBox.Show("Pomyslnie wygenerowano raport.","Git", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
-                    case "Purchase":
-                        List<Zakupy> purchaseResponseData = JsonConvert.DeserializeObject<List<Zakupy>>(jsonResponse[2]);
-                        IList<Zakupy> purchaseDataList = purchaseResponseData;
-                        PurchaseJsonDataRepository.DataList = purchaseDataList;
-                        break;
-                    case "Receipts":
-                        List<Paragony> receiptsResponseData = JsonConvert.DeserializeObject<List<Paragony>>(jsonResponse[2]);
-                        IList<Paragony> receiptsDataList = receiptsResponseData;
-                        ReceiptsJsonDataRepository.DataList = receiptsDataList;
+
+                    case "ERROR":
+                        MessageBox.Show("Wystapil bład podczas generowania raportu:\n" + jsonResponse[1],"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                 }
             }

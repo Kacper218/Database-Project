@@ -23,16 +23,6 @@ using NHibernate.Mapping;
 
 namespace Projekt_bazodanowy
 {
-
-    public enum Period
-    {
-        Day,
-        Week,
-        Month,
-        Year
-    }
-
-
     public partial class Form2 : Form
     {
         // Event handler for when any checkbox is clicked
@@ -62,14 +52,14 @@ namespace Projekt_bazodanowy
         }
 
         // Determine the selected period based on the checked checkbox
-        private Period whichPeriod()
+        private string whichPeriod()
         {
-            Period selectedPeriod = Period.Week;
+            string selectedPeriod = "Week";
 
-            if (dayReport_checkBox.Checked) selectedPeriod = Period.Day;
-            else if (weekReport_checkBox.Checked) selectedPeriod = Period.Week;
-            else if (monthReport_checkBox.Checked) selectedPeriod = Period.Month;
-            else if (yearReport_checkBox.Checked) selectedPeriod = Period.Year;
+            if (dayReport_checkBox.Checked) selectedPeriod = "Day";
+            else if (weekReport_checkBox.Checked) selectedPeriod = "Week";
+            else if (monthReport_checkBox.Checked) selectedPeriod = "Month";
+            else if (yearReport_checkBox.Checked) selectedPeriod = "Year";
 
             return selectedPeriod;
         }
@@ -178,78 +168,10 @@ namespace Projekt_bazodanowy
             DateTime selectedDate;
             selectedDate = report_dateTimePicker.Value;
             DateTime startDate = DateTime.UtcNow, endDate = DateTime.UtcNow;
-            ISession session = sessionFactor.OpenSession();
-            // Retrieve sales data from the database
-            var paragony = session.Query<Paragony>().ToList();
-            var zakupy = session.Query<Zakupy>().ToList();
 
-
-            Period selectedPeriod = whichPeriod();
-
-            // Process sales for the selected period
-            List<Paragony> filteredParagony;
-            switch (selectedPeriod)
-            {
-                // Based on selected period filter Paragony table 
-                case Period.Day:
-                    filteredParagony = paragony.Where(p => p.DataZakupu.Date == selectedDate.Date).OrderBy(p => p.DataZakupu).ToList();
-                    break;
-                case Period.Week:
-                    var startDateOfWeek = selectedDate.AddDays(-(int)selectedDate.DayOfWeek);
-                    var endDateOfWeek = startDateOfWeek.AddDays(6);
-                    filteredParagony = paragony.Where(p => p.DataZakupu.Date >= startDateOfWeek.Date && p.DataZakupu.Date <= endDateOfWeek.Date).OrderBy(p => p.DataZakupu).ToList();
-                    break;
-                case Period.Month:
-                    var startDateOfMonth = selectedDate.AddDays(-(int)selectedDate.DayOfWeek);
-                    var endDateOfMonth = startDateOfMonth.AddDays(30);
-                    filteredParagony = paragony.Where(p => p.DataZakupu.Date >= startDateOfMonth.Date && p.DataZakupu.Date <= endDateOfMonth.Date).OrderBy(p => p.DataZakupu).ToList();
-                    break;
-                case Period.Year:
-                    var startDateOfYear = selectedDate.AddDays(-(int)selectedDate.DayOfWeek);
-                    var endDateOfYear = startDateOfYear.AddDays(365);
-                    filteredParagony = paragony.Where(p => p.DataZakupu.Date >= startDateOfYear.Date && p.DataZakupu.Date <= endDateOfYear.Date).OrderBy(p => p.DataZakupu).ToList();
-                    break;
-                default:
-                    filteredParagony = paragony;
-                    break;
-            }
-
-            try { 
-
-                // Check for the case of an empty report
-                int numberOfReceipts = filteredParagony.Count;
-                if(numberOfReceipts == 0)
-                {
-                    throw new Exception("Raport z tego okresu nie posiada żadnych pozycji.");
-                }
-
-                // Prepare data for report genereting
-                var productSales = new Dictionary<int, int>(); // ProductID -> TotalQuantitySold
-                foreach (var paragon in filteredParagony)
-                {
-                    foreach (var zakup in zakupy)
-                    {
-                        if (zakup.IDDokumentu == paragon.IDDokumentu)
-                        {
-                            if (productSales.ContainsKey(int.Parse(zakup.IDProduktu)))
-                            {
-                                productSales[int.Parse(zakup.IDProduktu)] += int.Parse(zakup.Ilosc);
-                            }
-                            else
-                            {
-                                productSales[int.Parse(zakup.IDProduktu)] = int.Parse(zakup.Ilosc);
-                            }
-                        }
-                    }
-                }
-                // Generate sales report
-                GeneratePdfReport(filteredParagony, productSales,session);
-                MessageBox.Show("Raport wykonany pomyślnie\n", "Powodzenie operacji", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-            }
-            catch (Exception ex) { 
-                MessageBox.Show("Wystapil bład podczas generowania raportu:\n" + ex.Message,"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            string pathToSave = getFolderPath();
+            string selectedPeriod = "REPORT;" + whichPeriod() + ";" + selectedDate.ToString("yyyy-MM-ddTHH:mm:ss") + ";" + pathToSave + ";";
+            connection.WriteLineAndGetReply(selectedPeriod, TimeSpan.FromSeconds(2));
         }
     }
 }

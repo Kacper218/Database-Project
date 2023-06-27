@@ -76,6 +76,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataRepository\PdfReportDto.cs" />
     <Compile Include="DataRepository\ReceiptsJsonDataRepository.cs" />
     <Compile Include="DataRepository\PurchaseJsonDataRepository.cs" />
     <Compile Include="DataRepository\ProductsJsonDataRepository.cs" />
