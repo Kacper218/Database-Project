@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
+using Newtonsoft.Json;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Dialect;
@@ -7,16 +9,12 @@ using Server.Models;
 using SimpleTCP;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Reflection;
-using System.Globalization;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-using System.IO;
 
 namespace Server
 {
@@ -68,14 +66,14 @@ namespace Server
             string user = loginParts[1];
             string password = loginParts[2];
 
-            Console.WriteLine($"Otrzymałem dane z próba zalogowania dla użytkownika: {user}");  
+            Console.WriteLine($"Otrzymałem dane z próba zalogowania dla użytkownika: {user}");
             try
             {
                 var config = new Configuration();
 
                 string databaseName = "DESKTOP-9QOBELF\\SQLEXPRESS";
 
-                string connStr = "Data Source=" + databaseName + "; Initial Catalog=master; User Id=" + user + "; Password=" + password; 
+                string connStr = "Data Source=" + databaseName + "; Initial Catalog=master; User Id=" + user + "; Password=" + password;
                 // Configure the database integration
                 config.DataBaseIntegration(d =>
                 {
@@ -92,7 +90,7 @@ namespace Server
                 sessionFactor = session;
 
                 return true;
-                }
+            }
             catch (Exception ex)
             {
                 // Display error message
@@ -100,96 +98,96 @@ namespace Server
                 return false;
             }
         }
-        public static byte []GeneratePdfReport(List<Paragony> filteredParagony, Dictionary<int, int> productSales)
+        public static byte[] GeneratePdfReport(List<Paragony> filteredParagony, Dictionary<int, int> productSales)
         {
             using (MemoryStream stream = new MemoryStream())
             {
-            // Create the document and specify the file path
-            Document document = new Document();
-            //string pathToSave = getFolderPath();
-            //if (pathToSave == "") throw new Exception("Nie podano ścieżki do folderu");
-            //string filePath = pathToSave + "\\sales_report_" + DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".pdf";
-            PdfWriter writer = PdfWriter.GetInstance(document,stream);
-            ISession session = sessionFactor.OpenSession();
+                // Create the document and specify the file path
+                Document document = new Document();
+                //string pathToSave = getFolderPath();
+                //if (pathToSave == "") throw new Exception("Nie podano ścieżki do folderu");
+                //string filePath = pathToSave + "\\sales_report_" + DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".pdf";
+                PdfWriter writer = PdfWriter.GetInstance(document, stream);
+                ISession session = sessionFactor.OpenSession();
 
-            // Open the document for writing
-            document.Open();
+                // Open the document for writing
+                document.Open();
 
-            // Add a title to the report
-            Paragraph title = new Paragraph("Sales Report");
-            title.Alignment = Element.ALIGN_CENTER;
+                // Add a title to the report
+                Paragraph title = new Paragraph("Sales Report");
+                title.Alignment = Element.ALIGN_CENTER;
 
-            // Add spacing after the title
-            title.SpacingAfter = 10f; // Adjust the spacing value as needed
-            document.Add(title);
+                // Add spacing after the title
+                title.SpacingAfter = 10f; // Adjust the spacing value as needed
+                document.Add(title);
 
-            // Add the filtered paragony data to the report
-            PdfPTable paragonTable = new PdfPTable(4); // Number of columns in the table
-            paragonTable.WidthPercentage = 100;
+                // Add the filtered paragony data to the report
+                PdfPTable paragonTable = new PdfPTable(4); // Number of columns in the table
+                paragonTable.WidthPercentage = 100;
 
-            // Add table headers
-            paragonTable.AddCell("Paragon ID");
-            paragonTable.AddCell("Date");
-            paragonTable.AddCell("Customer ID");
-            paragonTable.AddCell("Total Amount");
+                // Add table headers
+                paragonTable.AddCell("Paragon ID");
+                paragonTable.AddCell("Date");
+                paragonTable.AddCell("Customer ID");
+                paragonTable.AddCell("Total Amount");
 
                 // Add table data
-                    foreach (var paragon in filteredParagony)
+                foreach (var paragon in filteredParagony)
+                {
+                    paragonTable.AddCell(paragon.IDDokumentu.ToString());
+                    paragonTable.AddCell(paragon.DataZakupu.ToString());
+                    paragonTable.AddCell(paragon.IDKlienta.ToString());
+                    if (paragon.KwotaCalkowita != null)
                     {
-                            paragonTable.AddCell(paragon.IDDokumentu.ToString());
-                            paragonTable.AddCell(paragon.DataZakupu.ToString());
-                            paragonTable.AddCell(paragon.IDKlienta.ToString());
-                            if (paragon.KwotaCalkowita != null)
-                            {
-                                paragonTable.AddCell(paragon.KwotaCalkowita.ToString());
-                            }
-                            else
-                            {
-                                paragonTable.AddCell(string.Empty);
-                            }
+                        paragonTable.AddCell(paragon.KwotaCalkowita.ToString());
+                    }
+                    else
+                    {
+                        paragonTable.AddCell(string.Empty);
+                    }
                 }
 
-            document.Add(paragonTable);
-            // Add a title to the report
-            Paragraph Salestitle = new Paragraph("Best selling products");
-            Salestitle.Alignment = Element.ALIGN_CENTER;
-            // Add spacing after the title
-            Salestitle.SpacingBefore = 10f; // Adjust the spacing value as needed
-            // Add spacing after the title
-            Salestitle.SpacingAfter = 10f; // Adjust the spacing value as needed
-            document.Add(Salestitle);
+                document.Add(paragonTable);
+                // Add a title to the report
+                Paragraph Salestitle = new Paragraph("Best selling products");
+                Salestitle.Alignment = Element.ALIGN_CENTER;
+                // Add spacing after the title
+                Salestitle.SpacingBefore = 10f; // Adjust the spacing value as needed
+                                                // Add spacing after the title
+                Salestitle.SpacingAfter = 10f; // Adjust the spacing value as needed
+                document.Add(Salestitle);
 
-            // Add the top selling products data to the report
-            PdfPTable productTable = new PdfPTable(2); // Number of columns in the table
-            productTable.WidthPercentage = 100;
+                // Add the top selling products data to the report
+                PdfPTable productTable = new PdfPTable(2); // Number of columns in the table
+                productTable.WidthPercentage = 100;
 
-            // Add table headers
-            productTable.AddCell("Product");
-            productTable.AddCell("Quantity Sold");
+                // Add table headers
+                productTable.AddCell("Product");
+                productTable.AddCell("Quantity Sold");
 
-            var sortedDict = from entry in productSales orderby entry.Value descending select entry;
+                var sortedDict = from entry in productSales orderby entry.Value descending select entry;
 
-            // Add table data
-            foreach (var kv in sortedDict)
-            {
-                int productId = kv.Key;
-                int quantitySold = kv.Value;
+                // Add table data
+                foreach (var kv in sortedDict)
+                {
+                    int productId = kv.Key;
+                    int quantitySold = kv.Value;
 
-                // Retrieve the product name from the database using the productId
-                var product = session.Get<Produkty>(productId.ToString());
-                string productName = product?.Nazwa;
+                    // Retrieve the product name from the database using the productId
+                    var product = session.Get<Produkty>(productId.ToString());
+                    string productName = product?.Nazwa;
 
-                productTable.AddCell(productName);
-                productTable.AddCell(quantitySold.ToString());
-            }
+                    productTable.AddCell(productName);
+                    productTable.AddCell(quantitySold.ToString());
+                }
 
-            document.Add(productTable);
+                document.Add(productTable);
 
-            // Close the document
-            document.Close();
+                // Close the document
+                document.Close();
 
-            byte[] bytesToReturn=stream.ToArray();
-            return bytesToReturn;
+                byte[] bytesToReturn = stream.ToArray();
+                return bytesToReturn;
             }
         }
         private static void Server_DataReceived(object sender, Message e)
@@ -198,26 +196,28 @@ namespace Server
             string[] messageParts = request.Split(';');
             string command = messageParts[0];
 
-            if(!isClientLoggedIn || command == "connect")
+            if (!isClientLoggedIn || command == "connect")
             {
-                if(AuthenticateUser(request))
+                if (AuthenticateUser(request))
                 {
                     isClientLoggedIn = true;
                     e.Reply("LOGIN_SUCCES");
                     Console.WriteLine("Klient został pomyślnie zalogowany");
-                } else
+                }
+                else
                 {
                     e.Reply("LOGIN_FAILED");
                     Console.WriteLine("Klient nie został zalogowany");
                 }
-            } else
+            }
+            else
             {
                 ISession session = sessionFactor.OpenSession();
-                switch(command)
+                switch (command)
                 {
                     case "SIMPLE_SEARCH":
                         string queryNameSimpleSearch = messageParts[1];
-                        switch(queryNameSimpleSearch)
+                        switch (queryNameSimpleSearch)
                         {
                             case "Clients":
                                 Console.WriteLine("Otrzymalem zgłoszenie szybkiego wyszukiwania tabeli Klienci.");
@@ -260,7 +260,7 @@ namespace Server
 
                     case "ADD":
                         string queryNameAdd = messageParts[1];
-                        switch(queryNameAdd)
+                        switch (queryNameAdd)
                         {
                             case "Clients":
                                 Console.WriteLine("Otrzymalem zgłoszenie dodania nowej pozycji do tabeli Klienci.");
@@ -270,7 +270,8 @@ namespace Server
                                     if (messageParts[2] == "Individual")
                                     {
                                         klient.ImieNazwisko = messageParts[3];
-                                    } else if (messageParts[2] == "Company")
+                                    }
+                                    else if (messageParts[2] == "Company")
                                     {
                                         klient.NazwaFirmy = messageParts[3];
                                     }
@@ -360,11 +361,12 @@ namespace Server
                                 break;
                         }
 
-                        try { 
+                        try
+                        {
 
                             // Check for the case of an empty report
                             int numberOfReceipts = filteredParagony.Count;
-                            if(numberOfReceipts == 0)
+                            if (numberOfReceipts == 0)
                             {
                                 throw new Exception("Raport z tego okresu nie posiada żadnych pozycji.");
                             }
@@ -406,10 +408,146 @@ namespace Server
                             Console.WriteLine("Wysłałem odpowiedź.");
 
                         }
-                        catch (Exception ex) {
+                        catch (Exception ex)
+                        {
                             string errorToReply = "ERROR;" + ex.Message + ";";
                             e.Reply(errorToReply);
-                            Console.WriteLine("Nie udalo sie wygererować raportu: " + ex.ToString()) ;
+                            Console.WriteLine("Nie udalo sie wygererować raportu: " + ex.ToString());
+                        }
+                        break;
+
+                    case "SEARCH":
+                        Console.WriteLine("Otrzymalem zgłoszenie wyszukiwania.");
+                        //Console.WriteLine("Otrzymalem parametry:" + request);
+
+                        switch (messageParts[1])
+                        {
+                            case "Clients":
+                                var query = session.QueryOver<Klienci>();
+
+                                if (messageParts[2] != "-")
+                                {
+                                    query = query.Where(c => c.IDKlienta == messageParts[2]);
+                                }
+                                if (messageParts[3] != "-")
+                                {
+                                    query = query.WhereRestrictionOn(c => c.NazwaFirmy).IsInsensitiveLike("%" + messageParts[3] + "%");
+                                }
+                                if (messageParts[4] != "-")
+                                {
+                                    query = query.WhereRestrictionOn(c => c.ImieNazwisko).IsInsensitiveLike("%" + messageParts[4] + "%");
+                                }
+                                if (messageParts[5] != "-")
+                                {
+                                    query = query.WhereRestrictionOn(c => c.Email).IsInsensitiveLike("%" + messageParts[5] + "%");
+                                }
+
+                                var result = query.List();
+                                var ClientsBindingList = new BindingList<Klienci>(result);
+
+                                string clientsJson = JsonConvert.SerializeObject(ClientsBindingList);
+                                string clientsMessageToReply = "SEARCH" + ";" + "Clients" + ";" + clientsJson;
+                                e.Reply(clientsMessageToReply);
+                                Console.WriteLine("Odeslalem wynik wyszukiwania dla tabeli Klienci");
+
+                                break;
+
+                            case "Products":
+                                var query2 = session.QueryOver<Produkty>();
+                                // Perform search based on provided criteria
+                                if (messageParts[2] != "-")
+                                {
+                                    query2 = query2.Where(c => c.IDProduktu == messageParts[2]);
+                                }
+                                if (messageParts[3] != "-")
+                                {
+                                    query2 = query2.WhereRestrictionOn(c => c.Nazwa).IsInsensitiveLike("%" + messageParts[3] + "%");
+                                }
+                                if (messageParts[4] != "-")
+                                {
+                                    query2 = query2.Where(c => c.CenaAktualna == messageParts[4]);
+                                }
+                                if (messageParts[5] != "-")
+                                {
+                                    query2 = query2.WhereRestrictionOn(c => c.Dostepnosc).IsInsensitiveLike("%" + messageParts[5] + "%");
+                                }
+
+                                var result2 = query2.List();
+                                var ProductsBindingList = new BindingList<Produkty>(result2);
+                                string productJson = JsonConvert.SerializeObject(ProductsBindingList);
+                                string productsMessageToReply = "SEARCH" + ";" + "Products" + ";" + productJson;
+                                e.Reply(productsMessageToReply);
+                                Console.WriteLine("Odeslalem wynik wyszukiwania dla tabeli Produkty");
+                                break;
+
+                            case "Purchase":
+                                var query3 = session.QueryOver<Zakupy>();
+                                // Perform search based on provided criteria
+
+                                if (messageParts[2] != "-")
+                                {
+                                    query3 = query3.Where(c => c.IDZakupu == messageParts[2]);
+                                }
+
+                                if (messageParts[3] != "-")
+                                {
+                                    query3 = query3.Where(c => c.IDDokumentu == messageParts[3]);
+                                }
+
+                                if (messageParts[4] != "-")
+                                {
+                                    query3 = query3.Where(c => c.IDProduktu == messageParts[4]);
+                                }
+
+                                if (messageParts[5] != "-")
+                                {
+                                    query3 = query3.Where(c => c.Ilosc == messageParts[5]);
+                                }
+
+                                if (messageParts[6] != "-")
+                                {
+                                    query3 = query3.Where(c => c.CenaZakupu == messageParts[6]);
+                                }
+                                var result3 = query3.List();
+                                var purchaseBindingList = new BindingList<Zakupy>(result3);
+                                string purchaseJson = JsonConvert.SerializeObject(purchaseBindingList);
+                                string purchaseMessageToReply = "SEARCH" + ";" + "Purchase" + ";" + purchaseJson;
+                                e.Reply(purchaseMessageToReply);
+                                    
+                                Console.WriteLine("Odeslalem wynik wyszukiwania dla tabeli Zakupy");
+                                break;
+
+                            case "Receipts":
+                                var query4 = session.QueryOver<Paragony>();
+                                // Perform search based on provided criteria
+                                    if (messageParts[2] != "-")
+                                    {
+                                        query4 = query4.Where(c => c.IDDokumentu == messageParts[2]);
+                                    }
+                                    if (messageParts[3] != "-")
+                                    {
+                                        DateTime dataZakupu;
+                                        if (DateTime.TryParse(messageParts[3], out dataZakupu))
+                                        {
+                                            query4 = query4.Where(c => c.DataZakupu == dataZakupu);
+                                        }
+                                    }
+                                    if (messageParts[4] != "-")
+                                    {
+                                        query4 = query4.Where(c => c.IDKlienta == messageParts[4]);
+                                    }
+                                    if (messageParts[5] != "-")
+                                    {
+                                        query4 = query4.Where(c => c.KwotaCalkowita == messageParts[5]);
+                                    }
+                                var result4 = query4.List();
+                                var receiptsBindingList = new BindingList<Paragony>(result4);
+                                string receiptsJson = JsonConvert.SerializeObject(receiptsBindingList);
+                                string receiptsMessageToReply = "SEARCH" + ";" + "Receipts" + ";" + receiptsJson;
+                                e.Reply(receiptsMessageToReply);
+                                    
+                                Console.WriteLine("Odeslalem wynik wyszukiwania dla tabeli Paragony");
+                                break;
                         }
                         break;
                 }

@@ -100,6 +100,33 @@ namespace Projekt_bazodanowy
                     case "ERROR":
                         MessageBox.Show("Wystapil bład podczas generowania raportu:\n" + jsonResponse[1],"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
+
+                    case "SEARCH":
+                        string table2 = jsonResponse[1];
+                        switch(table2)
+                        {
+                            case "Clients":
+                                BindingList<Klienci> clientsResponseData = JsonConvert.DeserializeObject<BindingList<Klienci>>(jsonResponse[2]);
+                                IList<Klienci> clientsDataList = clientsResponseData;
+                                ClientsJsonDataRepository.DataList = clientsDataList;
+                                break;
+                            case "Products":
+                                BindingList<Produkty> productsResponseData = JsonConvert.DeserializeObject<BindingList<Produkty>>(jsonResponse[2]);
+                                IList<Produkty> productsDataList = productsResponseData;
+                                ProductsJsonDataRepository.DataList = productsDataList;
+                                break;
+                            case "Purchase":
+                                BindingList<Zakupy> purchaseResponseData = JsonConvert.DeserializeObject<BindingList<Zakupy>>(jsonResponse[2]);
+                                IList<Zakupy> purchaseDataList = purchaseResponseData;
+                                PurchaseJsonDataRepository.DataList = purchaseDataList;
+                                break;
+                            case "Receipts":
+                                BindingList<Paragony> receiptsResponseData = JsonConvert.DeserializeObject<BindingList<Paragony>>(jsonResponse[2]);
+                                IList<Paragony> receiptsDataList = receiptsResponseData;
+                                ReceiptsJsonDataRepository.DataList = receiptsDataList;
+                                break;
+                        }
+                        break;
                 }
             }
         }

@@ -43,13 +43,13 @@ namespace Projekt_bazodanowy
             add_comboBox.SelectedIndex = 0;
             search_comboBox.SelectedIndex = 0;
 
-            idKlienta_textBox.Enabled = false;
+            idKlienta_textBox.Enabled = true;
             idZakupu_textBox.Enabled = false;
             idDokumentu_textBox.Enabled = false;
             idProduktu_textBox.Enabled = false;
-            imieNazwisko_textBox.Enabled = false;
-            nazwaFirmy_textBox.Enabled = false;
-            email_textBox.Enabled = false;
+            imieNazwisko_textBox.Enabled = true;
+            nazwaFirmy_textBox.Enabled = true;
+            email_textBox.Enabled = true;
             dataZakupu_textBox.Enabled = false;
             kwotaCalkowita_textBox.Enabled = false;
             nazwaProduktu_textBox.Enabled = false;
