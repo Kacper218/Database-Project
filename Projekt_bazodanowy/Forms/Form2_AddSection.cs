@@ -36,25 +36,25 @@ namespace Projekt_bazodanowy
                 switch (add_comboBox.Text.ToString())
                 {
                     case "Klienci":
-                        string messege = "SIMPLE_SEARCH:Clients:";
+                        string messege = "SIMPLE_SEARCH;Clients;";
                         connection.WriteLineAndGetReply(messege, TimeSpan.FromSeconds(2));
                         IList<Klienci> clientsInfo = ClientsJsonDataRepository.DataList;
                         dataGridView1.DataSource = clientsInfo;
                         break;
                     case "Produkty":
-                        string messege2 = "SIMPLE_SEARCH:Products:";
+                        string messege2 = "SIMPLE_SEARCH;Products;";
                         connection.WriteLineAndGetReply(messege2, TimeSpan.FromSeconds(2));
                         IList<Produkty> productsInfo = ProductsJsonDataRepository.DataList;
                         dataGridView1.DataSource = productsInfo;
                         break;
                     case "Paragony":
-                        string messege3 = "SIMPLE_SEARCH:Receipts:";
+                        string messege3 = "SIMPLE_SEARCH;Receipts;";
                         connection.WriteLineAndGetReply(messege3, TimeSpan.FromSeconds(2));
                         IList<Paragony> receiptsInfo = ReceiptsJsonDataRepository.DataList;
                         dataGridView1.DataSource = receiptsInfo;
                         break;
                     case "Zakupy":
-                        string messege4 = "SIMPLE_SEARCH:Purchase:";
+                        string messege4 = "SIMPLE_SEARCH;Purchase;";
                         connection.WriteLineAndGetReply(messege4, TimeSpan.FromSeconds(2));
                         IList<Zakupy> purchaseInfo = PurchaseJsonDataRepository.DataList;
                         dataGridView1.DataSource = purchaseInfo;
@@ -78,7 +78,7 @@ namespace Projekt_bazodanowy
                         switch (add_comboBox.Text.ToString())
                         {
                             case "Klienci":
-                                    string clientToAdd = "ADD:Clients:";
+                                    string clientToAdd = "ADD;Clients;";
 
                                     // Check if both ImieNazwisko and NazwaFirmy fields are filled
                                     if (!(field2_textBox.Text.ToString() == "") && !(field3_textBox.Text.ToString() == ""))
@@ -95,41 +95,41 @@ namespace Projekt_bazodanowy
                                     // Set fields based on user input
                                     if (field3_textBox.Text.ToString() == "")
                                     {
-                                        clientToAdd += "Individual:" + field2_textBox.Text.ToString() + ":";
+                                        clientToAdd += "Individual;" + field2_textBox.Text.ToString() + ";";
                                     }
                                     if (field2_textBox.Text.ToString() == "")
                                     {
-                                        clientToAdd += "Company:" + field3_textBox.Text.ToString() + ":";
+                                        clientToAdd += "Company;" + field3_textBox.Text.ToString() + ";";
                                     }
 
-                                    clientToAdd += field4_textBox.Text.ToString() + ":";
+                                    clientToAdd += field4_textBox.Text.ToString() + ";";
                                     connection.WriteLineAndGetReply(clientToAdd, TimeSpan.FromSeconds(2));
                                     break;
                             case "Produkty":
-                                    string productToAdd = "ADD:Products:";
+                                    string productToAdd = "ADD;Products;";
                                     // Set fields based on user input
-                                    productToAdd += field2_textBox.Text.ToString() + ":";
-                                    productToAdd += field3_textBox.Text.ToString() + ":";
-                                    productToAdd += field4_textBox.Text.ToString() + ":";
+                                    productToAdd += field2_textBox.Text.ToString() + ";";
+                                    productToAdd += field3_textBox.Text.ToString() + ";";
+                                    productToAdd += field4_textBox.Text.ToString() + ";";
                                     connection.WriteLineAndGetReply(productToAdd, TimeSpan.FromSeconds(2));
                                     break;
                             case "Paragony":
-                                    string receiptToAdd = "ADD:Receipts:";
+                                    string receiptToAdd = "ADD;Receipts;";
                                     // Set fields based on user input
-                                    receiptToAdd += field1_textBox.Text.ToString() + ":";
+                                    receiptToAdd += field1_textBox.Text.ToString() + ";";
                                     // Parse user date input to correct DateTime format
                                     receiptToAdd += field2_textBox.Text.ToString();
-                                    receiptToAdd += field3_textBox.Text.ToString() + ":";
-                                    receiptToAdd += field4_textBox.Text.ToString() + ":";
+                                    receiptToAdd += field3_textBox.Text.ToString() + ";";
+                                    receiptToAdd += field4_textBox.Text.ToString() + ";";
                                     connection.WriteLineAndGetReply(receiptToAdd, TimeSpan.FromSeconds(2));
                                     break;
                             case "Zakupy":
-                                    string purchaseToAdd = "ADD:Purchase:";
+                                    string purchaseToAdd = "ADD;Purchase;";
                                     // Set fields based on user input
-                                    purchaseToAdd += field2_textBox.Text.ToString() + ":";
-                                    purchaseToAdd += field3_textBox.Text.ToString() + ":";
-                                    purchaseToAdd += field4_textBox.Text.ToString() + ":";
-                                    purchaseToAdd += field5_textBox.Text.ToString() + ":";
+                                    purchaseToAdd += field2_textBox.Text.ToString() + ";";
+                                    purchaseToAdd += field3_textBox.Text.ToString() + ";";
+                                    purchaseToAdd += field4_textBox.Text.ToString() + ";";
+                                    purchaseToAdd += field5_textBox.Text.ToString() + ";";
                                     connection.WriteLineAndGetReply(purchaseToAdd, TimeSpan.FromSeconds(2));
                                     break;
                         }
