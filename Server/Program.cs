@@ -260,68 +260,81 @@ namespace Server
 
                     case "ADD":
                         string queryNameAdd = messageParts[1];
-                        switch (queryNameAdd)
+                        try
                         {
-                            case "Clients":
-                                Console.WriteLine("Otrzymalem zgłoszenie dodania nowej pozycji do tabeli Klienci.");
-                                using (session)
-                                {
-                                    var klient = new Klienci();
-                                    if (messageParts[2] == "Individual")
+                            switch (queryNameAdd)
+                            {
+                                case "Clients":
+                                    Console.WriteLine("Otrzymalem zgłoszenie dodania nowej pozycji do tabeli Klienci.");
+                                    using (session)
                                     {
-                                        klient.ImieNazwisko = messageParts[3];
+                                        var klient = new Klienci();
+                                        if (messageParts[2] == "Individual")
+                                        {
+                                            klient.ImieNazwisko = messageParts[3];
+                                        }
+                                        else if (messageParts[2] == "Company")
+                                        {
+                                            klient.NazwaFirmy = messageParts[3];
+                                        }
+                                        klient.Email = messageParts[4];
+                                        session.Save(klient);
+                                        session.Flush();
+                                        session.Clear();
                                     }
-                                    else if (messageParts[2] == "Company")
+                                    Console.WriteLine("Dodałem pozycje.");
+                                    break;
+                                case "Products":
+                                    Console.WriteLine("Otrzymalem zgłoszenie dodania nowej pozycji do tabeli Produkty.");
+                                    using (session)
                                     {
-                                        klient.NazwaFirmy = messageParts[3];
+                                        var produkt = new Produkty();
+                                        produkt.Nazwa = messageParts[2];
+                                        produkt.CenaAktualna = messageParts[3];
+                                        produkt.Dostepnosc = messageParts[4];
+                                        session.Save(produkt);
+                                        session.Flush();
+                                        session.Clear();
                                     }
-                                    klient.Email = messageParts[4];
-                                    session.Save(klient);
-                                    session.Flush();
-                                    session.Clear();
-                                }
-                                break;
-                            case "Products":
-                                Console.WriteLine("Otrzymalem zgłoszenie dodania nowej pozycji do tabeli Produkty.");
-                                using (session)
-                                {
-                                    var produkt = new Produkty();
-                                    produkt.Nazwa = messageParts[2];
-                                    produkt.CenaAktualna = messageParts[3];
-                                    produkt.Dostepnosc = messageParts[4];
-                                    session.Save(produkt);
-                                    session.Flush();
-                                    session.Clear();
-                                }
-                                break;
-                            case "Receipts":
-                                Console.WriteLine("Otrzymalem zgłoszenie dodania nowej pozycji do tabeli Paragony.");
-                                using (session)
-                                {
-                                    var paragon = new Paragony();
-                                    paragon.IDDokumentu = messageParts[2];
-                                    paragon.DataZakupu = DateTime.Parse(messageParts[3]);
-                                    paragon.IDKlienta = messageParts[4];
-                                    paragon.KwotaCalkowita = messageParts[5];
-                                    session.Save(paragon);
-                                    session.Flush();
-                                    session.Clear();
-                                }
-                                break;
-                            case "Purchase":
-                                Console.WriteLine("Otrzymalem zgłoszenie dodania nowej pozycji do tabeli Zakupy.");
-                                using (session)
-                                {
-                                    var zakup = new Zakupy();
-                                    zakup.IDDokumentu = messageParts[2];
-                                    zakup.IDProduktu = messageParts[3];
-                                    zakup.Ilosc = messageParts[4];
-                                    zakup.CenaZakupu = messageParts[5];
-                                    session.Save(zakup);
-                                    session.Flush();
-                                    session.Clear();
-                                }
-                                break;
+                                    Console.WriteLine("Dodałem pozycje.");
+                                    break;
+                                case "Receipts":
+                                    Console.WriteLine("Otrzymalem zgłoszenie dodania nowej pozycji do tabeli Paragony.");
+                                    using (session)
+                                    {
+                                        var paragon = new Paragony();
+                                        paragon.IDDokumentu = messageParts[2];
+                                        paragon.DataZakupu = DateTime.Parse(messageParts[3]);
+                                        paragon.IDKlienta = messageParts[4];
+                                        paragon.KwotaCalkowita = messageParts[5];
+                                        session.Save(paragon);
+                                        session.Flush();
+                                        session.Clear();
+                                        Console.WriteLine("Dodałem pozycje.");
+                                    }
+                                    break;
+                                case "Purchase":
+                                    Console.WriteLine("Otrzymalem zgłoszenie dodania nowej pozycji do tabeli Zakupy.");
+                                    using (session)
+                                    {
+                                        var zakup = new Zakupy();
+                                        zakup.IDDokumentu = messageParts[2];
+                                        zakup.IDProduktu = messageParts[3];
+                                        zakup.Ilosc = messageParts[4];
+                                        zakup.CenaZakupu = messageParts[5];
+                                        session.Save(zakup);
+                                        session.Flush();
+                                        session.Clear();
+                                    }
+                                    Console.WriteLine("Dodałem pozycje.");
+                                    break;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            string errorToReply = "ERROR;Dodawanie" + ex.Message + ";";
+                            e.Reply(errorToReply);
+                            Console.WriteLine("Nie udalo sie wygererować raportu: " + ex.ToString());
                         }
                         break;
 
@@ -410,7 +423,7 @@ namespace Server
                         }
                         catch (Exception ex)
                         {
-                            string errorToReply = "ERROR;" + ex.Message + ";";
+                            string errorToReply = "ERROR;Generowanie raportu" + ex.Message + ";";
                             e.Reply(errorToReply);
                             Console.WriteLine("Nie udalo sie wygererować raportu: " + ex.ToString());
                         }
@@ -418,7 +431,6 @@ namespace Server
 
                     case "SEARCH":
                         Console.WriteLine("Otrzymalem zgłoszenie wyszukiwania.");
-                        //Console.WriteLine("Otrzymalem parametry:" + request);
 
                         switch (messageParts[1])
                         {
@@ -513,41 +525,195 @@ namespace Server
                                 string purchaseJson = JsonConvert.SerializeObject(purchaseBindingList);
                                 string purchaseMessageToReply = "SEARCH" + ";" + "Purchase" + ";" + purchaseJson;
                                 e.Reply(purchaseMessageToReply);
-                                    
+
                                 Console.WriteLine("Odeslalem wynik wyszukiwania dla tabeli Zakupy");
                                 break;
 
                             case "Receipts":
                                 var query4 = session.QueryOver<Paragony>();
                                 // Perform search based on provided criteria
-                                    if (messageParts[2] != "-")
+                                if (messageParts[2] != "-")
+                                {
+                                    query4 = query4.Where(c => c.IDDokumentu == messageParts[2]);
+                                }
+                                if (messageParts[3] != "-")
+                                {
+                                    DateTime dataZakupu;
+                                    if (DateTime.TryParse(messageParts[3], out dataZakupu))
                                     {
-                                        query4 = query4.Where(c => c.IDDokumentu == messageParts[2]);
+                                        query4 = query4.Where(c => c.DataZakupu == dataZakupu);
                                     }
-                                    if (messageParts[3] != "-")
-                                    {
-                                        DateTime dataZakupu;
-                                        if (DateTime.TryParse(messageParts[3], out dataZakupu))
-                                        {
-                                            query4 = query4.Where(c => c.DataZakupu == dataZakupu);
-                                        }
-                                    }
-                                    if (messageParts[4] != "-")
-                                    {
-                                        query4 = query4.Where(c => c.IDKlienta == messageParts[4]);
-                                    }
-                                    if (messageParts[5] != "-")
-                                    {
-                                        query4 = query4.Where(c => c.KwotaCalkowita == messageParts[5]);
-                                    }
+                                }
+                                if (messageParts[4] != "-")
+                                {
+                                    query4 = query4.Where(c => c.IDKlienta == messageParts[4]);
+                                }
+                                if (messageParts[5] != "-")
+                                {
+                                    query4 = query4.Where(c => c.KwotaCalkowita == messageParts[5]);
+                                }
                                 var result4 = query4.List();
                                 var receiptsBindingList = new BindingList<Paragony>(result4);
                                 string receiptsJson = JsonConvert.SerializeObject(receiptsBindingList);
                                 string receiptsMessageToReply = "SEARCH" + ";" + "Receipts" + ";" + receiptsJson;
                                 e.Reply(receiptsMessageToReply);
-                                    
+
                                 Console.WriteLine("Odeslalem wynik wyszukiwania dla tabeli Paragony");
                                 break;
+                        }
+                        break;
+
+                    case "DELETE":
+                        try
+                        {
+                            string queryNameDelete = messageParts[1];
+                            switch (queryNameDelete)
+                            {
+                                case "Clients":
+                                    using (session)
+                                    {
+
+                                        Klienci rowToDelete = session.Get<Klienci>(messageParts[2]);
+
+                                        // Check if the primary key is referenced in another table
+                                        bool isReferenced = session.QueryOver<Paragony>()
+                                            .Where(re => re.IDKlienta == messageParts[2])
+                                            .RowCount() > 0;
+
+                                        if (isReferenced)
+                                        {
+                                            throw new Exception("Nie można usunąć wiersza używanego przez inne tabele.");
+                                        }
+
+                                        if (rowToDelete != null)
+                                        {
+                                            using (var transaction = session.BeginTransaction())
+                                            {
+                                                session.Delete(rowToDelete);
+                                                transaction.Commit();
+                                            }
+                                        }
+
+                                        string clientsDeletedInfo = "DELETE;SUCCES;";
+                                        e.Reply(clientsDeletedInfo);
+                                    }
+                                    break;
+                                case "Receipts":
+                                    using (session)
+                                    {
+                                        Paragony rowToDelete2 = session.Get<Paragony>(messageParts[2]);
+
+                                        // Check if the primary key is referenced in another table
+                                        bool isReferenced2 = session.QueryOver<Zakupy>()
+                                            .Where(re => re.IDDokumentu == messageParts[2])
+                                            .RowCount() > 0;
+
+                                        if (isReferenced2)
+                                        {
+                                            throw new Exception("Nie można usunąć wiersza używanego przez inne tabele.");
+                                        }
+
+                                        if (rowToDelete2 != null)
+                                        {
+                                            using (var transaction = session.BeginTransaction())
+                                            {
+                                                session.Delete(rowToDelete2);
+                                                transaction.Commit();
+                                            }
+                                        }
+
+                                        string productsDeletedInfo = "DELETE;SUCCES;";
+                                        e.Reply(productsDeletedInfo);
+
+                                    }
+                                    break;
+                                case "Purchase":
+                                    using (session)
+                                    {
+
+                                        session.BeginTransaction();
+
+                                        Zakupy rowToDelete3 = session.Get<Zakupy>(messageParts[2]);
+
+                                        string deleteQuery = "DELETE FROM Zakupy WHERE IDZakupu = :id";
+                                        var query = session.CreateQuery(deleteQuery);
+                                        query.SetParameter("id", messageParts[2]);
+                                        // Execute the delete query
+                                        int deletedCount = query.ExecuteUpdate();
+
+                                        if (deletedCount > 0)
+                                        {
+                                            // Commit the transaction
+                                            session.Transaction.Commit();
+                                        }
+                                        else
+                                        {
+                                            // Rollback the transaction
+                                            session.Transaction.Rollback();
+                                        }
+
+                                        string purchaseDeletedInfo = "DELETE;SUCCES;";
+                                        e.Reply(purchaseDeletedInfo);
+                                    }
+                                    break;
+                                case "Products":
+                                    using (session)
+                                    {
+                                        Produkty rowToDelete4 = session.Get<Produkty>(messageParts[2]);
+
+                                        // Check if the primary key is referenced in another table
+                                        bool isReferenced4 = session.QueryOver<Zakupy>()
+                                            .Where(re => re.IDProduktu == messageParts[2])
+                                            .RowCount() > 0;
+
+                                        if (isReferenced4)
+                                        {
+                                            throw new Exception("Nie można usunąć wiersza używanego przez inne tabele.");
+                                        }
+
+                                        if (rowToDelete4 != null)
+                                        {
+                                            using (var transaction = session.BeginTransaction())
+                                            {
+                                                session.Delete(rowToDelete4);
+                                                transaction.Commit();
+                                            }
+                                        }
+                                        string receiptsDeletedInfo = "DELETE;SUCCES;";
+                                        e.Reply(receiptsDeletedInfo);
+
+                                    }
+                                    break;
+
+                            }
+                            break;
+                        }
+                        catch (Exception ex)
+                        {
+                            string errorToReply = "ERROR;Usuwanie pozycji " + ex.Message + ";";
+                            e.Reply(errorToReply);
+                            Console.WriteLine("Nie udalo sie usunać pozycji: " + ex.ToString());
+                        }
+                        break;
+
+                    case "DETAILS":
+                        string queryNameDetails = messageParts[1];
+                        switch (queryNameDetails)
+                        {
+                            case "Clients":
+                                break;
+                            case "Receipts":
+                                break;
+                        }
+                        break;
+
+                    case "GETPRODUCTS":
+                        using (session)
+                        {
+                            var products = session.Query<Produkty>().ToList();
+                            string productsJson = JsonConvert.SerializeObject(products);
+                            string productsToReply = "GETPRODUCTS;" + productsJson + ";";
+                            e.Reply(productsToReply);
                         }
                         break;
                 }

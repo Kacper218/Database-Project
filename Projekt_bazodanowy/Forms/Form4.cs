@@ -1,36 +1,26 @@
-﻿using NHibernate;
-using NHibernate.Cfg;
+﻿using Projekt_bazodanowy.DataRepository;
 using Projekt_bazodanowy.Models;
-using Remotion.Linq.Parsing.ExpressionVisitors.Transformation.PredefinedTransformations;
+using SimpleTCP;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using NHibernate.Mapping;
 using System.Globalization;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace Projekt_bazodanowy
 {
     public partial class Form4 : Form
     {
         public static Form4 instance;
-        public readonly ISessionFactory sessionFactor;
+        public readonly SimpleTcpClient connection;
         public readonly string identifier;
 
-        public Form4(ISessionFactory sessionFactor, string receiptIdentifier)
+        public Form4(SimpleTcpClient connection, string receiptIdentifier)
         {
             InitializeComponent();
             instance = this;
             instance.CenterToScreen();
-            this.sessionFactor = sessionFactor;
+            this.connection = connection;
             this.Text = "Szczegóły Paragonu";
             identifier = receiptIdentifier;
 
@@ -43,15 +33,13 @@ namespace Projekt_bazodanowy
 
         public void fillProducts()
         {
-            ISession session = sessionFactor.OpenSession();
-            using (session)
-            {
-                var produkty = session.Query<Produkty>().ToList();
+            string messege = "GETPRODUCTS;";
+            connection.WriteLineAndGetReply(messege, TimeSpan.FromSeconds(2));
+            List<Produkty> productsInfo = ProductsListDataRepository.DataList;
 
-                foreach (var produkt in produkty)
-                {
-                    produkty_comboBox.Items.Add(produkt.Nazwa);
-                }
+            foreach (var product in productsInfo)
+            {
+                produkty_comboBox.Items.Add(product.Nazwa);
             }
         }
 
@@ -69,30 +57,23 @@ namespace Projekt_bazodanowy
         {
             paragony_dataGridView.Columns.Clear(); // Clears existing columns in the DataGridView
             paragony_dataGridView.DataSource = null; // Clears the data source of the DataGridView
-            ISession session = sessionFactor.OpenSession();
-            using (session)
-            {
-                var query = session.QueryOver<Zakupy>();
-                // Perform search based on provided criteria
 
-                query = query.Where(c => c.IDDokumentu == identifier);
+            string recieptToSearch = "SEARCH;Receipts;" + identifier + ";-;-;-;";
+            connection.WriteLineAndGetReply(recieptToSearch, TimeSpan.FromSeconds(2));
+            IList<Paragony> recieptInfo = ReceiptsJsonDataRepository.DataList;
+            Paragony paragon = recieptInfo.FirstOrDefault();
 
-                var result = query.List();
-                var bindingList = new BindingList<Zakupy>(result);
-                paragony_dataGridView.DataSource = bindingList;
-                paragony_dataGridView.AllowUserToAddRows = false;
+            idDokumentu_label.Text = "ID Dokumentu: " + identifier;
+            DataWystawienia_label.Text = "Data wystawienia: " + paragon.DataZakupu;
+            idKlienta_label.Text = "ID Klienta: " + paragon.IDKlienta;
+            kwotaCalkowita_label.Text = "Kwota: " + paragon.KwotaCalkowita;
 
-                var paragony = session.Query<Paragony>().ToList();
+            string purchasesToSearch = "SEARCH;Purchase;-;" + identifier + ";-;-;-;";
+            connection.WriteLineAndGetReply(purchasesToSearch, TimeSpan.FromSeconds(2));
+            IList<Zakupy> purchaseInfo = PurchaseJsonDataRepository.DataList;
+            paragony_dataGridView.DataSource = purchaseInfo;
+            paragony_dataGridView.AllowUserToAddRows = false;
 
-                List<Paragony> filteredParagony;
-                filteredParagony = paragony.Where(d => d.IDDokumentu == identifier).ToList();
-
-                idDokumentu_label.Text = "ID Dokumentu: " + identifier;
-                DataWystawienia_label.Text = "Data wystawienia: " + filteredParagony[0].DataZakupu;
-                idKlienta_label.Text = "ID Klienta: " + filteredParagony[0].IDKlienta;
-                kwotaCalkowita_label.Text = "Kwota: " + filteredParagony[0].KwotaCalkowita;
-
-            }
             deleteRowButtonAdd();
         }
 
@@ -103,62 +84,46 @@ namespace Projekt_bazodanowy
 
         public string getProductID()
         {
-            ISession session = sessionFactor.OpenSession();
-            string id="";
-            using (session)
+            string id = "";
+            List<Produkty> productsInfo = ProductsListDataRepository.DataList;
+            foreach (var product in productsInfo)
             {
-                var query = session.Query<Produkty>().ToList();
-
-                List<Produkty> produkt;
-                produkt = query.Where(d => d.Nazwa == produkty_comboBox.Text).ToList();
-
-                id = produkt[0].IDProduktu;
+                if (product.Nazwa == produkty_comboBox.Text) id = product.IDProduktu;
             }
             return id;
-            
-        }
-        public string getProductPrice()
-        {
-            ISession session = sessionFactor.OpenSession();
-            string price="";
-            using (session)
-            {
-                var query = session.Query<Produkty>().ToList();
-
-                List<Produkty> produkt;
-                produkt = query.Where(d => d.Nazwa == produkty_comboBox.Text).ToList();
-
-                price = produkt[0].CenaAktualna;
-            }
-            return price;
 
         }
         private void addRecipt_button_Click(object sender, EventArgs e)
         {
             try
             {
-                using (var session = sessionFactor.OpenSession())
+                if(string.IsNullOrEmpty(ilosc_textBox.Text))
                 {
-                    var zakup = new Zakupy();
-                    // Set fields based on user input
-
-                    zakup.IDDokumentu = identifier;
-                    zakup.Ilosc = ilosc_textBox.Text.ToString();
-                    zakup.IDProduktu = getProductID();
-
-                    // Specyfing '.' format for double values for easier database conversion
-                    CultureInfo format;
-                    format = CultureInfo.CreateSpecificCulture("en-CA");
-
-                    zakup.CenaZakupu = (double.Parse(getProductPrice()) * double.Parse(zakup.Ilosc)).ToString(format);
-
-                    session.Save(zakup);
-                    session.Flush();
-                    session.Clear();
-                    detailsFormInfoDisplay();
+                    throw new Exception("Nie wypełniono pola z ilością produktu.");
                 }
-            }
 
+                string messege = "ADD;Purchase;" + identifier + ";";
+                messege += getProductID() + ";";
+                messege += ilosc_textBox.Text + ";";
+
+                CultureInfo format;
+                format = CultureInfo.CreateSpecificCulture("en-CA");
+
+                string price = "";
+                List<Produkty> productsInfo = ProductsListDataRepository.DataList;
+
+                foreach (var product in productsInfo)
+                {
+                    if (product.Nazwa == produkty_comboBox.Text) price = product.CenaAktualna;
+                }
+
+                double temp1, temp2;
+                double.TryParse(price, out temp1);
+                double.TryParse(ilosc_textBox.Text, out temp2);
+                messege += (temp1 * temp2).ToString(format) + ";";
+                connection.WriteLineAndGetReply(messege, TimeSpan.FromSeconds(2));
+                detailsFormInfoDisplay();
+            }
             catch (Exception ex)
             {
                 MessageBox.Show("Wystapił nastepujący błąd: \n" + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -167,50 +132,24 @@ namespace Projekt_bazodanowy
 
         private void paragony_dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            ISession session = sessionFactor.OpenSession();
+            DataGridViewColumn clickedColumn = paragony_dataGridView.Columns[e.ColumnIndex];
+            string columnName = clickedColumn.Name;
             try
             {
-                DataGridViewColumn clickedColumn = paragony_dataGridView.Columns[e.ColumnIndex];
-                string columnName = clickedColumn.Name;
-                // Check if the delete button column is clicked
                 if (columnName == "delButton")
                 {
-                    using (session)
-                    {
-                        session.BeginTransaction();
-
-                        DataGridViewRow row = paragony_dataGridView.Rows[e.RowIndex];
-                        string rowIdentifier = row.Cells["IDZakupu"].Value.ToString();
-
-                        // Create a delete query using HQL or SQL
-                        string deleteQuery = "DELETE FROM Zakupy WHERE IDZakupu = :id";
-                        var query = session.CreateQuery(deleteQuery);
-                        query.SetParameter("id", rowIdentifier);
-
-                        // Execute the delete query
-                        int deletedCount = query.ExecuteUpdate();
-
-                        if (deletedCount > 0)
-                        {
-                            // Commit the transaction
-                            session.Transaction.Commit();
-                        }
-                        else
-                        {
-                            // Rollback the transaction
-                            session.Transaction.Rollback();
-                            throw new Exception("Wystapil problem podczas usuwania pozycji");
-                        }
-
-                        paragony_dataGridView.Rows.RemoveAt(e.RowIndex);
-                    }
+                    string messege = "DELETE;Purchase;";
+                    DataGridViewRow row = paragony_dataGridView.Rows[e.RowIndex];
+                    string rowIdentifier = row.Cells["IDZakupu"].Value.ToString();
+                    messege += rowIdentifier + ";";
+                    connection.WriteLineAndGetReply(messege, TimeSpan.FromSeconds(2));
+                    detailsFormInfoDisplay();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Wystapił nastepujący błąd: \n" + ex.ToString(), "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Wystapił nastepujący błąd: \n" + ex.Message, "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            detailsFormInfoDisplay();
         }
     }
 }

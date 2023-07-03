@@ -1,5 +1,4 @@
-﻿using NHibernate;
-using Projekt_bazodanowy.DataRepository;
+﻿using Projekt_bazodanowy.DataRepository;
 using Projekt_bazodanowy.Models;
 using System;
 using System.Collections.Generic;
@@ -92,7 +91,6 @@ namespace Projekt_bazodanowy
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // Open a session for database operations
-            ISession session = sessionFactor.OpenSession();
             try
             {
                 switch (search_comboBox.Text.ToString())
@@ -101,160 +99,72 @@ namespace Projekt_bazodanowy
                         // Check if the delete button column is clicked
                         if (e.ColumnIndex == 5)
                         {
-                            using (session)
-                            {
-                                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-                                string rowIdentifier = row.Cells["IDKlienta"].Value.ToString();
+                            string messege = "DELETE;Clients;";
+                            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                            string rowIdentifier = row.Cells["IDKlienta"].Value.ToString();
 
-                                Klienci rowToDelete = session.Get<Klienci>(rowIdentifier);
+                            messege += rowIdentifier + ";";
 
-                                // Check if the primary key is referenced in another table
-                                bool isReferenced = session.QueryOver<Paragony>()
-                                    .Where(re => re.IDKlienta == rowIdentifier)
-                                    .RowCount() > 0;
+                            connection.WriteLineAndGetReply(messege, TimeSpan.FromSeconds(2));
+                            search_button_Click(sender, e);
 
-                                if (isReferenced)
-                                {
-                                    throw new Exception("Nie można usunąć wiersza używanego przez inne tabele.");
-                                }
-
-                                if (rowToDelete != null)
-                                {
-                                    using (var transaction = session.BeginTransaction())
-                                    {
-                                        session.Delete(rowToDelete);
-                                        transaction.Commit();
-                                    }
-                                }
-
-                                dataGridView1.Rows.RemoveAt(e.RowIndex);
-                            }
-                            // Check if the details button column is clicked
                         }
                         else if (e.ColumnIndex == 4)
                         {
                             DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
                             string rowIdentifier = row.Cells["IDKlienta"].Value.ToString();
 
+                            //connection.WriteLineAndGetReply(messege, TimeSpan.FromSeconds(2));
                             // Create an instance of Form3 and show it
-                            Form3 form3 = new Form3(sessionFactor, rowIdentifier);
+                            Form3 form3 = new Form3(connection, rowIdentifier);
                             form3.Show();
                             form3.BringToFront();
                         }
                         break;
+
                     case "Paragony":
-                        // Check if the delete button column is clicked
                         if (e.ColumnIndex == 5)
                         {
-                            using (session)
-                            {
-                                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-                                string rowIdentifier = row.Cells["IDDokumentu"].Value.ToString();
-
-                                Paragony rowToDelete = session.Get<Paragony>(rowIdentifier);
-
-                                // Check if the primary key is referenced in another table
-                                bool isReferenced = session.QueryOver<Zakupy>()
-                                    .Where(re => re.IDDokumentu == rowIdentifier)
-                                    .RowCount() > 0;
-
-                                if (isReferenced)
-                                {
-                                    throw new Exception("Nie można usunąć wiersza używanego przez inne tabele.");
-                                }
-
-                                if (rowToDelete != null)
-                                {
-                                    using (var transaction = session.BeginTransaction())
-                                    {
-                                        session.Delete(rowToDelete);
-                                        transaction.Commit();
-                                    }
-                                }
-
-                                dataGridView1.Rows.RemoveAt(e.RowIndex);
-                            }
-                            // Check if the details button column is clicked
+                            string messege = "DELETE;Receipts;";
+                            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                            string rowIdentifier = row.Cells["IDDokumentu"].Value.ToString();
+                            messege += rowIdentifier + ";";
+                            connection.WriteLineAndGetReply(messege, TimeSpan.FromSeconds(2));
+                            search_button_Click(sender, e);
                         }
                         else if (e.ColumnIndex == 4)
                         {
                             DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
                             string rowIdentifier = row.Cells["IDDokumentu"].Value.ToString();
+                            //connection.WriteLineAndGetReply(messege, TimeSpan.FromSeconds(2));
 
                             // Create an instance of Form4 and show it
-                            Form4 form4 = new Form4(sessionFactor, rowIdentifier);
+                            Form4 form4 = new Form4(connection, rowIdentifier);
                             form4.Show();
                             form4.BringToFront();
                         }
                         break;
                     case "Produkty":
-                        // Check if the delete button column is clicked
                         if (e.ColumnIndex == 4)
                         {
-                            using (session)
-                            {
-                                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-                                string rowIdentifier = row.Cells["IDProduktu"].Value.ToString();
-
-                                Produkty rowToDelete = session.Get<Produkty>(rowIdentifier);
-
-                                // Check if the primary key is referenced in another table
-                                bool isReferenced = session.QueryOver<Zakupy>()
-                                    .Where(re => re.IDProduktu == rowIdentifier)
-                                    .RowCount() > 0;
-
-                                if (isReferenced)
-                                {
-                                    throw new Exception("Nie można usunąć wiersza używanego przez inne tabele.");
-                                }
-
-                                if (rowToDelete != null)
-                                {
-                                    using (var transaction = session.BeginTransaction())
-                                    {
-                                        session.Delete(rowToDelete);
-                                        transaction.Commit();
-                                    }
-                                }
-
-                                dataGridView1.Rows.RemoveAt(e.RowIndex);
-                            }
+                            string messege = "DELETE;Products;";
+                            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                            string rowIdentifier = row.Cells["IDProduktu"].Value.ToString();
+                            messege += rowIdentifier + ";";
+                            connection.WriteLineAndGetReply(messege, TimeSpan.FromSeconds(2));
+                            search_button_Click(sender, e);
                         }
+
                         break;
                     case "Zakupy":
-                        // Check if the delete button column is clicked
                         if (e.ColumnIndex == 5)
                         {
-                            using (session)
-                            {
-                                session.BeginTransaction();
-
-                                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-                                string rowIdentifier = row.Cells["IDZakupu"].Value.ToString();
-
-                                // Create a delete query using HQL or SQL
-                                string deleteQuery = "DELETE FROM Zakupy WHERE IDZakupu = :id";
-                                var query = session.CreateQuery(deleteQuery);
-                                query.SetParameter("id", rowIdentifier);
-
-                                // Execute the delete query
-                                int deletedCount = query.ExecuteUpdate();
-
-                                if (deletedCount > 0)
-                                {
-                                    // Commit the transaction
-                                    session.Transaction.Commit();
-                                }
-                                else
-                                {
-                                    // Rollback the transaction
-                                    session.Transaction.Rollback();
-
-                                    throw new Exception("Wystapil problem podczas usuwania pozycji");
-                                }
-
-                                dataGridView1.Rows.RemoveAt(e.RowIndex);
-                            }
+                            string messege = "DELETE;Purchase;";
+                            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                            string rowIdentifier = row.Cells["IDZakupu"].Value.ToString();
+                            messege += rowIdentifier + ";";
+                            connection.WriteLineAndGetReply(messege, TimeSpan.FromSeconds(2));
+                            search_button_Click(sender, e);
                         }
                         break;
                 }

@@ -59,7 +59,6 @@ namespace Projekt_bazodanowy
             {
                 string[] jsonResponse = e.MessageString.Split(';');
                 string command = jsonResponse[0];
-                //MessageBox.Show(command);
                 switch(command)
                 {
                     case "SIMPLE_SEARCH":
@@ -98,7 +97,7 @@ namespace Projekt_bazodanowy
                         break;
 
                     case "ERROR":
-                        MessageBox.Show("Wystapil bład podczas generowania raportu:\n" + jsonResponse[1],"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Wystapil bład podczas:\n" + jsonResponse[1] + ":" + jsonResponse[2],"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
 
                     case "SEARCH":
@@ -126,6 +125,20 @@ namespace Projekt_bazodanowy
                                 ReceiptsJsonDataRepository.DataList = receiptsDataList;
                                 break;
                         }
+                        break;
+
+                    case "DELETE":
+                        /*
+                        if (jsonResponse[1] == "SUCCES")
+                        {
+                            //MessageBox.Show("Pomyslnie usunięto wybraną pozycję.");
+                        }
+                        */
+                        break;
+
+                    case "GETPRODUCTS":
+                        List<Produkty> products = JsonConvert.DeserializeObject<List<Produkty>>(jsonResponse[1]);
+                        ProductsListDataRepository.DataList = products;
                         break;
                 }
             }

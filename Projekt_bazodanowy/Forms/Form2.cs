@@ -34,7 +34,6 @@ namespace Projekt_bazodanowy
             instance = this;
             instance.CenterToScreen();
             this.connection = connection;
-            this.sessionFactor = sessionFactor;
             this.Text = "Eksplorator Bazy Danych";
 
             dataGridView1.MultiSelect = true;
