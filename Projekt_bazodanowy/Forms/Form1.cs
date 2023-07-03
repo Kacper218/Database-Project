@@ -17,15 +17,17 @@ using NHibernate.Driver;
 using Projekt_bazodanowy.DataRepository;
 using Projekt_bazodanowy.Models;
 using SimpleTCP;
+using DodatkoweElementy;
 
 namespace Projekt_bazodanowy
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form, ILoginInfo
     {
         public static Form1 instance;
         public ISessionFactory sessionFactor;
         private SimpleTcpClient client;
         private bool isLoggedIn = false;
+        private int portNumber = 1234;
 
         public Form1()
         {
@@ -47,11 +49,11 @@ namespace Projekt_bazodanowy
         private void Client_DataRecieved(object sender, SimpleTCP.Message e)
         {
             string message = e.MessageString;
-            if(message == "LOGIN_SUCCES")
+            if (message == "LOGIN_SUCCES")
             {
                 isLoggedIn = true;
                 MessageBox.Show("Połączono z bazą danych.");
-            } else if(message == "LOGIN_FAILED")
+            } else if (message == "LOGIN_FAILED")
             {
                 isLoggedIn = false;
                 MessageBox.Show("Nie połączono z bazą danych.");
@@ -59,11 +61,11 @@ namespace Projekt_bazodanowy
             {
                 string[] jsonResponse = e.MessageString.Split(';');
                 string command = jsonResponse[0];
-                switch(command)
+                switch (command)
                 {
                     case "SIMPLE_SEARCH":
                         string table = jsonResponse[1];
-                        switch(table)
+                        switch (table)
                         {
                             case "Clients":
                                 List<Klienci> clientsResponseData = JsonConvert.DeserializeObject<List<Klienci>>(jsonResponse[2]);
@@ -93,16 +95,16 @@ namespace Projekt_bazodanowy
                         string base64String = reportDto.Base64Data;
                         byte[] reportBytes = Convert.FromBase64String(base64String);
                         File.WriteAllBytes(jsonResponse[1], reportBytes);
-                        MessageBox.Show("Pomyslnie wygenerowano raport.","Git", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Pomyslnie wygenerowano raport.", "Git", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
 
                     case "ERROR":
-                        MessageBox.Show("Wystapil bład podczas:\n" + jsonResponse[1] + ":" + jsonResponse[2],"Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Wystapil bład podczas:\n" + jsonResponse[1] + ":" + jsonResponse[2], "Błąd", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
 
                     case "SEARCH":
                         string table2 = jsonResponse[1];
-                        switch(table2)
+                        switch (table2)
                         {
                             case "Clients":
                                 BindingList<Klienci> clientsResponseData = JsonConvert.DeserializeObject<BindingList<Klienci>>(jsonResponse[2]);
@@ -149,7 +151,7 @@ namespace Projekt_bazodanowy
             try
             {
                 // Connection with server on port 1234
-                client.Connect("localhost", 1234);
+                client.Connect("localhost", this.portNumber);
                 MessageBox.Show("Połączono z serwerem.");
 
                 loginTextBox.Enabled = true;
@@ -179,7 +181,7 @@ namespace Projekt_bazodanowy
                 string messege = "connect" + ":" + user + ":" + password + ":";
                 client.WriteLineAndGetReply(messege, TimeSpan.FromSeconds(3));
 
-                if(isLoggedIn)
+                if (isLoggedIn)
                 {
                     //Create an instance of Form2 and show it
                     Form2 form2 = new Form2(client);
@@ -215,6 +217,24 @@ namespace Projekt_bazodanowy
         {
             client.Disconnect();
             Application.Exit();
+        }
+
+        int ILoginInfo.portnum { get => this.portNumber; set => this.portNumber = value; }
+
+        string ILoginInfo.Username { get => this.loginTextBox.Text; set => this.loginTextBox.Text = value; }
+
+        string ILoginInfo.Password { get => this.passwordTextBox.Text; set => this.passwordTextBox.Text = value; }
+
+        event EventHandler ILoginInfo.ConnectToServer
+        {
+            add => buttonConnect.Click += value;
+            remove => buttonConnect.Click -= value;
+        }
+
+        event EventHandler ILoginInfo.ConnectToDatabase
+        {
+                add => button1.Click += value;
+                remove => button1.Click -= value;
         }
     }
 }
